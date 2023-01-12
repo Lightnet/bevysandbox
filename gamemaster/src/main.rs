@@ -1,3 +1,4 @@
+// this for admain game or create for game master to edit the world
 #![allow(dead_code)]
 #![allow(unused_variables)]
 // https://stackoverflow.com/questions/25877285/how-to-disable-unused-code-warnings-in-rust

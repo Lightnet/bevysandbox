@@ -1,5 +1,5 @@
 [package]
-name = "game"
+name = "button"
 version = "0.1.0"
 edition = "2021"
 
@@ -7,6 +7,3 @@ edition = "2021"
 
 [dependencies]
 bevy = {version = "0.9", features = []}
-bevy_console = "0.6.0"
-clap = "4.0.32"
-bevy_egui = "0.18.0"

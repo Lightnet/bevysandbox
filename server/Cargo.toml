@@ -1,12 +1,11 @@
 [package]
-name = "game"
+name = "server"
 version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-bevy = {version = "0.9", features = []}
-bevy_console = "0.6.0"
-clap = "4.0.32"
-bevy_egui = "0.18.0"
+bevy = "0.9"
+bevy_renet = "0.0.6"
+

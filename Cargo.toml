@@ -1,8 +1,18 @@
 [workspace]
 members = [
   "editor",
-  "example01",
-  "game"
+  "game",
+  "client",
+  "server",
+  "shared",
+  "button",
+  "console",
+  "scripting",
+  "menutest",
+  "blankapp",
+  "network",
+  "physics",
+  "example01"
 ]
 # https://bevyengine.org/learn/book/getting-started/setup/
 resolver = "2" # path reslove packages
