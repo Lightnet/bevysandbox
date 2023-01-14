@@ -8,7 +8,7 @@ use clap::Parser;
 
 #[derive(Default)]
 pub struct LuaAPIProvider;
-
+/*
 /// the custom Lua api, world is provided via a global pointer,
 /// and callbacks are defined only once at script creation
 impl APIProvider for LuaAPIProvider {
@@ -53,7 +53,7 @@ impl APIProvider for LuaAPIProvider {
         Ok(())
     }
 }
-
+*/
 /// sends updates to script host which are then handled by the scripts
 /// in the designated stage
 pub fn trigger_on_update_lua(mut w: PriorityEventWriter<LuaEvent<()>>) {

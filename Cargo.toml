@@ -4,9 +4,7 @@
 members = [
   "editor",
   "game",
-  "scene3d",
   "shared",
-  "button",
   "console",
   "scripting",
   "menutest",

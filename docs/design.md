@@ -11,9 +11,7 @@ This is work space and not project. It needs for editor, game and other testing.
 
   It would required some basic component for debug tools to make sure they are visible. For example is lights, camera, physics shapes and other things that are not render or render objects.
 
-  To build editor real time is not easy. Required data transfar.
-
-  To either have local and server is not easy task to do when doing editor mode.
+  Need to buiild some primitive mesh, texture, material and other things.
 
   It would required some basic common components.
 
@@ -43,6 +41,11 @@ hash: hash data object (check for data hash change that might need to be update.
  Undo function and time line edit.
 
  Player actions permission.
+
+# Network:
+  To build editor real time is not easy. Required data transfar.
+
+  To either have local and server is not easy task to do when doing editor mode.
 
 # Notes:
  * bevy_egui -for some reason it only dev since it might lag render

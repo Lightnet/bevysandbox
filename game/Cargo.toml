@@ -16,8 +16,19 @@ bevy = {version = "0.9", features = []}
 bevy_console = "0.6.0"
 clap = "4.0.32"
 bevy_egui = "0.18.0"
+bevy_mod_picking = "0.11"
 
 [[example]]
 name = "test"
 path = "examples/test.rs"
+crate-type = ["bin"]
+
+[[example]]
+name = "button"
+path = "examples/button.rs"
+crate-type = ["bin"]
+
+[[example]]
+name = "scene3d"
+path = "examples/scene3d.rs"
 crate-type = ["bin"]
