@@ -1,9 +1,11 @@
-use bevy::{ecs::event::Events, prelude::*};
-use bevy_console::{AddConsoleCommand, ConsoleCommand, ConsolePlugin, PrintConsoleLine};
-use bevy_mod_scripting::prelude::*;
-use std::sync::Mutex;
 
-/* 
+use std::sync::Mutex;
+use bevy::{ecs::event::Events, prelude::*};
+use bevy_console::*;
+//use bevy_console::{AddConsoleCommand, ConsoleCommand, ConsolePlugin, PrintConsoleLine};
+use bevy_mod_scripting::prelude::*;
+use clap::Parser;
+
 #[derive(Default)]
 pub struct LuaAPIProvider;
 
@@ -64,6 +66,7 @@ pub fn trigger_on_update_lua(mut w: PriorityEventWriter<LuaEvent<()>>) {
     w.send(event, 0);
 }
 
+/*
 pub fn forward_script_err_to_console(
     mut r: EventReader<ScriptErrorEvent>,
     mut w: EventWriter<PrintConsoleLine>,
@@ -74,12 +77,13 @@ pub fn forward_script_err_to_console(
         });
     }
 }
-
+*/
 // we use bevy-debug-console to demonstrate how this can fit in in the runtime of a game
 // note that using just the entity id instead of the full Entity has issues,
 // but since we aren't despawning/spawning entities this works in our case
-#[derive(ConsoleCommand)]
-#[console_command(name = "run_script")]
+#[derive(Parser, ConsoleCommand)]
+//#[console_command(name = "run_script")]
+#[command(name = "run_script")]
 ///Runs a Lua script from the `assets/scripts` directory
 pub struct RunScriptCmd {
     /// the relative path to the script, e.g.: `/hello.lua` for a script located in `assets/scripts/hello.lua`
@@ -149,8 +153,8 @@ pub fn delete_script_cmd(
     }
 }
 
-#[derive(ConsoleCommand)]
-#[console_command(name = "delete_script")]
+#[derive(Parser, ConsoleCommand)]
+#[command(name = "delete_script")]
 ///Runs a Lua script from the `assets/scripts` directory
 pub struct DeleteScriptCmd {
     /// the name of the script
@@ -159,16 +163,16 @@ pub struct DeleteScriptCmd {
     /// the entity the script is attached to
     pub entity_id: u32,
 }
-*/
+
 fn main() -> std::io::Result<()> {
     let mut app = App::new();
     app.add_plugins(DefaultPlugins)
         .add_plugin(ScriptingPlugin)
         .add_plugin(ConsolePlugin)
-        //.add_startup_system(watch_assets)
+        .add_startup_system(watch_assets)
         // register bevy_console commands
-        //.add_console_command::<RunScriptCmd, _>(run_script_cmd)
-        //.add_console_command::<DeleteScriptCmd, _>(delete_script_cmd)
+        .add_console_command::<RunScriptCmd, _>(run_script_cmd)
+        .add_console_command::<DeleteScriptCmd, _>(delete_script_cmd)
         // choose and register the script hosts you want to use
         //.add_script_host::<LuaScriptHost<()>, _>(CoreStage::PostUpdate)
         //.add_api_provider::<LuaScriptHost<()>>(Box::new(LuaAPIProvider))
