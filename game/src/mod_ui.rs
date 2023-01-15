@@ -33,7 +33,7 @@ pub fn button_system(
 }
 
 
-pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
+pub fn setup_button(mut commands: Commands, asset_server: Res<AssetServer>) {
   // ui camera
   commands.spawn(Camera2dBundle::default());
   commands

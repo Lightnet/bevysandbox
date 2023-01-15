@@ -16,7 +16,10 @@ mod mod_console;
 use mod_console::{LogCommand, log_command};
 
 mod mod_ui;
-use mod_ui::{setup, button_system};
+use mod_ui::{setup_button, button_system};
+
+mod helloplugin;
+use helloplugin::{HelloPlugin};
 
 #[derive(Debug, Clone, Eq, PartialEq, Hash)]
 pub enum GameState{
@@ -24,15 +27,23 @@ pub enum GameState{
     Gameplay,
 }
 
+fn setup_console(app: &mut App){
+    app.add_plugin(ConsolePlugin);
+    app.add_console_command::<LogCommand, _>(log_command);
+}
+
 fn main() {
     let binspect:bool = false;
     let begui:bool = false;
     let bconsole:bool = true;
+    println!("init bevy app!");
 
     let mut app = App::new();
 
-    app.add_plugins(DefaultPlugins);
+    app.add_plugins(DefaultPlugins)
+    .add_plugin(HelloPlugin);
     app.insert_resource(WinitSettings::desktop_app());
+    
     app.add_state(GameState::MainMenu);
 
     // Systems that create Egui widgets should be run during the `CoreStage::Update` stage,
@@ -40,13 +51,14 @@ fn main() {
     //.add_plugin(EguiPlugin)
 
     //simple button
-    app.add_startup_system(setup);
+    app.add_startup_system(setup_button);
     app.add_system(button_system);
 
 
     if bconsole == true {
-        app.add_plugin(ConsolePlugin);
-        app.add_console_command::<LogCommand, _>(log_command);
+        //app.add_plugin(ConsolePlugin);
+        //app.add_console_command::<LogCommand, _>(log_command);
+        setup_console(&mut app);
     }
         //.add_system(ui_example)
     ;
