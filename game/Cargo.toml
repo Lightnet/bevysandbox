@@ -32,3 +32,13 @@ crate-type = ["bin"]
 name = "scene3d"
 path = "examples/scene3d.rs"
 crate-type = ["bin"]
+
+[[example]]
+name = "load_gltf"
+path = "examples/load_gltf.rs"
+crate-type = ["bin"]
+
+[[example]]
+name = "saveloadscene"
+path = "examples/saveloadscene.rs"
+crate-type = ["bin"]

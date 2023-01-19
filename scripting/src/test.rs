@@ -1,8 +1,10 @@
-use bevy::{ecs::event::Events, prelude::*};
-use bevy_console::{AddConsoleCommand, ConsoleCommand, ConsolePlugin, PrintConsoleLine};
-use bevy_mod_scripting::prelude::*;
-
+// bevy_console = "0.6.0"
 use std::sync::Mutex;
+use bevy::{ecs::event::Events, prelude::*};
+use bevy_console::*;
+//use bevy_console::{AddConsoleCommand, ConsoleCommand, ConsolePlugin, PrintConsoleLine};
+use bevy_mod_scripting::prelude::*;
+use clap::Parser;
 
 #[derive(Default)]
 pub struct LuaAPIProvider;
@@ -64,6 +66,7 @@ pub fn trigger_on_update_lua(mut w: PriorityEventWriter<LuaEvent<()>>) {
     w.send(event, 0);
 }
 
+
 pub fn forward_script_err_to_console(
     mut r: EventReader<ScriptErrorEvent>,
     mut w: EventWriter<PrintConsoleLine>,
@@ -78,8 +81,9 @@ pub fn forward_script_err_to_console(
 // we use bevy-debug-console to demonstrate how this can fit in in the runtime of a game
 // note that using just the entity id instead of the full Entity has issues,
 // but since we aren't despawning/spawning entities this works in our case
-#[derive(ConsoleCommand)]
-#[console_command(name = "run_script")]
+#[derive(Parser, ConsoleCommand)]
+//#[console_command(name = "run_script")]
+#[command(name = "run_script")]
 ///Runs a Lua script from the `assets/scripts` directory
 pub struct RunScriptCmd {
     /// the relative path to the script, e.g.: `/hello.lua` for a script located in `assets/scripts/hello.lua`
@@ -149,8 +153,8 @@ pub fn delete_script_cmd(
     }
 }
 
-#[derive(ConsoleCommand)]
-#[console_command(name = "delete_script")]
+#[derive(Parser, ConsoleCommand)]
+#[command(name = "delete_script")]
 ///Runs a Lua script from the `assets/scripts` directory
 pub struct DeleteScriptCmd {
     /// the name of the script
@@ -177,8 +181,9 @@ fn main() -> std::io::Result<()> {
         // add your systems
         .add_system(trigger_on_update_lua)
         .add_system(forward_script_err_to_console);
+        ;
 
-    info!("press '~' to open the console. Type in `run_script \"console_integration.lua\"` to run example script!");
+    //info!("press '~' to open the console. Type in `run_script \"console_integration.lua\"` to run example script!");
     app.run();
 
     Ok(())

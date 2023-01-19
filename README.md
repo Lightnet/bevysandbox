@@ -9,8 +9,17 @@
  * Rust Language
 
 # Status:
- * Bevy Engine ( infancy prototyping phase)
  * prototyping
+ * Bevy Engine ( infancy prototyping phase)
+ 
+
+# Packages:
+ * Bevy 0.9.1
+ * clap 4.0.32
+ * bevy_egui 0.18.0
+ * bevy_mod_picking 0.11.0
+ * 
+ * 
 
 # Information:
   Note this is dev build since it an prototype phase from Bevy Engine in Rust Language Code. This work space set up build for testing applications.

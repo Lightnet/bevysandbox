@@ -5,17 +5,14 @@ This is work space and not project. It needs for editor, game and other testing.
 
 
 # Information:
-  To build module components is not easy task.
+  Bevy Engine has module design components. It would required editor, debug and game to work correctly. 
+  As well some basic components for debug tools to make sure they are visible. 
+  For example is lights, camera, physics shapes and other things that are not visible for handler for transform, rotation and need hepler.
 
-  It would required some editor, debug and game to work correctly.
+  Need to buiild some common primitive meshs, textures, materials and other things.
 
-  It would required some basic component for debug tools to make sure they are visible. For example is lights, camera, physics shapes and other things that are not render or render objects.
-
-  Need to buiild some primitive mesh, texture, material and other things.
-
-  It would required some basic common components.
-
-  Idea base on game master build the world live. By using the peer to peer object checks as well block data.
+  Idea base on minecraft. As it can be edit live world and server and client.
+  By using the peer to peer object checks as well block data.
 
   Need some predefined material and objects.
 
@@ -51,3 +48,18 @@ hash: hash data object (check for data hash change that might need to be update.
  * bevy_egui -for some reason it only dev since it might lag render
  * bevy_egui and bevy_console have conflict that I test as it crashed.
 
+# Bevy components:
+
+```
+  enitily
+    player{
+      health
+      xp
+      name
+    }
+    shape mesh
+    physics
+    transform
+```
+
+https://rapier.rs/docs/user_guides/bevy_plugin/rigid_bodies/

@@ -14,7 +14,7 @@ opt-level = 3
 [dependencies]
 bevy = "0.9"
 clap = "4.0.32"
-bevy_console = "0.6.0"
-bevy_mod_scripting = {version = "0.2.2", features =["lua","lua54"]}
+bevy_console = "0.5.0"
+bevy_mod_scripting = {version = "0.2.2", features =["lua54","lua_script_api"]}
 
 
