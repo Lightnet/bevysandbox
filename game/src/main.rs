@@ -7,7 +7,8 @@ use bevy::prelude::*;
 //use bevy_egui::{egui, EguiContext, EguiPlugin};
 use bevy_console::{AddConsoleCommand, ConsolePlugin};
 use bevy::{winit::WinitSettings};
-use bevy_mod_picking::*;
+use bevy_inspector_egui::quick::WorldInspectorPlugin;
+//use bevy_mod_picking::*;
 //use clap::Parser;
 
 mod mod_console;
@@ -16,8 +17,11 @@ use mod_console::{LogCommand, log_command};
 mod mod_ui;
 use mod_ui::{setup_button, button_system};
 
-mod helloplugin;
-use helloplugin::{HelloPlugin};
+//mod helloplugin;
+//use helloplugin::{HelloPlugin};
+
+pub const HEIGHT: f32 = 720.0;
+pub const WIDTH: f32 = 1280.0;
 
 #[derive(Debug, Clone, Eq, PartialEq, Hash)]
 pub enum GameState{
@@ -38,22 +42,28 @@ fn main() {
 
     let mut app = App::new();
 
-    app.add_plugins(DefaultPlugins)
-    .add_plugin(HelloPlugin);
-    app.insert_resource(WinitSettings::desktop_app());
-    
+    //app.add_plugins(DefaultPlugins);
+    app.insert_resource(ClearColor(Color::rgb(0.3, 0.3, 0.3)));
+    app.add_plugins(DefaultPlugins.set(WindowPlugin {
+        window: WindowDescriptor {
+            width: WIDTH,
+            height: HEIGHT,
+            title: "Bevy Game Test".to_string(),
+            resizable: false,
+            ..default()
+        },
+        ..default()
+    }));
     app.add_state(GameState::MainMenu);
-
-    // Systems that create Egui widgets should be run during the `CoreStage::Update` stage,
-    // or after the `EguiSystem::BeginFrame` system (which belongs to the `CoreStage::PreUpdate` stage).
-    //.add_plugin(EguiPlugin)
+    //app.add_plugin(HelloPlugin);
+    app.add_plugin(WorldInspectorPlugin);
+    app.insert_resource(WinitSettings::desktop_app());
 
     //simple button
     app.add_startup_system(setup_button);
     app.add_system(button_system);
 
-
-    if bconsole == true {
+    if bconsole == false {
         //app.add_plugin(ConsolePlugin);
         //app.add_console_command::<LogCommand, _>(log_command);
         setup_console(&mut app);

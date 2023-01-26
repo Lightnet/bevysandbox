@@ -22,7 +22,9 @@ app.register_type<Tower>();
 
 
 ```rust
-	.insert(component::Name::new("Ground"))
+	.insert(component::Name::new("Ground"))//nope wrong code
+	
+	.insert(Name::new(format!("{:?}_Tower", tower_type)))
 ```
  * https://www.youtube.com/watch?v=VSnhfm00Vz4
 

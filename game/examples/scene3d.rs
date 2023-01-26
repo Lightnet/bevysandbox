@@ -1,10 +1,12 @@
 //! A simple 3D scene with light shining over a cube sitting on a plane.
 
 use bevy::prelude::*;
+use bevy_inspector_egui::quick::WorldInspectorPlugin;
 
 fn main() {
     App::new()
         .add_plugins(DefaultPlugins)
+        .add_plugin(WorldInspectorPlugin)
         .add_startup_system(setup)
         .run();
 }

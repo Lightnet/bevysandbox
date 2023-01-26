@@ -8,9 +8,9 @@ members = [
   "console",
   "scripting",
   "menutest",
-  "blankapp",
   "network",
   "physics",
+  "firstpersonview",
   "example01"
 ]
 # exclude = ["crates/foo", "path/to/other"]
