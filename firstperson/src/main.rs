@@ -33,17 +33,26 @@ fn setup(
 ) {
   // plane
   commands.spawn(PbrBundle {
-    mesh: meshes.add(Mesh::from(shape::Plane { size: 5.0 })),
+    mesh: meshes.add(Mesh::from(shape::Plane { size: 100.0 })),
     material: materials.add(Color::rgb(0.3, 0.5, 0.3).into()),
     ..default()
   }).insert(Name::new("plane"));
   // cube
+  //commands.spawn(PbrBundle {
+      //mesh: meshes.add(Mesh::from(shape::Cube { size: 1.0 })),
+      //material: materials.add(Color::rgb(0.8, 0.7, 0.6).into()),
+      //transform: Transform::from_xyz(0.0, 0.5, 0.0),
+      //..default()
+  //}).insert(Name::new("cube"));
+
+  // cube
   commands.spawn(PbrBundle {
-      mesh: meshes.add(Mesh::from(shape::Cube { size: 1.0 })),
-      material: materials.add(Color::rgb(0.8, 0.7, 0.6).into()),
-      transform: Transform::from_xyz(0.0, 0.5, 0.0),
-      ..default()
-  }).insert(Name::new("cube"));
+    mesh: meshes.add(Mesh::from(shape::Cube { size:32.0 })),
+    material: materials.add(Color::rgb(0.8, 0.7, 0.6).into()),
+    transform: Transform::from_xyz(0.0, 0.5, 0.0),
+    ..default()
+}).insert(Name::new("cube"));
+
   // light
   commands.spawn(PointLightBundle {
       point_light: PointLight {
@@ -56,7 +65,7 @@ fn setup(
   }).insert(Name::new("light"));
   // camera
   commands.spawn(Camera3dBundle {
-    transform: Transform::from_xyz(-2.0, 2.5, 5.0).looking_at(Vec3::ZERO, Vec3::Y),
+    transform: Transform::from_xyz(-20.0, 20.5, 50.0).looking_at(Vec3::ZERO, Vec3::Y),
     ..default()
   });
 }

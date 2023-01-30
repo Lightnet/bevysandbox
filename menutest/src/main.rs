@@ -3,19 +3,20 @@
 // https://bevyengine.org/learn/book/getting-started/ecs/
 // https://crates.io/crates/bevy-inspector-egui
 // https://github.com/mwbryant/bevy-tower-defense-tutorial/blob/part-7/src/main_menu.rs
+// https://github.com/mwbryant/bevy-tower-defense-tutorial/blob/part-7/src/main_menu.rs
+
 
 use bevy::{prelude::*, winit::WinitSettings};
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
 use bevy_mod_picking::*;
-
 
 pub const HEIGHT: f32 = 720.0;
 pub const WIDTH: f32 = 1280.0;
 
 #[derive(Debug, Clone, Eq, PartialEq, Hash)]
 pub enum GameState {
-    MainMenu,
-    GamePlay,
+  MainMenu,
+  GamePlay,
 }
 
 #[derive(Component)]
@@ -31,77 +32,137 @@ pub struct QuitButton;
 
 fn main() {
     let mut app = App::new();
+
     app
-        .insert_resource(ClearColor(Color::rgb(0.3, 0.3, 0.3)))
-        //bevy basic setup
-        .add_plugins(DefaultPlugins)
-        // Inspector Setup
-        .add_plugin(WorldInspectorPlugin)
+      .insert_resource(ClearColor(Color::rgb(0.3, 0.3, 0.3)))
+      //bevy basic setup
+      .add_plugins(DefaultPlugins)
+      // Inspector Setup
+      .add_plugin(WorldInspectorPlugin)
 
-        //for check game state for update and render
-        .add_state(GameState::MainMenu)
-        //.add_state(GameState::GamePlay)
+      //for check game state for update and render
+      .add_state(GameState::MainMenu)
+      //.add_state(GameState::GamePlay)
 
-        .insert_resource(WinitSettings::desktop_app())
-        .add_system_set(SystemSet::on_enter(GameState::MainMenu).with_system(setup_button01))
+      .insert_resource(WinitSettings::desktop_app())
 
-        //.add_startup_system(setup_button)
-        //.add_system(button_system)
-        //.add_system_set(
-            //SystemSet::on_enter(GameState::MainMenu)
-            //SystemSet::on_update(GameState::MainMenu)
-                //.with_system(spawn_main_menu)
-                //.with_system(menu_system)
-        //)
-        //.add_system_set(
-            //SystemSet::on_update(GameState::GamePlay)
-                //.with_system(game_system)
-        //)
+      .add_startup_system(spawn_camera)
 
-        ;
+      .add_system_set(
+        SystemSet::on_enter(GameState::MainMenu)
+          .with_system(setup_button01)
+          //.with_system(button_system)
+      )
+      .add_system_set(
+        SystemSet::on_update(GameState::MainMenu)
+          .with_system(button_system)
+      )
+
+      .add_system_set(
+        SystemSet::on_enter(GameState::GamePlay)
+          .with_system(setup_button02)
+          //.with_system(button_system)
+      )
+      .add_system_set(
+        SystemSet::on_update(GameState::GamePlay)
+          .with_system(button_system02)
+      )
+      
+      //.add_startup_system(setup_button)
+      //.add_system(button_system)
+      //.add_system_set(
+          //SystemSet::on_enter(GameState::MainMenu)
+          //SystemSet::on_update(GameState::MainMenu)
+              //.with_system(spawn_main_menu)
+              //.with_system(menu_system)
+      //)
+      //.add_system_set(
+          //SystemSet::on_update(GameState::GamePlay)
+              //.with_system(game_system)
+      //)
+
+      ;
 
     app.run();
 }
 
-fn menu_system(){
-    //println!("menu");
+fn spawn_camera(mut commands: Commands) {
+  commands
+      .spawn(Camera3dBundle {
+          transform: Transform::from_xyz(-2.0, 2.5, 5.0).looking_at(Vec3::ZERO, Vec3::Y),
+          ..default()
+      })
+      .insert(PickingCameraBundle::default());
 }
 
-fn game_system(){
-    //println!("game");
-}
+//fn menu_system(){
+  //println!("menu");
+//}
+
+//fn game_system(){
+  //println!("game");
+//}
 
 
 fn setup_button01(mut commands: Commands, asset_server: Res<AssetServer>) {
-    // ui camera
-    commands.spawn(Camera2dBundle::default());//need camera to see the UI button
-    commands
-        .spawn(ButtonBundle {
-            style: Style {
-                size: Size::new(Val::Px(150.0), Val::Px(65.0)),
-                // center button
-                margin: UiRect::all(Val::Auto),
-                // horizontally center child text
-                justify_content: JustifyContent::Center,
-                // vertically center child text
-                align_items: AlignItems::Center,
-                ..default()
-            },
-            background_color: NORMAL_BUTTON.into(),
-            ..default()
-        })
-        .with_children(|parent| {
-            parent.spawn(TextBundle::from_section(
-                "Button",
-                TextStyle {
-                    font: asset_server.load("fonts/FiraSans-Bold.ttf"),
-                    font_size: 40.0,
-                    color: Color::rgb(0.9, 0.9, 0.9),
-                },
-            ));
-        });
+  // ui camera
+  //commands.spawn(Camera2dBundle::default());//need camera to see the UI button
+  commands
+    .spawn(ButtonBundle {
+      style: Style {
+        size: Size::new(Val::Px(150.0), Val::Px(65.0)),
+        // center button
+        margin: UiRect::all(Val::Auto),
+        // horizontally center child text
+        justify_content: JustifyContent::Center,
+        // vertically center child text
+        align_items: AlignItems::Center,
+        ..default()
+      },
+      background_color: NORMAL_BUTTON.into(),
+      ..default()
+    })
+    .with_children(|parent| {
+      parent.spawn(TextBundle::from_section(
+        "Button",
+        TextStyle {
+          font: asset_server.load("fonts/FiraSans-Bold.ttf"),
+          font_size: 40.0,
+          color: Color::rgb(0.9, 0.9, 0.9),
+        },
+      ));
+    });
 }
 
+fn setup_button02(mut commands: Commands, asset_server: Res<AssetServer>) {
+  // ui camera
+  //commands.spawn(Camera2dBundle::default());//need camera to see the UI button
+  commands
+    .spawn(ButtonBundle {
+      style: Style {
+        size: Size::new(Val::Px(150.0), Val::Px(65.0)),
+        // center button
+        margin: UiRect::all(Val::Auto),
+        // horizontally center child text
+        justify_content: JustifyContent::Center,
+        // vertically center child text
+        align_items: AlignItems::Center,
+        ..default()
+      },
+      background_color: NORMAL_BUTTON.into(),
+      ..default()
+    })
+    .with_children(|parent| {
+      parent.spawn(TextBundle::from_section(
+        "Game",
+        TextStyle {
+          font: asset_server.load("fonts/FiraSans-Bold.ttf"),
+          font_size: 40.0,
+          color: Color::rgb(0.9, 0.9, 0.9),
+        },
+      ));
+    });
+}
 
 
 
@@ -192,30 +253,63 @@ const PRESSED_BUTTON: Color = Color::rgb(0.35, 0.75, 0.35);
 
 
 fn button_system(
-    mut interaction_query: Query<
-        (&Interaction, &mut BackgroundColor, &Children),
-        (Changed<Interaction>, With<Button>),
-    >,
-    mut text_query: Query<&mut Text>,
+  mut commands: Commands,
+  mut game_state: ResMut<State<GameState>>,
+  mut interaction_query: Query<
+      (&Interaction, &mut BackgroundColor, &Children),
+      (Changed<Interaction>, With<Button>),
+  >,
+  mut text_query: Query<&mut Text>,
 ) {
     for (interaction, mut color, children) in &mut interaction_query {
-        let mut text = text_query.get_mut(children[0]).unwrap();
-        match *interaction {
-            Interaction::Clicked => {
-                println!("CLICK...");
-                text.sections[0].value = "Press".to_string();
-                *color = PRESSED_BUTTON.into();
-            }
-            Interaction::Hovered => {
-                text.sections[0].value = "Hover".to_string();
-                *color = HOVERED_BUTTON.into();
-            }
-            Interaction::None => {
-                text.sections[0].value = "Button".to_string();
-                *color = NORMAL_BUTTON.into();
-            }
+      let mut text = text_query.get_mut(children[0]).unwrap();
+      match *interaction {
+        Interaction::Clicked => {
+          println!("start CLICK...");
+          //text.sections[0].value = "Press".to_string();
+          *color = PRESSED_BUTTON.into();
+          game_state.set(GameState::GamePlay).unwrap();
         }
+        Interaction::Hovered => {
+          //text.sections[0].value = "Hover".to_string();
+          *color = HOVERED_BUTTON.into();
+        }
+        Interaction::None => {
+          //text.sections[0].value = "Button".to_string();
+          *color = NORMAL_BUTTON.into();
+        }
+      }
     }
+}
+
+fn button_system02(
+  mut commands: Commands,
+  mut game_state: ResMut<State<GameState>>,
+  mut interaction_query: Query<
+    (&Interaction, &mut BackgroundColor, &Children),
+    (Changed<Interaction>, With<Button>),
+  >,
+  mut text_query: Query<&mut Text>,
+) {
+  for (interaction, mut color, children) in &mut interaction_query {
+    let mut text = text_query.get_mut(children[0]).unwrap();
+    match *interaction {
+      Interaction::Clicked => {
+        println!("CLICK...");
+        //text.sections[0].value = "Press".to_string();
+        *color = PRESSED_BUTTON.into();
+        //game_state.set(GameState::GamePlay).unwrap();
+      }
+      Interaction::Hovered => {
+        //text.sections[0].value = "Hover".to_string();
+        *color = HOVERED_BUTTON.into();
+      }
+      Interaction::None => {
+        //text.sections[0].value = "Button".to_string();
+        *color = NORMAL_BUTTON.into();
+      }
+    }
+  }
 }
 
 fn setup_button(mut commands: Commands, asset_server: Res<AssetServer>) {
@@ -249,11 +343,3 @@ fn setup_button(mut commands: Commands, asset_server: Res<AssetServer>) {
 }
 
 
-fn spawn_camera(mut commands: Commands) {
-    commands
-        .spawn(Camera3dBundle {
-            transform: Transform::from_xyz(-2.0, 2.5, 5.0).looking_at(Vec3::ZERO, Vec3::Y),
-            ..default()
-        })
-        .insert(PickingCameraBundle::default());
-}
