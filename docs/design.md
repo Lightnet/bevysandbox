@@ -3,8 +3,43 @@ Working on the detail of the project.
 
 This is work space and not project. It needs for editor, game and other testing.
 
-
 # Information:
+  To develop editor, debug, game and module design is code in rust Language.
+
+  The idea is base on Bevy engine has some basic information and examples. Idea base or simalar to godot engine. By node tree, components, res and script.
+
+  You can create components and loop logic. It use query call components to filter the update call when it match and will update the entities component.
+
+  The entity build on components. But required some default config base on entity types.
+
+```
+entity
+-transform (position, rotation, scale)
+-player (component )
+-player_movement (function loop query)
+```
+
+fn player_movement
+```
+(
+param > player tag component,
+param > input tag component,
+)
+{
+  // do something
+}
+```
+
+Query component for player tag filter. It would check if the entity component name matches player tag. It would update movement. But it would required input query as well. There are example game in Bevy engine.
+
+There is build in function to easy of access.
+
+
+# Design:
+  To build simple minecraft block but limited in sandbox ways by building simple first.
+
+
+
   Bevy Engine has module design components. It would required editor, debug and game to work correctly. 
   As well some basic components for debug tools to make sure they are visible. 
   For example is lights, camera, physics shapes and other things that are not visible for handler for transform, rotation and need hepler.
