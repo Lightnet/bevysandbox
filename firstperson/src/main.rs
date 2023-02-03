@@ -2,7 +2,7 @@
 
 // https://bevyengine.org/learn/book/getting-started/ecs/
 
-use bevy::prelude::*;
+use bevy::{prelude::*, input::mouse::MouseMotion};
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
 
 pub const HEIGHT: f32 = 720.0;
@@ -23,6 +23,8 @@ fn main() {
     }))
     .add_plugin(WorldInspectorPlugin)
     .add_startup_system(setup)
+
+    .add_system(player_camera_controller)
     .run();
 }
 
@@ -68,4 +70,41 @@ fn setup(
     transform: Transform::from_xyz(-20.0, 20.5, 50.0).looking_at(Vec3::ZERO, Vec3::Y),
     ..default()
   });
+}
+
+
+fn player_camera_controller(
+  mut mouse_motion: EventReader<MouseMotion>,
+  windows: Res<Windows>,
+  mut query: Query<(&mut Transform), With<Camera>>,
+){
+  //let window = get_primary_window_size(&windows);
+  let mut camera_transform = query.single_mut();
+  let mut yaw:f32 = 0.;
+  let mut pitch:f32 = 0.;
+  let mut TAU:f32 = 1.0;
+
+  for ev in mouse_motion.iter() { //rewrite
+    //camera_transform.rotate_y(ev.delta.x * TAU * -0.001);
+    //camera_transform.rotate_x(ev.delta.y * TAU * -0.001);
+    //camera_transform.rotate_z(0.0);
+
+    camera_transform
+      .rotate(Quat::from_euler(EulerRot::XYZ,
+        ev.delta.y * -0.001, ev.delta.x * -0.001, 0.));
+
+
+  }
+
+
+  /*
+  for (mut transform) in query.iter_mut() {
+      for ev in motion.iter() {
+
+          yaw = ev.delta.x * 0.01 ; // window.x * player.sensitivity;
+          pitch = ev.delta.y * -0.01; // / window.y * player.sensitivity;
+      }
+      transform.rotate(Quat::from_rotation_y(-yaw) * Quat::from_rotation_x(pitch) * Quat::from_rotation_z(0.));
+  }
+  */
 }

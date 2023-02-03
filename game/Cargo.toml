@@ -9,6 +9,12 @@ opt-level = 1
 [profile.dev.package."*"]
 opt-level = 3
 
+[profile.release]
+strip = true #automatically strip symbols from binary
+opt-level = "s" # optimize for size
+lto = true #enabl link time optimizations
+codegen-units = 1 # maximize size reducation optimizations
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
