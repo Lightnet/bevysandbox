@@ -13,8 +13,9 @@ opt-level = 3
 
 [dependencies]
 bevy = {version = "0.9", features = []}
-rapier3d = "0.16.1"
-bevy_rapier3d = "0.19"
+#rapier3d = "0.17.1"
+bevy_rapier3d = "0.20.0"
+bevy-inspector-egui = "0.17"
 log = "0.4"
 serde = { version = "1", features = [ "derive" ], optional = true}
 

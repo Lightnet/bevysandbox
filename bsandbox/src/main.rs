@@ -1,7 +1,9 @@
 
+
 use bevy::prelude::*;
 use bevy_rapier3d::prelude::*;
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
+
 
 fn main() {
     App::new()
@@ -24,10 +26,14 @@ fn setup_graphics(mut commands: Commands) {
         transform: Transform::from_xyz(-30.0, 30.0, 100.0)
             .looking_at(Vec3::new(0.0, 10.0, 0.0), Vec3::Y),
         ..Default::default()
-    });
+    }).insert(Name::new("Camera"));;
 }
 
-pub fn setup_physics(mut commands: Commands) {
+pub fn setup_physics(
+  mut commands: Commands,
+  mut meshes: ResMut<Assets<Mesh>>,
+  mut materials: ResMut<Assets<StandardMaterial>>,
+) {
     /*
      * Ground
      */
@@ -37,13 +43,13 @@ pub fn setup_physics(mut commands: Commands) {
     commands.spawn((
         TransformBundle::from(Transform::from_xyz(0.0, -ground_height, 0.0)),
         Collider::cuboid(ground_size, ground_height, ground_size),
-    ));
+    )).insert(Name::new("Ground"));;
 
     /*
      * Create the cubes
      */
     let num = 8;
-    let rad = 1.0;
+    let rad = 16.0;
 
     let shift = rad * 2.0 + rad;
     let centerx = shift * (num / 2) as f32;
@@ -58,6 +64,27 @@ pub fn setup_physics(mut commands: Commands) {
         Color::hsl(260.0, 1.0, 0.7),
     ];
 
+    commands
+        .spawn(TransformBundle::from(Transform::from_rotation(
+            Quat::from_rotation_x(0.2),
+        )))
+        .with_children(|child| {
+            child.spawn((
+                TransformBundle::from(Transform::from_xyz(0.0, 32.0, 0.0)),
+                RigidBody::Dynamic,
+                Collider::cuboid(rad, rad, rad),
+                ColliderDebugColor(colors[color % 3]),
+            ));
+        }).insert(Name::new("CubePhysics"));
+
+       // cube
+    commands.spawn(PbrBundle {
+      mesh: meshes.add(Mesh::from(shape::Cube { size: 32.0 })),
+      material: materials.add(Color::rgb(0.8, 0.7, 0.6).into()),
+      transform: Transform::from_xyz(0.0, 0.5, 0.0),
+      ..default()
+    }).insert(Name::new("Cube"));
+    /*
     for j in 0usize..20 {
         for i in 0..num {
             for k in 0usize..num {
@@ -83,4 +110,5 @@ pub fn setup_physics(mut commands: Commands) {
 
         offset -= 0.05 * rad * (num as f32 - 1.0);
     }
+    */
 }

@@ -4,6 +4,8 @@
 
 use bevy::{prelude::*, input::mouse::MouseMotion};
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
+use bevy_flycam::PlayerPlugin;
+
 
 pub const HEIGHT: f32 = 720.0;
 pub const WIDTH: f32 = 1280.0;
@@ -21,11 +23,21 @@ fn main() {
       },
       ..default()
     }))
+    .add_plugin(PlayerPlugin)
     .add_plugin(WorldInspectorPlugin)
     .add_startup_system(setup)
-
-    .add_system(player_camera_controller)
+    //.add_system(player_camera_controller)
     .run();
+}
+
+fn setup_camera(
+  mut commands: Commands,
+){
+  // camera
+  commands.spawn(Camera3dBundle {
+    transform: Transform::from_xyz(-20.0, 20.5, 50.0).looking_at(Vec3::ZERO, Vec3::Y),
+    ..default()
+  });
 }
 
 fn setup(
@@ -65,11 +77,12 @@ fn setup(
       transform: Transform::from_xyz(4.0, 8.0, 4.0),
       ..default()
   }).insert(Name::new("light"));
+
   // camera
-  commands.spawn(Camera3dBundle {
-    transform: Transform::from_xyz(-20.0, 20.5, 50.0).looking_at(Vec3::ZERO, Vec3::Y),
-    ..default()
-  });
+  //commands.spawn(Camera3dBundle {
+    //transform: Transform::from_xyz(-20.0, 20.5, 50.0).looking_at(Vec3::ZERO, Vec3::Y),
+    //..default()
+  //});
 }
 
 
