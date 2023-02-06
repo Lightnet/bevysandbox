@@ -118,10 +118,18 @@ fn update_system(
 	for mut controller in controllers.iter_mut() {
 		//controller.translation = Some(Vec3::new(1.0, -0.5, 0.01));
 		if keyboard_input.pressed(KeyCode::A) {
-			controller.translation = Some(Vec3::new(1.0, -0.5, 0.01));
+			controller.translation = Some(Vec3::new(1.0, -0.5, 0.0));
 		}
 		if keyboard_input.pressed(KeyCode::D) {
-			controller.translation = Some(Vec3::new(1.0, -0.5, -0.01));
+			controller.translation = Some(Vec3::new(-1.0, -0.5, 0.0));
+		}
+
+		if keyboard_input.pressed(KeyCode::W) {
+			controller.translation = Some(Vec3::new(0.0, -0.5, 1.0));
+		}
+
+		if keyboard_input.pressed(KeyCode::S) {
+			controller.translation = Some(Vec3::new(0.0, -0.5, -1.0));
 		}
 	}
 }

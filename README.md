@@ -2,7 +2,7 @@
 
 # License: MIT
 
-# tool chain:
+# Tool Chain:
  * Rust
 
 # Code Language:
@@ -20,9 +20,15 @@
  * bevy_mod_picking 0.11.0
 
 # Information:
-  Note this is prototype build from Bevy Engine in Rust Language. This work space set up build for testing applications.
+  Note this is prototype build from Bevy Engine in Rust Language. Bevy Engine API subject to change and break.
+  
+  This work space set up build for testing applications.
 
   This is just test build ideas. It work in progress that subject to changes.
+
+  By using the Bevy Engine. Note it develop by users who like using rust or game engine. There are many plugins and helper scripts. It very module builds.
+
+  * https://bevyengine.org/assets/
 
 # Command Lines (work space):
 ```
@@ -39,7 +45,7 @@ cargo run --package launcher
 Since it work space you need to run some more command args.
 
 ```
-cargo run --package game --release
+cargo run -p game --release
 ```
   For release stable application.
 

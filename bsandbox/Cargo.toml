@@ -2,6 +2,8 @@
 name = "bsandbox"
 version = "0.1.0"
 edition = "2021"
+publish = false
+default-run = "rapier_character_input01"
 
 [profile.dev]
 opt-level = 1
@@ -18,3 +20,6 @@ bevy_rapier3d = "0.20.0"
 bevy-inspector-egui = "0.17"
 log = "0.4"
 serde = { version = "1", features = [ "derive" ], optional = true}
+
+
+

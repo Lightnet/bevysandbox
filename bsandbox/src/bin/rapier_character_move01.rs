@@ -107,22 +107,10 @@ pub fn setup_physics(
 
 }
 
-fn update_system(
-	mut controllers: Query<&mut KinematicCharacterController>,
-	keyboard_input: Res<Input<KeyCode>>,
-) {
+fn update_system(mut controllers: Query<&mut KinematicCharacterController>) {
 	//println!("update...");
-
-
-
 	for mut controller in controllers.iter_mut() {
-		//controller.translation = Some(Vec3::new(1.0, -0.5, 0.01));
-		if keyboard_input.pressed(KeyCode::A) {
-			controller.translation = Some(Vec3::new(1.0, -0.5, 0.01));
-		}
-		if keyboard_input.pressed(KeyCode::D) {
-			controller.translation = Some(Vec3::new(1.0, -0.5, -0.01));
-		}
+		controller.translation = Some(Vec3::new(1.0, -0.5, 0.01));
 	}
 }
 

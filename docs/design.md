@@ -35,6 +35,29 @@ Query component for player tag filter. It would check if the entity component na
 There is build in function to easy of access.
 
 
+
+
+  There are some basic default plugin for window, headless and others. For preset set up application to run.
+
+  Three basic develop for Entity, Components and system. They are break up into parts that handle the engine best possible to run game smoothly. As the users have to create their own way to handle the build and set up.
+
+  Entity is made up empty for scene to render to place there. It use by components for later use by system query for update, inputs, render and other user code functions.
+
+  Component tag need to be register into the bevy engine for later use like editor.
+
+  * https://bevyengine.org/learn/book/getting-started/ecs/
+
+  System are for update, stages, assets and other things does thing run or set up.
+
+  Resource are for assets loading, set up struct variables and logic configs.
+
+  You can think of Godot Engine node tree system is base on idea designs. It very module design.
+
+  One is that you prefab or premade scene or entity from bevy engine save and load build.
+
+  * https://github.com/bevyengine/bevy/blob/main/examples/scene/scene.rs
+
+
 # Design:
   To build simple minecraft block but limited in sandbox ways by building simple first.
 
