@@ -7,20 +7,28 @@
 // https://github.com/rust-cli/env_logger/blob/main/examples/filters_from_code.rs
 //use std::env;
 
-use bevy::prelude::*;
+use bevy::{prelude::*, window::PresentMode};
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
+use bevy_mod_picking::{DefaultPickingPlugins, PickingCameraBundle, DebugEventsPickingPlugin, DebugCursorPickingPlugin, PickingEvent, PickableBundle};
 use bevy_rapier3d::prelude::*;
 
 use bevy::log::{debug,error,info,trace,warn};
+use std::f32::consts::PI;
 //const FILTER_ENV: &str = "MY_LOG_LEVEL";
 
 mod prefabs;
-//use prefabs::setup_ground;
+use prefabs::*;
 
 // https://bevy-cheatbook.github.io/programming/res.html
 #[derive(Resource)]
 struct UserConfig {
   playername: String,
+}
+
+#[derive(Resource)]
+struct PlayerInputSetting{
+  axis_x:f32,
+  axis_y:f32,
 }
 
 fn main() {
@@ -32,18 +40,39 @@ fn main() {
             0xF9 as f32 / 255.0,
             0xFF as f32 / 255.0,
     )))
-    .add_plugins(DefaultPlugins)
+    //.add_plugins(DefaultPlugins)
+    .add_plugins(DefaultPlugins.set(WindowPlugin {
+      window: WindowDescriptor {
+          present_mode: PresentMode::AutoNoVsync, // Reduce input latency
+          ..default()
+      },
+      ..default()
+    }))
     .add_plugin(WorldInspectorPlugin)
+    .add_plugins(DefaultPickingPlugins) // <- Adds picking, interaction, and highlighting
+    //.add_plugin(DebugCursorPickingPlugin) // <- Adds the debug cursor (optional)
+    //.add_plugin(DebugEventsPickingPlugin) // <- Adds debug event logging (optional)
+    .add_system(print_pick_events)
+
     .insert_resource(UserConfig{
       playername: "Guest".into(),
     })
+    .insert_resource(
+      PlayerInputSetting{
+        axis_x: 1.0,
+        axis_y: 1.0,
+      }
+    )
     .add_plugin(RapierPhysicsPlugin::<NoUserData>::default())
     .add_plugin(RapierDebugRenderPlugin::default())
-
+    
 
     .add_startup_system(setup_physics_ground)
-    .add_startup_system(setup_physics_cube)
+    //.add_startup_system(setup_physics_cube)
     .add_system(update_character_input)
+
+    .add_startup_system(setup_lights)
+    .add_startup_system(setup_pick01)
 
     .add_startup_system(get_playername)
     
@@ -99,14 +128,54 @@ fn display_logtype(){
   warn!("warn");
 }
 
+//===============================================
+// CAMERA
+//===============================================
 fn setup_camera00(mut commands: Commands) {
-  commands.spawn(Camera3dBundle {
-      transform: Transform::from_xyz(-30.0, 30.0, 100.0)
-          .looking_at(Vec3::new(0.0, 10.0, 0.0), Vec3::Y),
+  commands.spawn((
+    Camera3dBundle {
+      //transform: Transform::from_xyz(-2.0, 2.5, 5.0).looking_at(Vec3::ZERO, Vec3::Y),
+      //transform: Transform::from_xyz(-30.0, 30.0, 100.0).looking_at(Vec3::new(0.0, 10.0, 0.0), Vec3::Y),
+      transform: Transform::from_xyz(-120.0, 120.0, 400.0).looking_at(Vec3::new(0.0, 20.0, 0.0), Vec3::Y),
       ..Default::default()
-  }).insert(Name::new("Camera"));;
+    },
+    PickingCameraBundle::default(), // <- Sets the camera to use for picking.
+  ))
+  //.insert(PickingCameraBundle::default())
+  .insert(Name::new("Camera"));
+  //commands.spawn(Camera3dBundle {
+      //transform: Transform::from_xyz(-30.0, 30.0, 100.0)
+          //.looking_at(Vec3::new(0.0, 10.0, 0.0), Vec3::Y),
+      //..Default::default()
+  //}).insert(Name::new("Camera"));
 }
 
+// https://www.reddit.com/r/bevy/comments/va2tug/odd_behavior_while_hovering_entities_bevy_mod/
+fn setup_pick01(
+  mut commands: Commands,
+	mut meshes: ResMut<Assets<Mesh>>,
+	mut materials: ResMut<Assets<StandardMaterial>>,
+) {
+
+  add_cube(&mut commands, &mut meshes, &mut materials, -128.0, 32.0, 0.0);
+  add_cube(&mut commands, &mut meshes, &mut materials, 128.0, 32.0, 0.0);
+}
+
+pub fn print_pick_events(mut events: EventReader<PickingEvent>) {
+  for event in events.iter() {
+      match event {
+          PickingEvent::Selection(e) => info!("A selection event happened: {:?}", e),
+          PickingEvent::Hover(e) => {
+            info!("Egads! A hover event!? {:?}", e);
+          },
+          PickingEvent::Clicked(e) => info!("Gee Willikers, it's a click! {:?}", e),
+      }
+  }
+}
+
+//===============================================
+// PHYSICS GROUND
+//===============================================
 pub fn setup_physics_ground(
   mut commands: Commands,
 	mut meshes: ResMut<Assets<Mesh>>,
@@ -119,20 +188,84 @@ pub fn setup_physics_ground(
   let ground_height = 0.1;
 
   commands.spawn((
-      TransformBundle::from(Transform::from_xyz(0.0, -ground_height, 0.0)),
-      Collider::cuboid(ground_size, ground_height, ground_size),
-  )).insert(Name::new("Ground"));
+    PbrBundle {
+        mesh: meshes.add(Mesh::from(shape::Plane { size: ground_size })),
+        material: materials.add(Color::rgb(0.3, 0.5, 0.3).into()),
+        ..Default::default()
+    },
+    PickableBundle::default(), // <- Makes the mesh pickable.
+  ));
+
+  //commands.spawn((
+      //TransformBundle::from(Transform::from_xyz(0.0, -ground_height, 0.0)),
+      //Collider::cuboid(ground_size, ground_height, ground_size),
+  //)).insert(Name::new("Ground"));
 
 }
+
+
+pub fn setup_lights(
+  mut commands: Commands,
+	mut meshes: ResMut<Assets<Mesh>>,
+	mut materials: ResMut<Assets<StandardMaterial>>,
+) {
+  commands.spawn(PointLightBundle {
+    point_light: PointLight {
+      intensity: 1500.0,
+      shadows_enabled: true,
+      ..Default::default()
+    },
+    transform: Transform::from_xyz(4.0, 8.0, 4.0),
+    ..Default::default()
+  });
+
+  commands.insert_resource(AmbientLight {
+    //color: Color::ORANGE_RED,
+    //brightness: 0.02,
+    ..Default::default()
+  });
+
+  // directional 'sun' light
+  const HALF_SIZE: f32 = 10.0;
+  commands.spawn(DirectionalLightBundle {
+      directional_light: DirectionalLight {
+          // Configure the projection to better fit the scene
+          shadow_projection: OrthographicProjection {
+              left: -HALF_SIZE,
+              right: HALF_SIZE,
+              bottom: -HALF_SIZE,
+              top: HALF_SIZE,
+              near: -10.0 * HALF_SIZE,
+              far: 10.0 * HALF_SIZE,
+              ..default()
+          },
+          shadows_enabled: true,
+          ..default()
+      },
+      transform: Transform {
+          translation: Vec3::new(0.0, 2.0, 0.0),
+          rotation: Quat::from_rotation_x(-PI / 4.),
+          ..default()
+      },
+      ..default()
+  });
+}
+
+
 //===============================================
 // CUBE
 //===============================================
+// https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html
 pub fn setup_physics_cube(
   mut commands: Commands,
 	mut meshes: ResMut<Assets<Mesh>>,
 	mut materials: ResMut<Assets<StandardMaterial>>,
 ) {
 
+  add_physics_cube(&mut commands, &mut meshes, &mut materials, 0.0, 32.0, 0.0);
+  add_physics_cube(&mut commands, &mut meshes, &mut materials, 0.0, 32.0, 32.0);
+
+  /*
   let mut color = 0;
   let colors = [
     Color::hsl(220.0, 1.0, 0.3),
@@ -159,6 +292,7 @@ pub fn setup_physics_cube(
     ));
   })
     .insert(Name::new("RigidBodyCube"));
+    */
 }
 //===============================================
 // CHARACTER BODY

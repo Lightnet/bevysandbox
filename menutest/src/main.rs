@@ -6,7 +6,10 @@
 // https://github.com/mwbryant/bevy-tower-defense-tutorial/blob/part-7/src/main_menu.rs
 
 
-use bevy::{prelude::*, winit::WinitSettings};
+use bevy::{
+  prelude::*, 
+  winit::WinitSettings,
+};
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
 use bevy_mod_picking::*;
 
@@ -28,7 +31,11 @@ pub struct StartButton;
 #[derive(Component)]
 pub struct QuitButton;
 
+#[derive(Component)]
+pub struct MainUIRoot;
 
+#[derive(Component)]
+pub struct GameUIRoot;
 
 fn main() {
     let mut app = App::new();
@@ -67,20 +74,6 @@ fn main() {
         SystemSet::on_update(GameState::GamePlay)
           .with_system(button_system02)
       )
-      
-      //.add_startup_system(setup_button)
-      //.add_system(button_system)
-      //.add_system_set(
-          //SystemSet::on_enter(GameState::MainMenu)
-          //SystemSet::on_update(GameState::MainMenu)
-              //.with_system(spawn_main_menu)
-              //.with_system(menu_system)
-      //)
-      //.add_system_set(
-          //SystemSet::on_update(GameState::GamePlay)
-              //.with_system(game_system)
-      //)
-
       ;
 
     app.run();
@@ -94,15 +87,6 @@ fn spawn_camera(mut commands: Commands) {
       })
       .insert(PickingCameraBundle::default());
 }
-
-//fn menu_system(){
-  //println!("menu");
-//}
-
-//fn game_system(){
-  //println!("game");
-//}
-
 
 fn setup_button01(mut commands: Commands, asset_server: Res<AssetServer>) {
   // ui camera
@@ -121,10 +105,10 @@ fn setup_button01(mut commands: Commands, asset_server: Res<AssetServer>) {
       },
       background_color: NORMAL_BUTTON.into(),
       ..default()
-    })
+    }).insert(MainUIRoot)
     .with_children(|parent| {
       parent.spawn(TextBundle::from_section(
-        "Button",
+        "Main Button",
         TextStyle {
           font: asset_server.load("fonts/FiraSans-Bold.ttf"),
           font_size: 40.0,
@@ -151,7 +135,7 @@ fn setup_button02(mut commands: Commands, asset_server: Res<AssetServer>) {
       },
       background_color: NORMAL_BUTTON.into(),
       ..default()
-    })
+    }).insert(GameUIRoot)
     .with_children(|parent| {
       parent.spawn(TextBundle::from_section(
         "Game",
@@ -164,96 +148,13 @@ fn setup_button02(mut commands: Commands, asset_server: Res<AssetServer>) {
     });
 }
 
-
-
-fn spawn_main_menu(mut commands: Commands, asset_server: Res<AssetServer>) {
-    let start_button = spawn_button(&mut commands, &asset_server, "Start Game", Color::RED);
-    commands.entity(start_button).insert(StartButton);
-
-    let quit_button = spawn_button(&mut commands, &asset_server, "Quit", Color::BLUE);
-    commands.entity(quit_button).insert(QuitButton);
-
-    commands
-        .spawn(NodeBundle {
-            style: Style {
-                size: Size::new(Val::Percent(100.0), Val::Percent(100.0)),
-                justify_content: JustifyContent::Center,
-                flex_direction: FlexDirection::Column,
-                ..default()
-            },
-            ..default()
-        })
-        .insert(MenuUIRoot)
-        .with_children(|commands| {
-            commands.spawn(TextBundle {
-                style: Style {
-                    align_self: AlignSelf::Center,
-                    margin: UiRect::all(Val::Percent(3.0)),
-                    ..default()
-                },
-                text: Text::from_section(
-                    "Tower Defense Tutorial",
-                    TextStyle {
-                        font: asset_server.load("FiraSans-Bold.ttf"),
-                        font_size: 96.0,
-                        color: Color::BLACK,
-                    },
-                ),
-                ..default()
-            });
-        })
-        .add_child(start_button)
-        .add_child(quit_button);
-}
-
-fn spawn_button(
-    commands: &mut Commands,
-    asset_server: &AssetServer,
-    text: &str,
-    color: Color,
-) -> Entity {
-    commands
-        .spawn(ButtonBundle {
-            style: Style {
-                size: Size::new(Val::Percent(65.0), Val::Percent(15.0)),
-                align_self: AlignSelf::Center,
-                justify_content: JustifyContent::Center,
-                margin: UiRect::all(Val::Percent(2.0)),
-                ..default()
-            },
-            background_color: color.into(),
-            ..default()
-        })
-        .with_children(|commands| {
-            commands.spawn(TextBundle {
-                style: Style {
-                    align_self: AlignSelf::Center,
-                    margin: UiRect::all(Val::Percent(3.0)),
-                    ..default()
-                },
-                text: Text::from_section(
-                    text,
-                    TextStyle {
-                        font: asset_server.load("FiraSans-Bold.ttf"),
-                        font_size: 64.0,
-                        color: Color::BLACK,
-                    },
-                ),
-                ..default()
-            });
-        })
-        .id()
-}
-
-
-
 const NORMAL_BUTTON: Color = Color::rgb(0.15, 0.15, 0.15);
 const HOVERED_BUTTON: Color = Color::rgb(0.25, 0.25, 0.25);
 const PRESSED_BUTTON: Color = Color::rgb(0.35, 0.75, 0.35);
 
-
 fn button_system(
   mut commands: Commands,
+  menu_root: Query<Entity, With<MainUIRoot>>,
   mut game_state: ResMut<State<GameState>>,
   mut interaction_query: Query<
       (&Interaction, &mut BackgroundColor, &Children),
@@ -262,12 +163,16 @@ fn button_system(
   mut text_query: Query<&mut Text>,
 ) {
     for (interaction, mut color, children) in &mut interaction_query {
-      let mut text = text_query.get_mut(children[0]).unwrap();
+      //let mut text = text_query.get_mut(children[0]).unwrap();
       match *interaction {
         Interaction::Clicked => {
           println!("start CLICK...");
           //text.sections[0].value = "Press".to_string();
           *color = PRESSED_BUTTON.into();
+          let root_entity = menu_root.single();
+          commands.entity(root_entity).despawn_recursive();
+
+          
           game_state.set(GameState::GamePlay).unwrap();
         }
         Interaction::Hovered => {
@@ -284,6 +189,7 @@ fn button_system(
 
 fn button_system02(
   mut commands: Commands,
+  menu_root: Query<Entity, With<GameUIRoot>>,
   mut game_state: ResMut<State<GameState>>,
   mut interaction_query: Query<
     (&Interaction, &mut BackgroundColor, &Children),
@@ -292,13 +198,15 @@ fn button_system02(
   mut text_query: Query<&mut Text>,
 ) {
   for (interaction, mut color, children) in &mut interaction_query {
-    let mut text = text_query.get_mut(children[0]).unwrap();
+    //let mut text = text_query.get_mut(children[0]).unwrap();
     match *interaction {
       Interaction::Clicked => {
         println!("CLICK...");
         //text.sections[0].value = "Press".to_string();
         *color = PRESSED_BUTTON.into();
-        //game_state.set(GameState::GamePlay).unwrap();
+        let root_entity = menu_root.single();
+        commands.entity(root_entity).despawn_recursive();
+        game_state.set(GameState::MainMenu).unwrap();
       }
       Interaction::Hovered => {
         //text.sections[0].value = "Hover".to_string();
@@ -311,35 +219,4 @@ fn button_system02(
     }
   }
 }
-
-fn setup_button(mut commands: Commands, asset_server: Res<AssetServer>) {
-    // ui camera
-    commands.spawn(Camera2dBundle::default());
-    commands
-        .spawn(ButtonBundle {
-            style: Style {
-                size: Size::new(Val::Px(150.0), Val::Px(65.0)),
-                // center button
-                margin: UiRect::all(Val::Auto),
-                // horizontally center child text
-                justify_content: JustifyContent::Center,
-                // vertically center child text
-                align_items: AlignItems::Center,
-                ..default()
-            },
-            background_color: NORMAL_BUTTON.into(),
-            ..default()
-        })
-        .with_children(|parent| {
-            parent.spawn(TextBundle::from_section(
-                "Button",
-                TextStyle {
-                    font: asset_server.load("fonts/FiraSans-Bold.ttf"),
-                    font_size: 40.0,
-                    color: Color::rgb(0.9, 0.9, 0.9),
-                },
-            ));
-        });
-}
-
 

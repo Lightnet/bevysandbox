@@ -36,8 +36,20 @@ codegen-units = 1 # maximize size reducation optimizations
 bevy = {version = "0.9"}
 clap = "4.0.32"
 bevy_console = "0.6.0"
+bevy_mod_picking = "0.11"
 bevy_rapier3d = "0.20.0"
 bevy-inspector-egui = "0.17"
 #log = "0.4"
 #env_logger = "0.10"
 serde = { version = "1", features = [ "derive" ], optional = true}
+
+
+[[example]]
+name= "deselection"
+path = "src/examples/deselection.rs"
+crate-type = ["bin"]
+
+[[example]]
+name= "pick_test"
+path = "src/examples/pick_test.rs"
+crate-type = ["bin"]
