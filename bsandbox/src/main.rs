@@ -45,7 +45,7 @@ pub fn setup_physics(
 		commands.spawn((
 				TransformBundle::from(Transform::from_xyz(0.0, -ground_height, 0.0)),
 				Collider::cuboid(ground_size, ground_height, ground_size),
-		)).insert(Name::new("Ground"));;
+		)).insert(Name::new("Ground"));
 
 		/*
 		 * Create the cubes
@@ -113,8 +113,6 @@ fn update_system(
 ) {
 	//println!("update...");
 
-
-
 	for mut controller in controllers.iter_mut() {
 		//controller.translation = Some(Vec3::new(1.0, -0.5, 0.01));
 		if keyboard_input.pressed(KeyCode::A) {
@@ -125,7 +123,6 @@ fn update_system(
 		}
 	}
 }
-
 
 fn read_result_system(controllers: Query<(Entity, &KinematicCharacterControllerOutput)>) {
 	for (entity, output) in controllers.iter() {

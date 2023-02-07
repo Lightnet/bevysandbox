@@ -1,0 +1,1 @@
+bevy has built in logging from plugin default window set up

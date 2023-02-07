@@ -1,18 +1,43 @@
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+# https://doc.rust-lang.org/cargo/reference/cargo-targets.html#:~:text=The%20default%20binary%20filename%20is,toml%20.
 [package]
 name = "testgame"
 version = "0.1.0"
 edition = "2021"
 publish = false
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+#default-run = "testgame"
 
-[dependencies]
-bevy = "0.9"
-clap = "4.0.32"
-bevy_console = "0.5.0"
+# Example of customizing binaries in Cargo.toml.
+# https://stackoverflow.com/questions/26946646/package-with-both-a-library-and-a-binary
+# https://doc.rust-lang.org/cargo/reference/cargo-targets.html#binaries
+[[bin]]
+name = "testgame"
+#path = "src/bin/testgame.rs"
+path = "src/main.rs"
+test = false
+bench = false
+# 
 
+
+
+[profile.dev]
+opt-level = 1
+
+[profile.dev.package."*"]
+opt-level = 3
 
 [profile.release]
 strip = true #automatically strip symbols from binary
 opt-level = "s" # optimize for size
 lto = true #enabl link time optimizations
 codegen-units = 1 # maximize size reducation optimizations
+
+[dependencies]
+bevy = {version = "0.9"}
+clap = "4.0.32"
+bevy_console = "0.6.0"
+bevy_rapier3d = "0.20.0"
+bevy-inspector-egui = "0.17"
+#log = "0.4"
+#env_logger = "0.10"
+serde = { version = "1", features = [ "derive" ], optional = true}
