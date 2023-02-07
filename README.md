@@ -32,15 +32,19 @@
 
 # Command Lines (work space):
 ```
-cargo run --package console
-cargo run --package editor
-cargo run --package firstperson
-cargo run --package game
-cargo run --package menutest
-cargo run --package network
-cargo run --package physics
+cargo run --package bsandbox // test
+cargo run --package console // test
+cargo run --package editor // test
+cargo run --package firstperson // test
+cargo run --package game // test
+cargo run --package menutest // test
+cargo run --package network // test
+cargo run --package physics // test
 cargo run --package scripting //for lua script test
-cargo run --package launcher
+cargo run --package launcher // test
+cargo run --package testgame // prototyping
+cargo run --package testlib // test
+
 ```
 Since it work space you need to run some more command args.
 

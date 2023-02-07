@@ -7,13 +7,19 @@
 // https://github.com/rust-cli/env_logger/blob/main/examples/filters_from_code.rs
 //use std::env;
 
+extern crate mylib;
+use mylib::test_lib;
+
+use testlib::test;
+
 use bevy::{prelude::*, window::PresentMode};
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
 use bevy_mod_picking::{DefaultPickingPlugins, PickingCameraBundle, DebugEventsPickingPlugin, DebugCursorPickingPlugin, PickingEvent, PickableBundle};
 use bevy_rapier3d::prelude::*;
+//use bevy::prelude::default;
 
 use bevy::log::{debug,error,info,trace,warn};
-use std::f32::consts::PI;
+use std::{f32::consts::PI, default};
 //const FILTER_ENV: &str = "MY_LOG_LEVEL";
 
 mod prefabs;
@@ -31,8 +37,30 @@ struct PlayerInputSetting{
   axis_y:f32,
 }
 
+// note that we can simply auto-derive Default here.
+//#[derive(Component, Default)]
+#[derive(Resource, Debug)]
+struct TestAInstance {
+  //#[default]
+  name: String,
+  //#[default]
+  version: String,
+}
+
+impl Default for TestAInstance {
+  fn default() -> Self {
+    Self {
+      name: "Test".into(),
+      version:"0.1.0".into(),
+    }
+  }
+}
+
 fn main() {
   //env_logger::init(); // do not use bevy log plugin conflict.
+
+  test_lib();
+  test();
     
   App::new()
     .insert_resource(ClearColor(Color::rgb(
@@ -40,6 +68,11 @@ fn main() {
             0xF9 as f32 / 255.0,
             0xFF as f32 / 255.0,
     )))
+    .insert_resource(TestAInstance::default())
+    //.insert_resource(TestAInstance{ 
+      //name:"test".into(),
+      //..default()
+    //})
     //.add_plugins(DefaultPlugins)
     .add_plugins(DefaultPlugins.set(WindowPlugin {
       window: WindowDescriptor {
@@ -52,6 +85,7 @@ fn main() {
     .add_plugins(DefaultPickingPlugins) // <- Adds picking, interaction, and highlighting
     //.add_plugin(DebugCursorPickingPlugin) // <- Adds the debug cursor (optional)
     //.add_plugin(DebugEventsPickingPlugin) // <- Adds debug event logging (optional)
+    .add_startup_system(load_models)
     .add_system(print_pick_events)
 
     .insert_resource(UserConfig{
@@ -88,6 +122,25 @@ fn main() {
   //warn!("some warning log");
   //error!("some error log");
   println!("END??")
+}
+
+fn load_models(
+  mut commands: Commands, 
+  asset_server: Res<AssetServer>,
+){
+
+  commands.spawn(SceneBundle {
+    scene: asset_server.load("models/blockframe01.gltf#Scene0"),
+    //transform: Transform::from_xyz(0.0, 0.0, 0.0).with_scale(scale),
+    transform: Transform {
+      //translation: Vec3::new(0.0, 2.0, 0.0),
+      //rotation: Quat::from_rotation_x(-PI / 4.),
+      scale:Vec3::new(32.0, 32.0, 32.0),
+      ..default()
+    },
+    ..default()
+  })
+  .insert(Name::new("modelgltf"));
 }
 
 // https://docs.rs/bevy/latest/bevy/ecs/system/trait.Resource.html
