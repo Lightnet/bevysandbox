@@ -92,5 +92,3 @@ bevy_egui = "0.18.0"
 
 # Refs / Links:
  * https://bevyengine.org/
- * 
- * 

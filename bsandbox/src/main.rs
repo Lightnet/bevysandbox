@@ -16,14 +16,14 @@ fn main() {
 				.add_plugin(WorldInspectorPlugin)
 				.add_plugin(RapierPhysicsPlugin::<NoUserData>::default())
 				.add_plugin(RapierDebugRenderPlugin::default())
-				.add_startup_system(setup_graphics)
+				.add_startup_system(setup_camera)
 				.add_startup_system(setup_physics)
 				.add_system(update_system)
 				.add_system(read_result_system)
 				.run();
 }
 
-fn setup_graphics(mut commands: Commands) {
+fn setup_camera(mut commands: Commands) {
 		commands.spawn(Camera3dBundle {
 				transform: Transform::from_xyz(-30.0, 30.0, 100.0)
 						.looking_at(Vec3::new(0.0, 10.0, 0.0), Vec3::Y),

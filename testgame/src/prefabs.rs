@@ -29,7 +29,7 @@ pub fn add_physics_cube(
 
   commands.spawn((
     PbrBundle {
-      mesh: meshes.add(Mesh::from(shape::Cube { size: 28.0 })),
+      mesh: meshes.add(Mesh::from(shape::Cube { size: 1.0 })),
       material: materials.add(Color::rgb(0.3, 0.5, 0.3).into()),
       //transform: Transform::from_xyz(0.0, 32.0, 0.0),
       transform: Transform::from_xyz(x, y, z),
@@ -42,7 +42,7 @@ pub fn add_physics_cube(
   .with_children(|child| {
     child.spawn((
       //TransformBundle::from(Transform::from_xyz(0.0, 32.0, 0.0)),
-      Collider::cuboid(16.0,16.0,16.0),
+      Collider::cuboid(0.5,0.5,0.5),
       ColliderDebugColor(colors[color % 3]),
     ));
   })
@@ -66,7 +66,7 @@ pub fn add_cube(
 
   commands.spawn((
     PbrBundle {
-      mesh: meshes.add(Mesh::from(shape::Cube { size: 28.0 })),
+      mesh: meshes.add(Mesh::from(shape::Cube { size: 1.0 })),
       material: materials.add(Color::rgb(0.3, 0.5, 0.3).into()),
       //transform: Transform::from_xyz(0.0, 32.0, 0.0),
       transform: Transform::from_xyz(x, y, z),

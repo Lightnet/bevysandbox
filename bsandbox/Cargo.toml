@@ -3,7 +3,7 @@ name = "bsandbox"
 version = "0.1.0"
 edition = "2021"
 publish = false
-default-run = "rapier_character_input01"
+#default-run = "rapier_character_input01"
 
 [profile.dev]
 opt-level = 1

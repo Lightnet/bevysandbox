@@ -57,3 +57,43 @@ crate-type = ["bin"]
 name= "pick_test"
 path = "src/examples/pick_test.rs"
 crate-type = ["bin"]
+
+[[example]]
+name= "vertex_colors"
+path = "src/examples/vertex_colors.rs"
+crate-type = ["bin"]
+
+[[example]]
+name= "cube_texture"
+path = "src/examples/cube_texture.rs"
+crate-type = ["bin"]
+
+[[example]]
+name= "animated_fox"
+path = "src/examples/animated_fox.rs"
+crate-type = ["bin"]
+
+[[example]]
+name= "cube_texture02"
+path = "src/examples/cube_texture02.rs"
+crate-type = ["bin"]
+
+[[example]]
+name= "lines"
+path = "src/examples/lines.rs"
+crate-type = ["bin"]
+
+[[example]]
+name= "skybox"
+path = "src/examples/skybox.rs"
+crate-type = ["bin"]
+
+[[example]]
+name= "render_to_texture"
+path = "src/examples/render_to_texture.rs"
+crate-type = ["bin"]
+
+[[example]]
+name= "array_textures"
+path = "src/examples/array_textures.rs"
+crate-type = ["bin"]
