@@ -2,6 +2,7 @@
 use bevy::prelude::*;
 use bevy_inspector_egui::inspector_options::std_options::NumberDisplay;
 use bevy_inspector_egui::{prelude::*, DefaultInspectorConfigPlugin};
+use bevy_egui::{egui, EguiContext, EguiPlugin};
 
 #[derive(Reflect, Default, InspectorOptions)]
 #[reflect(InspectorOptions)]
@@ -58,10 +59,20 @@ fn main() {
         .register_type::<Config>()
         .register_type::<Shape>()
         .register_type::<UiData>()
-        .add_system(ui_example)
+        //.add_system(ui_example)
+        .add_system(ui_example_system)
         .run();
 }
 
+fn ui_example_system(mut egui_context: ResMut<EguiContext>) {
+    egui::Window::new("Hello").show(egui_context.ctx_mut(), |ui| {
+        ui.label("world");
+    });
+}
+
+
+
+/*
 fn ui_example(world: &mut World) {
     let egui_context = world
         .resource_mut::<bevy_egui::EguiContext>()
@@ -74,3 +85,4 @@ fn ui_example(world: &mut World) {
         });
     });
 }
+*/

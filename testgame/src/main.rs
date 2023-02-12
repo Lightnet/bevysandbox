@@ -119,6 +119,7 @@ fn main() {
             0xF9 as f32 / 255.0,
             0xFF as f32 / 255.0,
     )))
+    .insert_resource(Msaa { samples: 4 })
     .insert_resource(TestAInstance::default())
     //.insert_resource(TestAInstance{ 
       //name:"test".into(),

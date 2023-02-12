@@ -34,7 +34,6 @@
 ```
 cargo run --package bsandbox // test
 cargo run --package console // test
-cargo run --package editor // test
 cargo run --package firstperson // test
 cargo run --package game // test
 cargo run --package menutest // test
@@ -68,11 +67,6 @@ crate-type = ["bin"]
 
 Cargo.toml
 ```
-[package]
-name = "game"
-version = "0.1.0"
-edition = "2021"
-
 [profile.dev]
 opt-level = 1
 

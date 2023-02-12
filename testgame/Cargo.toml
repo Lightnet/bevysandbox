@@ -42,9 +42,12 @@ bevy_console = "0.6.0"
 bevy_mod_picking = "0.11"
 bevy_rapier3d = "0.20.0"
 bevy-inspector-egui = "0.17"
+bevy_egui = "0.19.0"
+egui = "0.21.0"
+serde = { version = "1", features = [ "derive" ], optional = true}
 #log = "0.4"
 #env_logger = "0.10"
-serde = { version = "1", features = [ "derive" ], optional = true}
+
 testlib = {version = "0.1.0", path = "../testlib"}
 
 
@@ -96,4 +99,34 @@ crate-type = ["bin"]
 [[example]]
 name= "array_textures"
 path = "src/examples/array_textures.rs"
+crate-type = ["bin"]
+
+[[example]]
+name= "cube_texture_image"
+path = "src/examples/cube_texture_image.rs"
+crate-type = ["bin"]
+
+[[example]]
+name= "cube_texture_image02"
+path = "src/examples/cube_texture_image02.rs"
+crate-type = ["bin"]
+
+[[example]]
+name= "editor"
+path = "src/examples/editor.rs"
+crate-type = ["bin"]
+
+[[example]]
+name= "egui_cube"
+path = "src/examples/egui_cube.rs"
+crate-type = ["bin"]
+
+[[example]]
+name= "bevy_egui01"
+path = "src/examples/bevy_egui01.rs"
+crate-type = ["bin"]
+
+[[example]]
+name= "side_panels"
+path = "src/examples/side_panels.rs"
 crate-type = ["bin"]

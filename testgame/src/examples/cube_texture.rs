@@ -26,9 +26,6 @@ fn setup(
         ..default()
     });
 
-
-
-
     // cube
     commands.spawn(PbrBundle {
         mesh: meshes.add(Mesh::from(shape::Cube { size: 1.0 })),
@@ -36,10 +33,6 @@ fn setup(
         transform: Transform::from_xyz(0.0, 0.5, 0.0),
         ..default()
     });
-
-
-
-
 
     // light
     commands.spawn(PointLightBundle {
