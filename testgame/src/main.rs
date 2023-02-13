@@ -18,9 +18,12 @@ use bevy_rapier3d::prelude::*;
 //use bevy::prelude::default;
 
 use bevy::log::{debug,error,info,trace,warn};
+
 use std::{f32::consts::PI, default};
 //const FILTER_ENV: &str = "MY_LOG_LEVEL";
 
+
+use mylib::HelloPlugin;
 mod prefabs;
 use prefabs::*;
 
@@ -126,6 +129,7 @@ fn main() {
       //..default()
     //})
     //.add_plugins(DefaultPlugins)
+    .add_plugin(HelloPlugin)
     .add_plugins(DefaultPlugins
       .set(WindowPlugin {
         window: WindowDescriptor {

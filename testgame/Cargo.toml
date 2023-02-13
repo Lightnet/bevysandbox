@@ -16,7 +16,15 @@ name = "testgame"
 path = "src/main.rs"
 test = false
 bench = false
-# 
+
+
+[[bin]]
+name = "gameeditor"
+path = "src/bin/gameeditor.rs"
+test = false
+bench = false
+
+
 [lib]
 name = "mylib"
 path = "src/lib.rs"
@@ -45,10 +53,10 @@ bevy-inspector-egui = "0.17"
 bevy_egui = "0.19.0"
 egui = "0.21.0"
 serde = { version = "1", features = [ "derive" ], optional = true}
+bevy_transform_gizmo = "0.5.0"
+testlib = {version = "0.1.0", path = "../testlib"}
 #log = "0.4"
 #env_logger = "0.10"
-
-testlib = {version = "0.1.0", path = "../testlib"}
 
 
 [[example]]
