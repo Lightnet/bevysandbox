@@ -11,10 +11,13 @@ use bevy::prelude::*;
 use crate::core::{ui::menu::main::styles::*, components::*};
 
 pub fn spawn_main_menu(mut commands: Commands, asset_server: Res<AssetServer>) {
-  // ui camera
-  //commands.spawn(Camera2dBundle::default());//need camera to see the UI button
-  commands
-    .spawn(ButtonBundle {
+  
+  commands.spawn(NodeBundle{
+    ..default()
+  }).with_children(|parent|{
+
+    // PLAY BUTTON
+    parent.spawn(ButtonBundle {
       style: Style {
         size: Size::new(Val::Px(150.0), Val::Px(65.0)),
         // center button
@@ -27,8 +30,7 @@ pub fn spawn_main_menu(mut commands: Commands, asset_server: Res<AssetServer>) {
       },
       background_color: NORMAL_BUTTON.into(),
       ..default()
-    })
-    .insert(MainUIRoot)
+    }).insert(StartButton)
     .with_children(|parent| {
       parent.spawn(TextBundle::from_section(
         "Play",
@@ -39,6 +41,35 @@ pub fn spawn_main_menu(mut commands: Commands, asset_server: Res<AssetServer>) {
         },
       ));
     });
+
+    // QUIT BUTTON
+    parent.spawn(ButtonBundle {
+      style: Style {
+        size: Size::new(Val::Px(150.0), Val::Px(65.0)),
+        // center button
+        margin: UiRect::all(Val::Auto),
+        // horizontally center child text
+        justify_content: JustifyContent::Center,
+        // vertically center child text
+        align_items: AlignItems::Center,
+        ..default()
+      },
+      background_color: NORMAL_BUTTON.into(),
+      ..default()
+    }).insert(QuitButton)
+    .with_children(|parent| {
+      parent.spawn(TextBundle::from_section(
+        "Quit",
+        TextStyle {
+          font: asset_server.load("fonts/FiraSans-Bold.ttf"),
+          font_size: 40.0,
+          color: Color::rgb(0.9, 0.9, 0.9),
+        },
+      ));
+    });
+
+
+  }).insert(MainUIRoot);
 }
 
 pub fn despawn_main_menu(
