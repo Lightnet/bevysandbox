@@ -6,10 +6,4 @@
     Note there are multiple licenses.
  */
 
-pub mod components;
-pub mod entity;
-pub mod network;
-pub mod systems;
-pub mod physics;
-pub mod world;
-pub mod ui;
+pub mod player;
