@@ -35,17 +35,22 @@
 
   * https://bevyengine.org/assets/
 
-# Command Lines:
+# Command Lines and Tests:
 
 ```
 cargo run // test
-cargo run --bin console // test
-cargo run --bin firstperson // test
+cargo run --bin editor // test
 cargo run --bin game // test
-cargo run --bin menutest // test
-cargo run --bin physics // test
-cargo run --bin scripting //for lua script test
-cargo run --bin launcher // test
+```
+
+```
+cargo run --example launcher // test
+cargo run --example console // test
+cargo run --example firstperson // test
+cargo run --example menutest // test
+cargo run --example physics // test
+cargo run --example scripting //for lua script test
+cargo run --example launcher // test
 ```
 
 # Network test:

@@ -9,7 +9,7 @@
 //simple IMGUI > EGUI
 
 use bevy::prelude::*;
-use bevy_egui::{egui, EguiContext, EguiPlugin, EguiContexts};
+use bevy_egui::{egui, EguiPlugin, EguiContexts};
 
 fn main() {
   App::new()

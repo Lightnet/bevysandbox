@@ -12,32 +12,51 @@ name = "bevysandbox"
 path = "src/bin/game.rs"
 
 [[bin]]
+name = "editor"
+path = "src/bin/editor.rs"
+
+[[example]]
 name = "firstperson"
-path = "src/bin/firstperson.rs"
+path = "src/examples/firstperson.rs"
 
-[[bin]]
+[[example]]
 name = "launcher"
-path = "src/bin/launcher.rs"
+path = "src/examples/launcher.rs"
 
-[[bin]]
+[[example]]
 name = "menutest"
-path = "src/bin/menutest.rs"
+path = "src/examples/menutest.rs"
 
-[[bin]]
+[[example]]
 name = "network"
-path = "src/bin/network.rs"
+path = "src/examples/network.rs"
 
-[[bin]]
+[[example]]
 name = "physics"
-path = "src/bin/physics.rs"
+path = "src/examples/physics.rs"
 
-[[bin]]
+[[example]]
 name = "scripting"
-path = "src/bin/scripting.rs"
+path = "src/examples/scripting.rs"
 
-[[bin]]
+[[example]]
 name = "scene3d"
-path = "src/bin/scene3d.rs"
+path = "src/examples/scene3d.rs"
+
+[[example]]
+name = "bevyegui"
+path = "src/examples/bevyegui.rs"
+
+[[example]]
+name = "blankwindow"
+path = "src/examples/blankwindow.rs"
+
+[[example]]
+name = "button"
+path = "src/examples/button.rs"
+[[example]]
+name = "saveloadscene"
+path = "src/examples/saveloadscene.rs"
 
 # exclude = ["crates/foo", "path/to/other"]
 

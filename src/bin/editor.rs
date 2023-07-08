@@ -7,9 +7,7 @@
  */
 
 //Tests
-
-// https://bevyengine.org/learn/book/getting-started/ecs/
-
+// https://github.com/bevyengine/bevy/blob/main/examples/window/window_settings.rs
 use bevy::prelude::*;
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
 
@@ -21,8 +19,7 @@ fn main() {
     //.add_plugins(DefaultPlugins)
     app.add_plugins(DefaultPlugins.set(WindowPlugin {
       primary_window: Some(Window {
-        //width: WIDTH,
-        //height: HEIGHT,
+        resolution: (WIDTH, HEIGHT).into(),
         title: "Bevy Game Test".to_string(),
         resizable: false,
         ..default()
