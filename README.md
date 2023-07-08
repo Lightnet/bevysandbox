@@ -2,85 +2,66 @@
 
 # License: MIT
 
+# Created By: Lightnet
+
+# Status:
+ * Prototyping
+ * Work In Progress and subject to files and changes.
+
 # Tool Chain:
- * Rust
+ * Rust 1.69.0
 
 # Code Language:
  * Rust Language
 
-# Status:
- * prototyping
- * Bevy Engine ( infancy prototyping phase)
- * work in progress files and changes.
- 
+# Game Engine:
+ * Bevy Engine 0.10.1
+
 # Packages:
  * Bevy 0.9.1
  * clap 4.0.32
  * bevy_egui 0.18.0
  * bevy_mod_picking 0.11.0
+ * 
 
 # Information:
-  Note this is prototype build from Bevy Engine in Rust Language. Bevy Engine API subject to change and break.
+  Note this is prototype build from Bevy Engine in Rust Language.
   
-  This work space set up build for testing applications.
+  It work in progress that subject to changes. Bevy Engine API subject to change and break.
 
-  This is just test build ideas. It work in progress that subject to changes.
+  This is just test build ideas.
 
-  By using the Bevy Engine. Note it develop by users who like using rust or game engine. There are many plugins and helper scripts. It very module builds.
+  Note it develop by users who like using rust or game engine. There are many plugins and helper scripts. It very module builds.
 
   * https://bevyengine.org/assets/
 
-# Command Lines (work space):
-```
-cargo run --package bsandbox // test
-cargo run --package console // test
-cargo run --package firstperson // test
-cargo run --package game // test
-cargo run --package menutest // test
-cargo run --package network // test
-cargo run --package physics // test
-cargo run --package scripting //for lua script test
-cargo run --package launcher // test
+# Command Lines:
 
 ```
-Since it work space you need to run some more command args.
+cargo run // test
+cargo run --bin console // test
+cargo run --bin firstperson // test
+cargo run --bin game // test
+cargo run --bin menutest // test
+cargo run --bin physics // test
+cargo run --bin scripting //for lua script test
+cargo run --bin launcher // test
+```
 
+# Network test:
+ * Need to config this later.
+```
+cargo run --bin network -- server
+cargo run --bin network -- client
+```
+
+## Notes:
+ * Examples and samples from bevyengine github for testing.
+ * There are other example from other github and users from bevy community.
 ```
 cargo run -p game --release
 ```
   For release stable application.
-
-```
-cargo run --example <name>
-```
-  It will check each Cargo.tomal example config tag.
-
-Look in projects that matches the name in Cargo.toml file.
-```
-[[example]]
-name = "test"
-path = "examples/test.rs"
-crate-type = ["bin"]
-```
-
-Cargo.toml
-```
-[profile.dev]
-opt-level = 1
-
-[profile.dev.package."*"]
-opt-level = 3
-
-[dependencies]
-bevy = {version = "0.9", features = []}
-bevy_console = "0.6.0"
-clap = "4.0.32"
-bevy_egui = "0.18.0"
-```
-
-# Notes:
- * Examples and samples from bevyengine github for testing.
- * There are other example from other github and users from bevy community.
 
 # Refs / Links:
  * https://bevyengine.org/
