@@ -7,15 +7,15 @@
  */
 
 use bevy::prelude::*;
-use bevy_rapier3d::prelude::*;
+//use bevy_rapier3d::prelude::*;
 
 pub struct BsbPhysicsPlugin;
 
 impl Plugin for BsbPhysicsPlugin {
   fn build(&self, app: &mut App) {
     
-    app.add_plugin(RapierPhysicsPlugin::<NoUserData>::default());
-		app.add_plugin(RapierDebugRenderPlugin::default());
+    //app.add_plugin(RapierPhysicsPlugin::<NoUserData>::default());
+		//app.add_plugin(RapierDebugRenderPlugin::default());
 
   }
 }
@@ -34,7 +34,7 @@ pub fn setup_physics_ground(
 
   commands.spawn((
       TransformBundle::from(Transform::from_xyz(0.0, -ground_height, 0.0)),
-      Collider::cuboid(ground_size, ground_height, ground_size),
+      //Collider::cuboid(ground_size, ground_height, ground_size),
   )).insert(Name::new("Ground"));
 
 }

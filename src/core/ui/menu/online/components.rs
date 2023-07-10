@@ -9,22 +9,16 @@
 use bevy::prelude::*;
 
 #[derive(Component)]
-pub struct MenuUIRoot;
+pub struct OnlineUIRoot;
 
 #[derive(Component)]
-pub struct StartButton;
+pub struct ButtonHost;
 
 #[derive(Component)]
-pub struct OnlineButton;
+pub struct ButtonJoin;
 
 #[derive(Component)]
-pub struct SettingsButton;
+pub struct ButtonNetworkConfig;
 
 #[derive(Component)]
-pub struct QuitButton;
-
-#[derive(Component)]
-pub struct MainUIRoot;
-
-#[derive(Component)]
-pub struct GameUIRoot;
+pub struct ButtonBack;

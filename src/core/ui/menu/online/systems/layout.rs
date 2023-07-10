@@ -8,9 +8,9 @@
 
 use bevy::prelude::*;
 
-use crate::core::{ui::menu::main::{styles::*, components::*}, components::*};
-
-pub fn spawn_main_menu(
+use crate::core::ui::menu::{main::styles::NORMAL_BUTTON, online::components::*};
+ 
+pub fn spawn_online_menu(
   mut commands: Commands,
   asset_server: Res<AssetServer>
 ) {
@@ -48,15 +48,15 @@ pub fn spawn_main_menu(
       ..default()
     };
 
-    // PLAY BUTTON
+    // Host BUTTON
     parent.spawn(ButtonBundle {
       style: button_style.clone(),
       background_color: NORMAL_BUTTON.into(),
       ..default()
-    }).insert(StartButton)
+    }).insert(ButtonHost)
     .with_children(|parent| {
       parent.spawn(TextBundle::from_section(
-        "Play",
+        "Host",
         TextStyle {
           //font: asset_server.load("fonts/FiraSans-Bold.ttf"),
           font_size: 40.0,
@@ -66,15 +66,15 @@ pub fn spawn_main_menu(
       ));
     });
 
-    // Online BUTTON
+    // Join BUTTON
     parent.spawn(ButtonBundle {
       style: button_style.clone(),
       background_color: NORMAL_BUTTON.into(),
       ..default()
-    }).insert(OnlineButton)
+    }).insert(ButtonJoin)
     .with_children(|parent| {
       parent.spawn(TextBundle::from_section(
-        "Online",
+        "Join",
         text_style.clone(),
       ));
     });
@@ -84,7 +84,7 @@ pub fn spawn_main_menu(
       style: button_style.clone(),
       background_color: NORMAL_BUTTON.into(),
       ..default()
-    }).insert(SettingsButton)
+    }).insert(ButtonNetworkConfig)
     .with_children(|parent| {
       parent.spawn(TextBundle::from_section(
         "Settings",
@@ -97,63 +97,23 @@ pub fn spawn_main_menu(
       style: button_style.clone(),
       background_color: NORMAL_BUTTON.into(),
       ..default()
-    }).insert(QuitButton)
+    }).insert(ButtonBack)
     .with_children(|parent| {
       parent.spawn(TextBundle::from_section(
-        "Quit",
+        "Back",
         text_style.clone(),
       ));
     });
 
 
-  }).insert(MainUIRoot);
+  }).insert(OnlineUIRoot);
 }
 
-pub fn despawn_main_menu(
+pub fn despawn_online_menu(
   mut commands: Commands,
-  main_menu_query:Query<Entity, With<MainUIRoot>>,
+  menu_query:Query<Entity, With<OnlineUIRoot>>,
 ){
-  if let Ok(main_menu_entity) = main_menu_query.get_single(){
-    commands.entity(main_menu_entity).despawn_recursive();
-  }
-}
-
-pub fn spawn_game_menu(mut commands: Commands, asset_server: Res<AssetServer>) {
-  // ui camera
-  //commands.spawn(Camera2dBundle::default());//need camera to see the UI button
-  commands
-    .spawn(ButtonBundle {
-      style: Style {
-        //size: Size::new(Val::Px(150.0), Val::Px(65.0)),
-        // center button
-        margin: UiRect::all(Val::Auto),
-        // horizontally center child text
-        justify_content: JustifyContent::Center,
-        // vertically center child text
-        align_items: AlignItems::Center,
-        ..default()
-      },
-      background_color: NORMAL_BUTTON.into(),
-      ..default()
-    })
-    .insert(GameUIRoot)
-    .with_children(|parent| {
-      parent.spawn(TextBundle::from_section(
-        "Game",
-        TextStyle {
-          font: asset_server.load("fonts/FiraSans-Bold.ttf"),
-          font_size: 40.0,
-          color: Color::rgb(0.9, 0.9, 0.9),
-        },
-      ));
-    });
-}
-
-pub fn despawn_game_menu(
-  mut commands: Commands,
-  main_menu_query:Query<Entity, With<GameUIRoot>>,
-){
-  if let Ok(main_menu_entity) = main_menu_query.get_single(){
-    commands.entity(main_menu_entity).despawn_recursive();
+  if let Ok(menu_entity) = menu_query.get_single(){
+    commands.entity(menu_entity).despawn_recursive();
   }
 }

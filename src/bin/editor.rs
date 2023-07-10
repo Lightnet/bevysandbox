@@ -9,7 +9,7 @@
 //Tests
 // https://github.com/bevyengine/bevy/blob/main/examples/window/window_settings.rs
 use bevy::prelude::*;
-use bevy_inspector_egui::quick::WorldInspectorPlugin;
+//use bevy_inspector_egui::quick::WorldInspectorPlugin;
 
 pub const HEIGHT: f32 = 720.0;
 pub const WIDTH: f32 = 1280.0;
@@ -26,8 +26,9 @@ fn main() {
       }),
       ..default()
     }))
-    .add_plugin(WorldInspectorPlugin::default())
-    .add_startup_system(setup)
+    //.add_plugin(WorldInspectorPlugin::default())
+    //.add_startup_system(setup)
+    .add_systems(Startup, setup)
     .run();
 }
 

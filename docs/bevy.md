@@ -2,6 +2,7 @@
 # CHEAT BOOK:
  * https://bevy-cheatbook.github.io/
  * https://github.com/jakobhellermann/bevy-inspector-egui
+ * https://bevyengine.org/learn/book/getting-started/setup/
 
 
 https://bevyengine.org/learn/book/getting-started/ecs/

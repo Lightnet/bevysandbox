@@ -7,8 +7,8 @@
  */
 
 use bevy::prelude::*;
-use bevy_mod_picking::prelude::RaycastPickCamera;
-use bevy_rapier3d::prelude::*;
+//use bevy_mod_picking::prelude::RaycastPickCamera;
+//use bevy_rapier3d::prelude::*;
 
 #[allow(unused_variables, unused_mut)]
 pub fn setup_physics_player(
@@ -24,10 +24,10 @@ pub fn setup_physics_player(
       material: materials.add(Color::rgb(0.3, 0.5, 0.3).into()),
       ..default()
     },
-    RigidBody::KinematicPositionBased,
-    KinematicCharacterController::default(),
+    //RigidBody::KinematicPositionBased,
+    //KinematicCharacterController::default(),
     //RigidBody::Dynamic,
-    Collider::ball(1.0),
+    //Collider::ball(1.0),
     //ColliderDebugColor(colors[color % 3]),
   ))
   .insert(TransformBundle::from(Transform::from_xyz(0.0, 32.0, 0.0)))
@@ -45,14 +45,14 @@ pub fn setup_physics_player(
       ..Default::default()
       },
       //PlayerCamera,
-      RaycastPickCamera::default()//when main camera is active and select to update ray cast
+      //RaycastPickCamera::default()//when main camera is active and select to update ray cast
     ));
   })
   
   ;
 
 }
-
+/*
 pub fn system_physics_player_input(
 	mut controllers: Query<(&mut Transform, &mut KinematicCharacterController)>,
 	keyboard_input: Res<Input<KeyCode>>,
@@ -91,3 +91,4 @@ pub fn system_physics_player_input(
     }
 	}
 }
+*/

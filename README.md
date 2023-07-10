@@ -9,16 +9,16 @@
  * Work In Progress and subject to files and changes.
 
 # Tool Chain:
- * Rust 1.69.0
+ * Rust 1.70.0
 
 # Code Language:
  * Rust Language
 
 # Game Engine:
- * Bevy Engine 0.10.1
+ * Bevy Engine 0.11.0
 
 # Packages:
- * Bevy 0.9.1
+ * Bevy 0.11.0
  * clap 4.0.32
  * bevy_egui 0.18.0
  * bevy_mod_picking 0.11.0
