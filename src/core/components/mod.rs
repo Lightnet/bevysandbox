@@ -17,6 +17,9 @@ pub enum GameState{
   Gameplay,
 }
 
+#[derive(Component)]
+pub struct CameraUIRoot;
+
 //#[derive(Component)]
 //pub struct MenuUIRoot;
 

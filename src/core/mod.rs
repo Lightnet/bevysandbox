@@ -12,4 +12,5 @@ pub mod network;
 pub mod systems;
 pub mod physics;
 pub mod world;
+pub mod resources;
 pub mod ui;

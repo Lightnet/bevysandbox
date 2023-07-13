@@ -27,22 +27,8 @@ pub fn spawn_main_menu(
     ..default()
   }).with_children(|parent|{
 
-    let button_style:Style = Style {
-      //size: Size::new(Val::Px(150.0), Val::Px(65.0)),
-      width: Val::Px(180.0),
-      height: Val::Px(65.0),
-      // center button
-      //margin: UiRect::all(Val::Auto),
-      margin: UiRect::all(Val::Px(8.0)),
-      // horizontally center child text
-      justify_content: JustifyContent::Center,
-      // vertically center child text
-      align_items: AlignItems::Center,
-      ..default()
-    };
-
     let text_style:TextStyle = TextStyle {
-      //font: asset_server.load("fonts/FiraSans-Bold.ttf"),
+      font: asset_server.load("fonts/FiraSans-Bold.ttf"),
       font_size: 40.0,
       color: Color::rgb(0.9, 0.9, 0.9),
       ..default()
@@ -50,7 +36,7 @@ pub fn spawn_main_menu(
 
     // PLAY BUTTON
     parent.spawn(ButtonBundle {
-      style: button_style.clone(),
+      style: get_button_style(),
       background_color: NORMAL_BUTTON.into(),
       ..default()
     }).insert(StartButton)
@@ -68,7 +54,7 @@ pub fn spawn_main_menu(
 
     // Online BUTTON
     parent.spawn(ButtonBundle {
-      style: button_style.clone(),
+      style: get_button_style(),
       background_color: NORMAL_BUTTON.into(),
       ..default()
     }).insert(OnlineButton)
@@ -81,7 +67,7 @@ pub fn spawn_main_menu(
 
     // SETTINGS BUTTON
     parent.spawn(ButtonBundle {
-      style: button_style.clone(),
+      style: get_button_style(),
       background_color: NORMAL_BUTTON.into(),
       ..default()
     }).insert(SettingsButton)
@@ -94,7 +80,7 @@ pub fn spawn_main_menu(
 
     // QUIT BUTTON
     parent.spawn(ButtonBundle {
-      style: button_style.clone(),
+      style: get_button_style(),
       background_color: NORMAL_BUTTON.into(),
       ..default()
     }).insert(QuitButton)

@@ -19,10 +19,11 @@
 
 # Packages:
  * Bevy 0.11.0
+ * bevy_mod_picking 0.14.0 (not working)
+ * bevy_rapier3d 0.22.0 (working)
+ * ...
  * clap 4.0.32
  * bevy_egui 0.18.0
- * bevy_mod_picking 0.11.0
- * 
 
 # Information:
   Note this is prototype build from Bevy Engine in Rust Language.
