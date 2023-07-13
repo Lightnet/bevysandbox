@@ -21,7 +21,6 @@ fn main() {
     .run();
 }
 
-
 fn setup(
   mut commands: Commands,
   mut meshes: ResMut<Assets<Mesh>>,
@@ -49,23 +48,23 @@ fn setup(
   mesh.set_indices(Some(mesh::Indices::U32(vec![0, 2, 1])));
 
   commands.spawn(PbrBundle {
-      mesh: meshes.add(mesh),
-      material: materials.add(Color::rgb(0.3, 0.5, 0.3).into()),
-      ..default()
+    mesh: meshes.add(mesh),
+    material: materials.add(Color::rgb(0.3, 0.5, 0.3).into()),
+    ..default()
   });
 
   commands.spawn(PointLightBundle {
-      point_light: PointLight {
-          intensity: 1500.0,
-          shadows_enabled: true,
-          ..default()
-      },
-      transform: Transform::from_xyz(4.0, 8.0, 4.0),
+    point_light: PointLight {
+      intensity: 1500.0,
+      shadows_enabled: true,
       ..default()
+    },
+    transform: Transform::from_xyz(4.0, 8.0, 4.0),
+    ..default()
   });
 
   commands.spawn(Camera3dBundle {
-      transform: Transform::from_xyz(-2.0, 2.5, 5.0).looking_at(Vec3::ZERO, Vec3::Y),
-      ..default()
+    transform: Transform::from_xyz(-2.0, 2.5, 5.0).looking_at(Vec3::ZERO, Vec3::Y),
+    ..default()
   });
 }

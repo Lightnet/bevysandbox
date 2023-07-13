@@ -26,10 +26,10 @@ fn main() {
         }))
         .register_type::<ComponentA>()
         .register_type::<ComponentB>()
-        .add_startup_system(save_scene_system)
-        .add_startup_system(load_scene_system)
-        .add_startup_system(infotext_system)
-        .add_system(log_system)
+        .add_systems(Startup ,save_scene_system)
+        .add_systems(Startup ,load_scene_system)
+        .add_systems(Startup ,infotext_system)
+        .add_systems(log_system)
         .run();
 }
 

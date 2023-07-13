@@ -32,13 +32,13 @@ path = "src/bin/game.rs"
 #name = "network"
 #path = "src/examples/network.rs"
 
-#[[example]]
-#name = "physics"
-#path = "src/examples/physics.rs"
+[[example]]
+name = "physics"
+path = "src/examples/physics.rs"
 
-#[[example]]
-#name = "pick"
-#path = "src/examples/pick.rs"
+[[example]]
+name = "pick"
+path = "src/examples/pick.rs"
 
 #[[example]]
 #name = "scripting"
@@ -88,12 +88,12 @@ resolver = "2" # path reslove packages
 # windows > dynamic - does not work 65535 objects exceeded
 # bevy = {version = "0.9", features = ["dynamic"]}
 bevy = { version = "0.11.0", features = [
-  "bevy_ui",
-  "bmp", 
-  "jpeg", 
-  "wav", 
-  "zlib", 
-  "bevy_animation",
+  #"bevy_ui",
+  #"bmp", 
+  #"jpeg", 
+  #"wav", 
+  #"zlib", 
+  #"bevy_animation",
   "dynamic_linking"
 ]}
 #bevy-inspector-egui = "0.18.3"
