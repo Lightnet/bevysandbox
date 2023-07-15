@@ -6,7 +6,5 @@
     Note there are multiple licenses.
  */
 
-pub mod main;
-pub mod online;
-pub mod settings;
-pub mod inventory;
+pub mod interaction;
+pub mod layout;

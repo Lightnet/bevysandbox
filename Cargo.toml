@@ -68,6 +68,11 @@ path = "src/examples/pick.rs"
 #name = "mesh"
 #path = "src/examples/mesh.rs"
 
+[[example]]
+name = "inventory"
+path = "src/examples/inventory_menu.rs"
+
+
 # exclude = ["crates/foo", "path/to/other"]
 
 # https://bevyengine.org/learn/book/getting-started/setup/
