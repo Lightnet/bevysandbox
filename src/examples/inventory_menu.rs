@@ -10,11 +10,11 @@
 
 use bevy::{
   prelude::*, 
-  winit::WinitSettings,
+  //winit::WinitSettings,
 };
 //use bevy_inspector_egui::quick::WorldInspectorPlugin;
 //use bevy_mod_picking::prelude::*;
-use bevysandbox::core::{components::*, ui::menu::{main::MainMenuPlugin, inventory::InventoryMenuPlugin}};
+use bevysandbox::core::{components::*, ui::menu::inventory::InventoryMenuPlugin};
 
 pub const HEIGHT: f32 = 720.0;
 pub const WIDTH: f32 = 1280.0;

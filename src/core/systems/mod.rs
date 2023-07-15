@@ -41,3 +41,11 @@ pub fn system_query_info(
     println!("[[player_info]]: {:?}", player_info);
   }
 }
+
+pub fn get_text_style(asset_server: &Res<AssetServer>) -> TextStyle {
+  TextStyle {
+    font: asset_server.load("fonts/FiraSans-Bold.ttf"),
+    font_size:28.0,
+    color: Color::WHITE,
+  }
+}
