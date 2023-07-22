@@ -14,3 +14,4 @@ pub mod physics;
 pub mod world;
 pub mod resources;
 pub mod ui;
+pub mod camera;

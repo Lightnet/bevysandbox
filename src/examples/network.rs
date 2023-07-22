@@ -1,12 +1,4 @@
-/*
-  Project Name: Bevy Sandbox
-  Licenses: MIT
-  Created By: Lightnet
-  Information:
-    Note there are multiple licenses.
- */
-
-use bevy::prelude::*;
+use bevy::prelude::{shape::Plane, *};
 use bevy_renet::{
     renet::{
         transport::{ClientAuthentication, ServerAuthentication, ServerConfig},
@@ -103,30 +95,32 @@ fn main() {
     app.init_resource::<Lobby>();
 
     if is_host {
-        app.add_plugin(RenetServerPlugin);
-        app.add_plugin(NetcodeServerPlugin);
+        app.add_plugins(RenetServerPlugin);
+        app.add_plugins(NetcodeServerPlugin);
         let (server, transport) = new_renet_server();
         app.insert_resource(server);
         app.insert_resource(transport);
 
-        app.add_systems((server_update_system, server_sync_players, move_players_system));
+        app.add_systems(
+            Update,
+            (server_update_system, server_sync_players, move_players_system).run_if(resource_exists::<RenetServer>()),
+        );
     } else {
-        app.add_plugin(RenetClientPlugin);
-        app.add_plugin(NetcodeClientPlugin);
+        app.add_plugins(RenetClientPlugin);
+        app.add_plugins(NetcodeClientPlugin);
         app.init_resource::<PlayerInput>();
         let (client, transport) = new_renet_client();
         app.insert_resource(client);
         app.insert_resource(transport);
 
         app.add_systems(
-            (player_input, client_send_input, client_sync_players)
-                .distributive_run_if(bevy_renet::transport::client_connected)
-                .in_base_set(CoreSet::Update),
+            Update,
+            (player_input, client_send_input, client_sync_players).run_if(bevy_renet::transport::client_connected()),
         );
     }
 
-    app.add_startup_system(setup);
-    app.add_system(panic_on_error_system);
+    app.add_systems(Startup, setup);
+    app.add_systems(Update, panic_on_error_system);
 
     app.run();
 }
@@ -223,7 +217,7 @@ fn client_sync_players(
                 lobby.players.insert(id, player_entity);
             }
             ServerMessages::PlayerDisconnected { id } => {
-                println!("disconnected Player {:}", id);
+                println!("Player {} disconnected.", id);
                 if let Some(player_entity) = lobby.players.remove(&id) {
                     commands.entity(player_entity).despawn();
                 }
@@ -249,9 +243,7 @@ fn client_sync_players(
 fn setup(mut commands: Commands, mut meshes: ResMut<Assets<Mesh>>, mut materials: ResMut<Assets<StandardMaterial>>) {
     // plane
     commands.spawn(PbrBundle {
-        //mesh: meshes.add(Mesh::from(Plane::from_size(5.0))),
-        mesh: meshes.add(shape::Plane::from_size(5.0).into()),
-
+        mesh: meshes.add(Mesh::from(Plane::from_size(5.0))),
         material: materials.add(Color::rgb(0.3, 0.5, 0.3).into()),
         ..Default::default()
     });
