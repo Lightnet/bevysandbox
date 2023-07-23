@@ -5,6 +5,9 @@
   Information:
     Note there are multiple licenses.
 */
+/*
+  Information: Testing game play.
+*/
 
 use bevy::prelude::*;
 use bevysandbox::plugins::PrototypeSandboxPlugin;
@@ -32,15 +35,8 @@ fn main() {
       ..default()
     }))
     //.add_plugin(WorldInspectorPlugin::new())
-    //.add_plugin(BsbPhysicsPlugin)
     //.add_plugin(RapierPhysicsPlugin::<NoUserData>::default())
     //.add_plugin(RapierDebugRenderPlugin::default())
-    //.add_startup_system(setup_camera)
-    //.add_startup_system(setup_physics)
-    //.add_system(update_system)
-    //.add_system(read_result_system)
-    //.add_plugin(WorldPhysicsTest01Plugin)
-    //.add_plugins(BevySandboxPlugin)
     .add_plugins(PrototypeSandboxPlugin)
 
     .run();

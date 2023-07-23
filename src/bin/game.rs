@@ -5,6 +5,10 @@
   Information:
     Note there are multiple licenses.
  */
+/*
+  Information:
+    Start Game Menu and other base game access default build.
+*/
 
 use bevy::prelude::*;
 //use bevy_rapier3d::prelude::*;
