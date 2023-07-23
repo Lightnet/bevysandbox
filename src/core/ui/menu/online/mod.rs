@@ -25,9 +25,8 @@ impl Plugin for OnlineMenuPlugin {
     app.add_systems( OnEnter(GameState::Online),spawn_online_menu);
     app.add_systems(Update, (
       interact_host_button,
-      interact_back_button,
-      //interact_settings_button,
-      //interact_quit_button
+      interact_join_button,
+      interact_back_button
     ).run_if(in_state(GameState::Online)) );
     app.add_systems( OnExit(GameState::Online),despawn_online_menu);
 

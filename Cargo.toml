@@ -12,6 +12,10 @@ build = "build.rs"
 name = "bevysandbox"
 path = "src/bin/game.rs"
 
+[[bin]]
+name = "prototype"
+path = "src/bin/prototype.rs"
+
 #[[bin]]
 #name = "editor"
 #path = "src/bin/editor.rs"

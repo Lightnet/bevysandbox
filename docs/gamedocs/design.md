@@ -31,7 +31,6 @@ sturct PlayerBundle {
   health:Health,
 }
 
-
 #[derive(Component)]
 sturct Health;
 ```
