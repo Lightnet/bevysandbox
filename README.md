@@ -9,30 +9,30 @@
  * Work In Progress and subject to files and changes.
 
 # Tool Chain:
- * Rust 1.70.0
+ * Rust 1.76.0
 
 # Code Language:
  * Rust Language
 
 # Game Engine:
- * Bevy Engine 0.11.0
+ * Bevy Engine 0.12.1
 
 # Packages:
- * Bevy 0.11.0
+ * Bevy 0.12.1
  * bevy_mod_picking 0.14.0 (not working)
- * bevy_rapier3d 0.22.0 (working)
+ * bevy_mod_raycast 0.16.0 (???)
+ * bevy_rapier3d 0.24.0 (???)
  * ...
  * clap 4.0.32
  * bevy_egui 0.18.0
+
 
 # Information:
   Note this is prototype build from Bevy Engine in Rust Language.
   
   It work in progress that subject to changes. Bevy Engine API subject to change and break.
 
-  This is just test build ideas.
-
-  Note it develop by users who like using rust or game engine. There are many plugins and helper scripts. It very module builds.
+  The ideas base on godot for single small file to run scripts. But the network required more coding to handle ID object lists.
 
   * https://bevyengine.org/assets/
 
