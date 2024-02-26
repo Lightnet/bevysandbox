@@ -22,7 +22,7 @@ pub fn spawn_camera_3d(mut commands: Commands) {
 }
 
 pub fn system_query_info(
-  keyboard_input: Res<Input<KeyCode>>,
+  keyboard_input: Res<ButtonInput<KeyCode>>,
   mut player_info: ResMut<PlayerInfo>,
 ){
   //if keyboard_input.pressed(KeyCode::A) {
@@ -32,12 +32,12 @@ pub fn system_query_info(
 
   //keyboard_input.get_just_released()
 
-  if keyboard_input.just_released(KeyCode::A) {
+  if keyboard_input.just_released(KeyCode::KeyA) {
     println!("player_info: {:?}", player_info);
     println!("player Name: {:}", player_info.name);
   }
 
-  if keyboard_input.just_pressed(KeyCode::D) {
+  if keyboard_input.just_pressed(KeyCode::KeyD) {
     println!("[[player_info]]: {:?}", player_info);
   }
 }

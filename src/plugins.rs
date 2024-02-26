@@ -37,10 +37,10 @@ impl Plugin for BevySandboxPlugin {
     app.init_resource::<PlayerInfo>();
 
     //app.add_plugin(WorldInspectorPlugin::new());
-    app.add_state::<GameState>();
+    app.init_state::<GameState>();
     app.add_systems(Startup,spawn_camera_3d);
     app.add_plugins(MainMenuPlugin);
-    app.add_plugins(OnlineMenuPlugin);
+    //app.add_plugins(OnlineMenuPlugin);
     app.add_plugins(SettingsMenuPlugin);
     //app.add_plugins(WorldTest01Plugin);
 
@@ -56,7 +56,7 @@ impl Plugin for PrototypeSandboxPlugin {
     //app.insert_resource(PlayerInfo::default());
     app.init_resource::<PlayerInfo>();
     //app.add_plugin(WorldInspectorPlugin::new());
-    app.add_state::<GameState>();
+    app.init_state::<GameState>();
 
     app.add_systems(Startup, set_state_gameplay);
     app.add_systems(Startup,spawn_camera_3d);

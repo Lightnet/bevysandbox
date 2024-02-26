@@ -20,8 +20,8 @@ pub fn setup_physics_player(
   commands.spawn((
     PbrBundle {
       //mesh: meshes.add(shape::Plane::from_size(1.0).into()),
-      mesh: meshes.add(Mesh::from(shape::Cube { size: 1.0 })),
-      material: materials.add(Color::rgb(0.3, 0.5, 0.3).into()),
+      mesh: meshes.add(Cuboid::new(1.0, 1.0, 1.0)),
+      material: materials.add(Color::rgb(0.3, 0.5, 0.3)),
       ..default()
     },
     //RigidBody::KinematicPositionBased,
