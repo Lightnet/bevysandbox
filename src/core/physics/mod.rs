@@ -9,16 +9,14 @@
 use bevy::prelude::*;
 //use bevy_rapier3d::prelude::*;
 
-pub struct BsbPhysicsPlugin;
+//pub struct BsbPhysicsPlugin;
 
-impl Plugin for BsbPhysicsPlugin {
-  fn build(&self, app: &mut App) {
-    
+//impl Plugin for BsbPhysicsPlugin {
+  //fn build(&self, app: &mut App) {
     //app.add_plugin(RapierPhysicsPlugin::<NoUserData>::default());
 		//app.add_plugin(RapierDebugRenderPlugin::default());
-
-  }
-}
+  //}
+//}
 
 #[allow(unused_mut, unused_variables)]
 pub fn setup_physics_ground(

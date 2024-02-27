@@ -7,7 +7,7 @@
  */
 
 use bevy::prelude::*;
-
+#[allow(unused_imports)]
 use crate::core::{ui::menu::main::{styles::*, components::*}, components::*};
 
 pub fn spawn_main_menu(

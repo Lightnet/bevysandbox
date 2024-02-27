@@ -10,13 +10,17 @@
 
 use bevy::prelude::*;
 
+#[allow(unused_imports)]
 use crate::core::{
-  ui::menu::{
+  components::GameState, resources::PlayerInfo, systems::{spawn_camera_3d, system_query_info}, ui::{debug::UIEditorPlugin, menu::{
     main::MainMenuPlugin, 
     online::OnlineMenuPlugin, 
     settings::SettingsMenuPlugin
-  }, 
-  components::GameState, systems::{spawn_camera_3d, system_query_info}, resources::PlayerInfo, world::{WorldPrototypePlugin, WorldTest01Plugin}
+  }},
+    world::{
+      WorldPrototypePlugin, 
+      //WorldTest01Plugin
+    }
 };
 
 //pub struct HelloPlugin;
@@ -32,6 +36,7 @@ pub struct BevySandboxPlugin;
 
 impl Plugin for BevySandboxPlugin {
   fn build(&self, app: &mut App) {
+    app.add_plugins(UIEditorPlugin);
     app.insert_resource(ClearColor(Color::rgb(0.3, 0.3, 0.3)));
     //app.insert_resource(PlayerInfo::default());
     app.init_resource::<PlayerInfo>();

@@ -59,9 +59,9 @@ bevy = { version = "0.13.0", features = [
   #"bevy_core_pipeline",
   #"dynamic_linking"
 ]}
-#bevy-inspector-egui = "0.18.3"
+bevy-inspector-egui = "0.23"
+bevy_egui = "0.25"
 #bevy_console = "0.7.0"
-#bevy_egui = "0.20.3"
 
 #bevy_rapier3d = "0.25.0"
 #bevy_renet = { version = "0.0.11"}

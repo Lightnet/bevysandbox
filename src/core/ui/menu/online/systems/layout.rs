@@ -12,7 +12,7 @@ use crate::core::ui::menu::{main::styles::NORMAL_BUTTON, online::components::*};
  
 pub fn spawn_online_menu(
   mut commands: Commands,
-  asset_server: Res<AssetServer>
+  //asset_server: Res<AssetServer>
 ) {
   println!("init menu...");
   commands.spawn(NodeBundle{

@@ -13,8 +13,6 @@
 use bevy::prelude::*;
 use bevysandbox::plugins::BevySandboxPlugin;
 //use bevy_rapier3d::prelude::*;
-//use bevy_inspector_egui::quick::WorldInspectorPlugin;
-//use bevysandbox::{core::{physics::BsbPhysicsPlugin, world::{WorldPhysicsTest01Plugin, WorldTest01Plugin}}, plugins::BevySandboxPlugin};
 
 pub const HEIGHT: f32 = 720.0;
 pub const WIDTH: f32 = 1280.0;
