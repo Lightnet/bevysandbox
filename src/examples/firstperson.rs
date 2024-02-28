@@ -12,7 +12,7 @@
 
 use bevy::{prelude::*, input::mouse::MouseMotion, window::PresentMode};
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
-use bevy_flycam::PlayerPlugin;
+//use bevy_flycam::PlayerPlugin;
 
 pub const HEIGHT: f32 = 720.0;
 pub const WIDTH: f32 = 1280.0;
@@ -31,9 +31,10 @@ fn main() {
       }),
       ..default()
     }))
-    .add_plugin(PlayerPlugin)
-    .add_plugin(WorldInspectorPlugin::new())
-    .add_startup_system(setup)
+    //.add_plugins(PlayerPlugin)
+    .add_plugins(WorldInspectorPlugin::new())
+    .add_systems(Startup, setup)
+    .add_systems(Startup, setup_camera)
     //.add_system(player_camera_controller)
     .run();
 }
@@ -43,7 +44,7 @@ fn setup_camera(
 ){
   // camera
   commands.spawn(Camera3dBundle {
-    transform: Transform::from_xyz(-20.0, 20.5, 50.0).looking_at(Vec3::ZERO, Vec3::Y),
+    transform: Transform::from_xyz(-50.0, 50.5, 50.0).looking_at(Vec3::ZERO, Vec3::Y),
     ..default()
   });
 }
@@ -55,8 +56,8 @@ fn setup(
 ) {
   // plane
   commands.spawn(PbrBundle {
-    mesh: meshes.add(shape::Plane::from_size(100.0).into()),
-    material: materials.add(Color::rgb(0.3, 0.5, 0.3).into()),
+    mesh: meshes.add(Plane3d::default().mesh().size(100., 100.)),
+    material: materials.add(Color::rgb(0.3, 0.5, 0.3)),
     ..default()
   }).insert(Name::new("plane"));
   // cube
@@ -69,8 +70,8 @@ fn setup(
 
   // cube
   commands.spawn(PbrBundle {
-    mesh: meshes.add(Mesh::from(shape::Cube { size:32.0 })),
-    material: materials.add(Color::rgb(0.8, 0.7, 0.6).into()),
+    mesh: meshes.add(Cuboid::new(32.0, 32.0, 32.0)),
+    material: materials.add(Color::rgb(0.8, 0.7, 0.6)),
     transform: Transform::from_xyz(0.0, 0.5, 0.0),
     ..default()
 }).insert(Name::new("cube"));
@@ -85,6 +86,16 @@ fn setup(
       transform: Transform::from_xyz(4.0, 8.0, 4.0),
       ..default()
   }).insert(Name::new("light"));
+
+  // light
+  commands.spawn(PointLightBundle {
+    point_light: PointLight {
+        shadows_enabled: true,
+        ..default()
+    },
+    transform: Transform::from_xyz(40.0, 60.0, 4.0),
+    ..default()
+  });
 
   // camera
   //commands.spawn(Camera3dBundle {

@@ -88,66 +88,51 @@ bevy_egui = "0.25"
 #[build-dependencies] # for window icon
 #winres = "0.1"
 
-#[[example]]
-#name = "firstperson"
-#path = "src/examples/firstperson.rs"
+[[example]]
+name = "mesh00"
+path = "src/examples/mesh00.rs"
+
+[[example]]
+name = "sample00"
+path = "src/examples/test_window.rs"
+
+[[example]]
+name = "sample01"
+path = "src/examples/scene3d.rs"
+
+[[example]]
+name = "sample02"
+path = "src/examples/inspector_scene3d.rs"
+
+[[example]]
+name = "sample03"
+path = "src/examples/test_button.rs"
+
+[[example]]
+name = "scene04"
+path = "src/examples/raypick.rs"
+
+[[example]]
+name = "egui00"
+path = "src/examples/test_egui.rs"
 
 #[[example]]
-#name = "launcher"
-#path = "src/examples/launcher.rs"
-
-#[[example]]
-#name = "menutest"
-#path = "src/examples/menutest.rs"
-
-#[[example]]
-#name = "network"
-#path = "src/examples/network.rs"
-
-#[[example]]
-#name = "physics"
+#name = "physics00"
 #path = "src/examples/physics.rs"
 
-#[[example]]
-#name = "pick"
-#path = "src/examples/pick.rs"
+[[example]]
+name = "test00"
+path = "src/examples/inventory_menu.rs"
+
+[[example]]
+name = "test01"
+path = "src/examples/firstperson.rs" #not work on yet
+
+[[example]]
+name = "load00"
+path = "src/examples/load_gltf.rs"
 
 #[[example]]
-#name = "raycast_pick"
-#path = "src/examples/mouse_picking.rs"
-
-#[[example]]
-#name = "scripting"
-#path = "src/examples/scripting.rs"
-
-#[[example]]
-#name = "scene3d"
-#path = "src/examples/scene3d.rs"
-
-#[[example]]
-#name = "bevyegui"
-#path = "src/examples/bevyegui.rs"
-
-#[[example]]
-#name = "blankwindow"
-#path = "src/examples/blankwindow.rs"
-
-#[[example]]
-#name = "button"
-#path = "src/examples/button.rs"
-
-#[[example]]
-#name = "saveloadscene"
+#name = "scenesl00"
 #path = "src/examples/saveloadscene.rs"
 
-#[[example]]
-#name = "mesh"
-#path = "src/examples/mesh.rs"
-
-#[[example]]
-#name = "inventory"
-#path = "src/examples/inventory_menu.rs"
-
-#[[example]]
-#name = "mesh01"
-#path = "src/examples/mesh01.rs"

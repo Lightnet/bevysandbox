@@ -6,7 +6,7 @@
     Note there are multiple licenses.
  */
 
-
+// https://github.com/bevyengine/bevy/blob/main/examples/ecs/ecs_guide.rs
 // https://github.com/bevyengine/bevy/blob/main/examples/scene/scene.rs
 // https://www.youtube.com/watch?v=4uASkH-FUWk
 
@@ -21,15 +21,17 @@ fn main() {
         .add_plugins(DefaultPlugins.set(AssetPlugin {
             // This tells the AssetServer to watch for changes to assets.
             // It enables our scenes to automatically reload in game when we modify their files.
-            watch_for_changes: true,
+            //watch_for_changes: true,
             ..default()
         }))
         .register_type::<ComponentA>()
         .register_type::<ComponentB>()
-        .add_systems(Startup ,save_scene_system)
-        .add_systems(Startup ,load_scene_system)
-        .add_systems(Startup ,infotext_system)
-        .add_systems(log_system)
+        //.add_systems(Startup ,infotext_system)
+        .add_systems(Update ,exclusive_save_scene_system)
+        //.add_systems(Update ,load_scene_system)
+        //.add_systems(Update ,(save_scene_system,load_scene_system ))
+
+        .add_systems(Update, log_system)
         .run();
 }
 
@@ -74,14 +76,20 @@ const SCENE_FILE_PATH: &str = "scenes/load_scene_example.scn.ron";
 // The new, updated scene data will be saved here so that you can see the changes
 const NEW_SCENE_FILE_PATH: &str = "scenes/load_scene_example-new.scn.ron";
 
-fn load_scene_system(mut commands: Commands, asset_server: Res<AssetServer>) {
-    // "Spawning" a scene bundle creates a new entity and spawns new instances
-    // of the given scene's entities as children of that entity.
-    commands.spawn(DynamicSceneBundle {
-        // Scenes are loaded just like any other asset.
-        scene: asset_server.load(SCENE_FILE_PATH),
-        ..default()
-    });
+fn load_scene_system(
+    mut commands: Commands, 
+    asset_server: Res<AssetServer>,
+    keyboard: Res<ButtonInput<KeyCode>>,
+) {
+    if keyboard.just_pressed(KeyCode::KeyD) {
+        // "Spawning" a scene bundle creates a new entity and spawns new instances
+        // of the given scene's entities as children of that entity.
+        commands.spawn(DynamicSceneBundle {
+            // Scenes are loaded just like any other asset.
+            scene: asset_server.load(SCENE_FILE_PATH),
+            ..default()
+        });
+    }
 }
 
 // This system logs all ComponentA components in our world. Try making a change to a ComponentA in
@@ -96,7 +104,13 @@ fn log_system(query: Query<(Entity, &ComponentA), Changed<ComponentA>>) {
     }
 }
 
-fn save_scene_system(world: &mut World) {
+fn exclusive_save_scene_system(
+    world: &mut World,
+    mut commands: Commands,
+    
+    keyboard: Res<ButtonInput<KeyCode>>,
+) {
+    if keyboard.just_pressed(KeyCode::KeyD) {
     // Scenes can be created from any ECS World. You can either create a new one for the scene or
     // use the current World.
     let mut scene_world = World::new();
@@ -112,7 +126,7 @@ fn save_scene_system(world: &mut World) {
     // The TypeRegistry resource contains information about all registered types (including
     // components). This is used to construct scenes.
     let type_registry = world.resource::<AppTypeRegistry>();
-    let scene = DynamicScene::from_world(&scene_world, type_registry);
+    let scene = DynamicScene::from_world(&scene_world);
 
     // Scenes can be serialized like this:
     let serialized_scene = scene.serialize_ron(type_registry).unwrap();
@@ -133,11 +147,15 @@ fn save_scene_system(world: &mut World) {
                 .expect("Error while writing scene to file");
         })
         .detach();
+    }
 }
 
 // This is only necessary for the info message in the UI. See examples/ui/text.rs for a standalone
 // text example.
-fn infotext_system(mut commands: Commands, asset_server: Res<AssetServer>) {
+fn infotext_system(
+    mut commands: Commands,
+    asset_server: Res<AssetServer>
+) {
     commands.spawn(Camera2dBundle::default());
     commands.spawn(
         TextBundle::from_section(

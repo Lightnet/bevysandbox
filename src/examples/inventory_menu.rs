@@ -27,7 +27,7 @@ fn main() {
     //bevy basic setup
     .add_plugins(DefaultPlugins)
     // 
-    .add_state::<GameState>() // state app
+    .init_state::<GameState>() // state app
     //.state_set(GameState::)
     .add_systems(Startup, spawn_camera)
     .add_plugins(InventoryMenuPlugin);

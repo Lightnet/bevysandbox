@@ -4,6 +4,9 @@
 
 # Created By: Lightnet
 
+# Code Language:
+ * Rust Language
+
 # Status:
  * Prototyping
  * Work In Progress and subject to files and changes.
@@ -11,20 +14,17 @@
 # Tool Chain:
  * Rust 1.76.0
 
-# Code Language:
- * Rust Language
-
 # Game Engine:
- * Bevy Engine 0.12.1
+ * Bevy Engine 0.13.0
 
 # Packages:
- * Bevy 0.12.1
- * bevy_mod_picking 0.14.0 (not working)
- * bevy_mod_raycast 0.16.0 (???)
- * bevy_rapier3d 0.24.0 (???)
+ * bevy
+ * bevy_mod_picking (not working)
+ * bevy_mod_raycast (???)
+ * bevy_rapier3d (???)
+ * bevy_egui
+ * clap 
  * ...
- * clap 4.0.32
- * bevy_egui 0.18.0
 
 
 # Information:
@@ -36,8 +36,25 @@
 
   * https://bevyengine.org/assets/
 
-# Command Lines and Tests:
+# Designs:
+  Work in progress...
 
+  * game
+  * character
+    * data
+    * animation
+    * loadout
+    * movement
+  * HUD
+    * inventory menu
+    * main menu
+    * settings
+  * phyisics
+  * debug
+
+
+# Command Lines and Tests:
+ Note this is work in progress tests.
 ```
 cargo run // test
 cargo run --bin editor // test
@@ -45,16 +62,12 @@ cargo run --bin game // test
 ```
 
 ```
-cargo run --example launcher // test
-cargo run --example console // test
 cargo run --example firstperson // test
 cargo run --example menutest // test
 cargo run --example physics // test
-cargo run --example scripting //for lua script test
-cargo run --example launcher // test
 ```
 
-# Network test:
+# Network Test ( N/A ):
  * Need to config this later.
 ```
 cargo run --bin network -- server

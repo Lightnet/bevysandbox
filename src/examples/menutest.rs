@@ -12,7 +12,6 @@
 // https://bevyengine.org/learn/book/getting-started/ecs/
 // https://crates.io/crates/bevy-inspector-egui
 // https://github.com/mwbryant/bevy-tower-defense-tutorial/blob/part-7/src/main_menu.rs
-// https://github.com/mwbryant/bevy-tower-defense-tutorial/blob/part-7/src/main_menu.rs
 
 use bevy::{
   prelude::*, 
