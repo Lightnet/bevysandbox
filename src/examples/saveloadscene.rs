@@ -4,6 +4,8 @@
   Created By: Lightnet
   Information:
     Note there are multiple licenses.
+
+    Save and loading required some more config.
  */
 
 // https://github.com/bevyengine/bevy/blob/main/examples/ecs/ecs_guide.rs

@@ -19,11 +19,11 @@
 
 # Packages:
  * bevy
- * bevy_mod_picking (not working)
- * bevy_mod_raycast (???)
- * bevy_rapier3d (???)
- * bevy_egui
- * clap 
+ * bevy_mod_raycast (?)
+ * bevy_rapier3d (?)
+ * bevy_egui 
+ * bevy-inspector-egui
+ * bevy_renet
  * ...
 
 
@@ -32,7 +32,11 @@
   
   It work in progress that subject to changes. Bevy Engine API subject to change and break.
 
-  The ideas base on godot for single small file to run scripts. But the network required more coding to handle ID object lists.
+  The ideas base on godot for single small file to run scripts.
+
+  To create sandbox base on block base on Minecraft game and other game mixed into as well.
+  
+  Network required more coding to handle ID object lists.
 
   * https://bevyengine.org/assets/
 
