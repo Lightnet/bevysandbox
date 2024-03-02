@@ -18,6 +18,34 @@ use std::io::Write;
 
 use bevy::{prelude::*, tasks::IoTaskPool, utils::Duration};
 
+// The initial scene file will be loaded below and not change when the scene is saved
+const SCENE_FILE_PATH: &str = "scenes/load_scene_example.scn.ron";
+
+// The new, updated scene data will be saved here so that you can see the changes
+const NEW_SCENE_FILE_PATH: &str = "scenes/load_scene_example-new.scn.ron";
+
+#[derive(Component, Reflect, Default)]
+#[reflect(Component)] // this tells the reflect derive to also reflect component behaviors
+struct ComponentA {
+    pub x: f32,
+    pub y: f32,
+}
+
+#[derive(Component, Reflect)]
+#[reflect(Component)]
+struct ComponentB {
+    pub value: String,
+    #[reflect(skip_serializing)]
+    pub _time_since_startup: Duration,
+}
+
+// Resources can be serialized in scenes as well, with the same requirements `Component`s have.
+#[derive(Resource, Reflect, Default)]
+#[reflect(Resource)]
+struct ResourceA {
+    pub score: u32,
+}
+
 fn main() {
     App::new()
         .add_plugins(DefaultPlugins.set(AssetPlugin {
@@ -28,38 +56,13 @@ fn main() {
         }))
         .register_type::<ComponentA>()
         .register_type::<ComponentB>()
-        //.add_systems(Startup ,infotext_system)
-        .add_systems(Update ,exclusive_save_scene_system)
-        //.add_systems(Update ,load_scene_system)
-        //.add_systems(Update ,(save_scene_system,load_scene_system ))
-
+        .register_type::<ResourceA>()
+        .add_systems(Startup ,infotext_system)
+        .add_systems(Update ,save_scene_system)
+        .add_systems(Update ,load_scene_system)
         .add_systems(Update, log_system)
+        //.add_systems(Update, handle_save_input)
         .run();
-}
-
-// Registered components must implement the `Reflect` and `FromWorld` traits.
-// The `Reflect` trait enables serialization, deserialization, and dynamic property access.
-// `Reflect` enable a bunch of cool behaviors, so its worth checking out the dedicated `reflect.rs`
-// example. The `FromWorld` trait determines how your component is constructed when it loads.
-// For simple use cases you can just implement the `Default` trait (which automatically implements
-// FromResources). The simplest registered component just needs these two derives:
-#[derive(Component, Reflect, Default)]
-#[reflect(Component)] // this tells the reflect derive to also reflect component behaviors
-struct ComponentA {
-    pub x: f32,
-    pub y: f32,
-}
-
-// Some components have fields that cannot (or should not) be written to scene files. These can be
-// ignored with the #[reflect(skip_serializing)] attribute. This is also generally where the `FromWorld`
-// trait comes into play. `FromWorld` gives you access to your App's current ECS `Resources`
-// when you construct your component.
-#[derive(Component, Reflect)]
-#[reflect(Component)]
-struct ComponentB {
-    pub value: String,
-    #[reflect(skip_serializing)]
-    pub _time_since_startup: Duration,
 }
 
 impl FromWorld for ComponentB {
@@ -72,21 +75,15 @@ impl FromWorld for ComponentB {
     }
 }
 
-// The initial scene file will be loaded below and not change when the scene is saved
-const SCENE_FILE_PATH: &str = "scenes/load_scene_example.scn.ron";
 
-// The new, updated scene data will be saved here so that you can see the changes
-const NEW_SCENE_FILE_PATH: &str = "scenes/load_scene_example-new.scn.ron";
-
-fn load_scene_system(
-    mut commands: Commands, 
-    asset_server: Res<AssetServer>,
-    keyboard: Res<ButtonInput<KeyCode>>,
-) {
+fn load_scene_system(world: &mut World) {
+    //let commands = world;
+    let asset_server = world.resource::<AssetServer>();
+    let keyboard = world.resource::<ButtonInput<KeyCode>>();
     if keyboard.just_pressed(KeyCode::KeyD) {
         // "Spawning" a scene bundle creates a new entity and spawns new instances
         // of the given scene's entities as children of that entity.
-        commands.spawn(DynamicSceneBundle {
+        world.spawn(DynamicSceneBundle {
             // Scenes are loaded just like any other asset.
             scene: asset_server.load(SCENE_FILE_PATH),
             ..default()
@@ -106,54 +103,52 @@ fn log_system(query: Query<(Entity, &ComponentA), Changed<ComponentA>>) {
     }
 }
 
-fn exclusive_save_scene_system(
-    world: &mut World,
-    mut commands: Commands,
-    
-    keyboard: Res<ButtonInput<KeyCode>>,
-) {
-    if keyboard.just_pressed(KeyCode::KeyD) {
-    // Scenes can be created from any ECS World. You can either create a new one for the scene or
-    // use the current World.
-    let mut scene_world = World::new();
-    let mut component_b = ComponentB::from_world(world);
-    component_b.value = "hello".to_string();
-    scene_world.spawn((
-        component_b,
-        ComponentA { x: 1.0, y: 2.0 },
-        Transform::IDENTITY,
-    ));
-    scene_world.spawn(ComponentA { x: 3.0, y: 4.0 });
+// https://github.com/bevyengine/bevy/blob/main/examples/scene/scene.rs
+fn save_scene_system(world: &mut World) {
 
-    // The TypeRegistry resource contains information about all registered types (including
-    // components). This is used to construct scenes.
-    let type_registry = world.resource::<AppTypeRegistry>();
-    let scene = DynamicScene::from_world(&scene_world);
+    let keyboard = world.resource::<ButtonInput<KeyCode>>();
 
-    // Scenes can be serialized like this:
-    let serialized_scene = scene.serialize_ron(type_registry).unwrap();
+    if keyboard.just_pressed(KeyCode::KeyS) {
+        println!("TEST");
 
-    // Showing the scene in the console
-    info!("{}", serialized_scene);
+        let mut scene_world = World::new();
 
-    // Writing the scene to a new file. Using a task to avoid calling the filesystem APIs in a system
-    // as they are blocking
-    // This can't work in WASM as there is no filesystem access
-    #[cfg(not(target_arch = "wasm32"))]
-    IoTaskPool::get()
-        .spawn(async move {
-            // Write the scene RON data to file
-            //full path file // windows current workspace root folder
-            File::create(format!("assets/{NEW_SCENE_FILE_PATH}"))
-                .and_then(|mut file| file.write(serialized_scene.as_bytes()))
-                .expect("Error while writing scene to file");
-        })
-        .detach();
+        let type_registry = world.resource::<AppTypeRegistry>().clone();
+        scene_world.insert_resource(type_registry);
+
+        let mut component_b = ComponentB::from_world(world);
+        component_b.value = "hello".to_string();
+        scene_world.spawn((
+            component_b,
+            ComponentA { x: 1.0, y: 2.0 },
+            Transform::IDENTITY,
+            Name::new("joe"),
+        ));
+        scene_world.spawn(ComponentA { x: 3.0, y: 4.0 });
+        scene_world.insert_resource(ResourceA { score: 1 });
+
+        let scene = DynamicScene::from_world(&scene_world);
+        let type_registry = world.resource::<AppTypeRegistry>();
+        let serialized_scene = scene.serialize_ron(type_registry).unwrap();
+        
+        info!("{}", serialized_scene);
+
+        #[cfg(not(target_arch = "wasm32"))]
+        IoTaskPool::get()
+            .spawn(async move {
+                // Write the scene RON data to file
+                File::create(format!("assets/{NEW_SCENE_FILE_PATH}"))
+                    .and_then(|mut file| file.write(serialized_scene.as_bytes()))
+                    .expect("Error while writing scene to file");
+            })
+            .detach();
+        println!("finish...")
     }
 }
 
 // This is only necessary for the info message in the UI. See examples/ui/text.rs for a standalone
 // text example.
+#[allow(unused)]
 fn infotext_system(
     mut commands: Commands,
     asset_server: Res<AssetServer>
@@ -174,3 +169,11 @@ fn infotext_system(
         }),
     );
 }
+
+
+//fn handle_save_input(world: &mut World) {
+    //let keys = world.resource::<ButtonInput<KeyCode>>();
+    //if keys.just_released(KeyCode::Space) {
+        //println!("KEY SPACE IN WORLD ");
+    //}
+//}

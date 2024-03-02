@@ -9,9 +9,9 @@ publish = false
 default-run = "game"
 #build = "build.rs"
 
-[[bin]]
-name = "scene"
-path = "src/bin/scene.rs"
+#[[bin]]
+#name = "scene"
+#path = "src/bin/scene.rs"
 
 [[bin]]
 name = "game"
@@ -49,18 +49,23 @@ serde = {version = "1.0", features = ["derive"]}
 serde_json = "1.0"
 winit = "0.29"
 image = "0.24"
+# https://github.com/bevyengine/bevy/blob/main/docs/cargo_features.md
 bevy = { version = "0.13.0", features = [
-  #"bevy_ui",
-  #"bmp", 
-  #"jpeg", 
-  #"wav", 
+  "bevy_ui",
+  "bmp", 
+  "jpeg",
+  "png",
+  "bevy_gltf",
+  #"wav",
   #"zlib",
+  #"animation",
   #"bevy_animation",
-  #"bevy_core_pipeline",
-  #"dynamic_linking"
+  "bevy_core_pipeline",
+  "dynamic_linking"
 ]}
 bevy-inspector-egui = "0.23"
 bevy_egui = "0.25"
+rand = "0.8.5"
 #bevy_console = "0.7.0"
 
 #bevy_rapier3d = "0.25.0"
@@ -116,6 +121,14 @@ path = "src/examples/raypick.rs"
 name = "egui00"
 path = "src/examples/test_egui.rs"
 
+[[example]]
+name = "egui01"
+path = "src/examples/test_egui01.rs"
+
+[[example]]
+name = "keys"
+path = "src/examples/ui_keyboard.rs"
+
 #[[example]]
 #name = "physics00"
 #path = "src/examples/physics.rs"
@@ -126,13 +139,25 @@ path = "src/examples/inventory_menu.rs"
 
 [[example]]
 name = "test01"
-path = "src/examples/firstperson.rs" #not work on yet
+path = "src/examples/firstperson00.rs" #Fly Camera
+
+#[[example]]
+#name = "test02"
+#path = "src/examples/firstperson00.rs" #Fly Camera
 
 [[example]]
 name = "load00"
 path = "src/examples/load_gltf.rs"
 
+[[example]]
+name = "load01"
+path = "src/examples/load_gltf01.rs"
+
 #[[example]]
-#name = "scenesl00"
-#path = "src/examples/saveloadscene.rs"
+#name = "ecs00"
+#path = "src/examples/ecs00.rs" # https://github.com/bevyengine/bevy/blob/main/examples/scene/scene.rs
+
+[[example]]
+name = "scenesl00"
+path = "src/examples/saveloadscene.rs"
 

@@ -12,6 +12,7 @@
 
 use bevy::{prelude::*, input::mouse::MouseMotion, window::PresentMode};
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
+use bevysandbox::core::camera::flycam::FlyCameraPlugin;
 //use bevy_flycam::PlayerPlugin;
 
 pub const HEIGHT: f32 = 720.0;
@@ -31,10 +32,10 @@ fn main() {
       }),
       ..default()
     }))
-    //.add_plugins(PlayerPlugin)
+    .add_plugins(FlyCameraPlugin)
     .add_plugins(WorldInspectorPlugin::new())
     .add_systems(Startup, setup)
-    .add_systems(Startup, setup_camera)
+    //.add_systems(Startup, setup_camera)
     //.add_system(player_camera_controller)
     .run();
 }
@@ -44,7 +45,7 @@ fn setup_camera(
 ){
   // camera
   commands.spawn(Camera3dBundle {
-    transform: Transform::from_xyz(-50.0, 50.5, 50.0).looking_at(Vec3::ZERO, Vec3::Y),
+    transform: Transform::from_xyz(80.0, 80.0, 50.0).looking_at(Vec3::ZERO, Vec3::Y),
     ..default()
   });
 }
@@ -61,18 +62,10 @@ fn setup(
     ..default()
   }).insert(Name::new("plane"));
   // cube
-  //commands.spawn(PbrBundle {
-      //mesh: meshes.add(Mesh::from(shape::Cube { size: 1.0 })),
-      //material: materials.add(Color::rgb(0.8, 0.7, 0.6).into()),
-      //transform: Transform::from_xyz(0.0, 0.5, 0.0),
-      //..default()
-  //}).insert(Name::new("cube"));
-
-  // cube
   commands.spawn(PbrBundle {
     mesh: meshes.add(Cuboid::new(32.0, 32.0, 32.0)),
     material: materials.add(Color::rgb(0.8, 0.7, 0.6)),
-    transform: Transform::from_xyz(0.0, 0.5, 0.0),
+    transform: Transform::from_xyz(0.0, 16.0, 0.0),
     ..default()
 }).insert(Name::new("cube"));
 
@@ -83,7 +76,7 @@ fn setup(
           shadows_enabled: true,
           ..default()
       },
-      transform: Transform::from_xyz(4.0, 8.0, 4.0),
+      transform: Transform::from_xyz(4.0, 32.0, 4.0),
       ..default()
   }).insert(Name::new("light"));
 
@@ -93,7 +86,13 @@ fn setup(
         shadows_enabled: true,
         ..default()
     },
-    transform: Transform::from_xyz(40.0, 60.0, 4.0),
+    transform: Transform::from_xyz(40.0, 90.0, 90.0),
+    ..default()
+  });
+
+  // light
+  commands.spawn(DirectionalLightBundle {
+    transform: Transform::from_translation(Vec3::ONE).looking_at(Vec3::ZERO, Vec3::Y),
     ..default()
   });
 

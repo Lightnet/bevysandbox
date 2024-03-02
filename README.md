@@ -42,7 +42,6 @@
 
 # Designs:
   Work in progress...
-
   * game
   * character
     * data
@@ -55,6 +54,22 @@
     * settings
   * phyisics
   * debug
+
+# TODOLIST:
+ * camera toggle
+ * fist person view
+ * controller physics
+ * network
+ * prefab blocks
+  * 32x32 block
+ * texture minecraft
+ * HUD
+ * inventory
+ * debug menu
+ * save and load
+  * scene
+  * player data
+
 
 
 # Command Lines and Tests:

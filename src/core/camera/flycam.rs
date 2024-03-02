@@ -186,8 +186,8 @@ fn cursor_grab(
 }
 
 /// Contains everything needed to add first-person fly camera behavior to your game
-pub struct PlayerPlugin;
-impl Plugin for PlayerPlugin {
+pub struct FlyCameraPlugin;
+impl Plugin for FlyCameraPlugin {
     fn build(&self, app: &mut App) {
         app.init_resource::<InputState>()
             .init_resource::<MovementSettings>()

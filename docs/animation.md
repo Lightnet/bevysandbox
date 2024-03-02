@@ -1,3 +1,9 @@
+https://bevyengine.org/examples/Animation/gltf-skinned-mesh/
+
+```rust
+let mesh_node_children = children_query.get(mesh_node_entity).unwrap();
+```
+ * https://www.reddit.com/r/bevy/comments/14564sy/getting_the_transform_of_a_bone_by_name_but_only/
 
 
  * https://discord.com/channels/691052431525675048/1003974538247278702/1003990772997173278
