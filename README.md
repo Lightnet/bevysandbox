@@ -24,7 +24,6 @@
  * bevy_egui 
  * bevy-inspector-egui
  * bevy_renet
- * ...
 
 
 # Information:
@@ -40,37 +39,93 @@
 
   * https://bevyengine.org/assets/
 
-# Designs:
-  Work in progress...
-  * game
-  * character
+# Design:
+ Work in progress...
+
+ Current rework the build and sample test builds in each area.
+
+ Just simple load player move around test. Working toward placing the block and remove block build. Swtiching block for place blooks. 
+ 
+ Network build. Lobby?
+
+ States:
+ * DataQuery:
+   * Game
+   * Save
+   * Load
+ * network
+   * offline
+   * setup
+   * server
+   * client
+   * close
+   * lobby
+ * app
+   * main menu
+   * server menu
+   * client menu
+   * lobbdy menu
+   * assets
+   * loading
+   * game
+   * pause
+   * ingame menu
+ * assets
+  * idle
+  * preload
+  * load
+  * unload
+ * player
+  * load
+  * save
+ * camera
+   * menu
+   * attach
+   * player
+   * vehicle
+   * ghost
+# TODOLIST:
+ * HUD
+    * inventory menu
+    * main menu (part done)
+    * settings
+    * network (part done test)
+    * debug (WIP)
+    * hotbar
+      * layout (part done)
+ * save and load (simple test)
+   * scene
+   * player data
+   * inventory
+   * entities
+ * character
     * data
     * animation
     * loadout
     * movement
-  * HUD
-    * inventory menu
-    * main menu
-    * settings
-  * phyisics
-  * debug
-
-# TODOLIST:
- * camera toggle
- * fist person view
- * controller physics
+    * inventory
+    * controller
+ * Game Mode
+   * survival
+   * creative
+   * team battle
+ * World
+   * generate terrain
+   * save and load
+   * blocks
+ * phyisics
+   * detect
+   * trigger
+   * player controller
+   * entity controller
+ * camera
+   * first person view 
+   * third person view
+   * specter / fly camera (part done)
  * network
- * prefab blocks
-  * 32x32 block
- * texture minecraft
- * HUD
- * inventory
- * debug menu
- * save and load
-  * scene
-  * player data
-
-
+   * peer to peer
+   * server
+   * client
 
 # Command Lines and Tests:
  Note this is work in progress tests.
@@ -103,3 +158,9 @@ cargo run -p game --release
 
 # Refs / Links:
  * https://bevyengine.org/
+
+
+# Credits:
+ Name: kenney
+ Type: Content Assets
+  * www.kenney.nl

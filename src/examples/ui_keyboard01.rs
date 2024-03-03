@@ -6,23 +6,50 @@
     Note there are multiple licenses.
  */
 
+// https://taintedcoders.com/bevy/sprites/
+// https://github.com/bevyengine/bevy/blob/main/examples/2d/texture_atlas.rs <-this one from bevy example
 
-//! A simple 3D scene with light shining over a cube sitting on a plane.
-
-use bevy::{prelude::*, render::render_resource::Texture};
+use bevy::{asset::LoadedFolder, prelude::*, render::render_resource::Texture};
 //use bevy_egui::EguiPlugin;
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
+
+// https://github.com/bevyengine/bevy/blob/main/examples/2d/texture_atlas.rs
+#[derive(Resource, Default)]
+struct KeySpriteFolder(Handle<LoadedFolder>);
 
 fn main() {
   App::new()
     .add_plugins(DefaultPlugins)
     //.add_plugins(EguiPlugin)
     .add_plugins(WorldInspectorPlugin::new())
+    .add_systems(Startup ,load_keys_textures)
+    .add_systems(Update ,check_textures)
     .add_systems(Startup ,setup)
     .add_systems(Startup ,setup_sprite)
     .add_systems(Update ,button_input)
     .run();
 }
+
+fn load_keys_textures(mut commands: Commands, asset_server: Res<AssetServer>) {
+  // load multiple, individual sprites from a folder
+  commands.insert_resource(KeySpriteFolder(asset_server.load_folder("kenney_input-prompts/Keyboard & Mouse/Default")));
+}
+
+fn check_textures(
+  key_sprite_folder: Res<KeySpriteFolder>,
+  mut events: EventReader<AssetEvent<LoadedFolder>>,
+){
+  // Advance the `AppState` once all sprite handles have been loaded by the `AssetServer`
+  for event in events.read() {
+    if event.is_loaded_with_dependencies(&key_sprite_folder.0) {
+      //next_state.set(AppState::Finished);
+      println!("LOAD KEY IMAGE");
+    }
+  }
+}
+
+
+
 #[derive(Component)]
 struct KEY0;
 
@@ -91,19 +118,6 @@ fn setup(
 // kenney_input-prompts\Flairs\Vector\ flair_disabled.svg //nope png format
 // kenney_input-prompts/Keyboard & Mouse/Default/keyboard_1_outline.png // okay
 // kenney_input-prompts/Keyboard & Mouse/Default/keyboard_0.png // okay
-
-struct ImageKey {
-  image0: Handle<Image>,
-  image1: Handle<Image>,
-  code: KeyCode
-}
-//use atlas image batch?
-
-struct AtlasImageKey {
-  image0: Handle<Image>,
-  code: KeyCode
-}
-
 
 #[allow(unused_mut, unused_variables)]
 fn setup_sprite(

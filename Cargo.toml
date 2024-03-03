@@ -129,6 +129,10 @@ path = "src/examples/test_egui01.rs"
 name = "keys"
 path = "src/examples/ui_keyboard.rs"
 
+[[example]]
+name = "keys01"
+path = "src/examples/ui_keyboard01.rs"
+
 #[[example]]
 #name = "physics00"
 #path = "src/examples/physics.rs"
@@ -156,6 +160,18 @@ path = "src/examples/load_gltf01.rs"
 #[[example]]
 #name = "ecs00"
 #path = "src/examples/ecs00.rs" # https://github.com/bevyengine/bevy/blob/main/examples/scene/scene.rs
+
+[[example]]
+name = "atlas"
+path = "src/examples/texture_atlas.rs"
+
+[[example]]
+name = "atlas01"
+path = "src/examples/atlas_keys.rs"
+
+[[example]]
+name = "atlas02"
+path = "src/examples/atlas_keyboard00.rs"
 
 [[example]]
 name = "scenesl00"
