@@ -18,11 +18,23 @@ fn main() {
     .add_plugins(DefaultPlugins)
     //.add_plugins(EguiPlugin)
     .add_plugins(WorldInspectorPlugin::new())
-    .add_systems(Startup ,setup)
-    .add_systems(Startup ,setup_sprite)
-    .add_systems(Update ,button_input)
+    .add_plugins(VKeyBoardPlugin)
+    
     .run();
 }
+
+pub struct VKeyBoardPlugin;
+
+impl Plugin for VKeyBoardPlugin {
+    fn build(&self, app: &mut App) {
+        // add things to your app here
+        app.add_systems(Startup ,setup);
+        app.add_systems(Startup ,setup_sprite);
+        app.add_systems(Update ,button_input);
+    }
+}
+
+
 #[derive(Component)]
 struct KEY0;
 
