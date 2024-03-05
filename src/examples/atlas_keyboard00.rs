@@ -1,5 +1,10 @@
 // https://github.com/bevyengine/bevy/blob/release-0.13.1/examples/2d/texture_atlas.rs
 
+// ASSETS
+// https://kenney.nl/assets/input-prompts
+// version 1.1
+// ~ = Backquote , https://docs.rs/bevy/latest/bevy/prelude/enum.KeyCode.html
+
 use bevy::{asset::LoadedFolder, prelude::*, render::texture::ImageSampler};
 
 #[derive(Component)]
@@ -78,189 +83,343 @@ fn load_textures(
   mut keyBoards: ResMut<DisplayKeys>,
 ) {
   let boardkeys: Vec<ViewKey> = vec![
-    ViewKey{press_id:0,release_id:1,key:KeyCode::Numpad0,row:1},
-    ViewKey{press_id:2,release_id:3,key:KeyCode::Numpad1,row:1},
-    ViewKey{press_id:4,release_id:5,key:KeyCode::Numpad2,row:1},
-    ViewKey{press_id:6,release_id:7,key:KeyCode::Numpad3,row:1},
-    ViewKey{press_id:8,release_id:9,key:KeyCode::Numpad4,row:1},
-    ViewKey{press_id:10,release_id:11,key:KeyCode::Numpad5,row:1},
-    ViewKey{press_id:12,release_id:13,key:KeyCode::Numpad6,row:1},
-    ViewKey{press_id:14,release_id:15,key:KeyCode::Numpad7,row:1},
-    ViewKey{press_id:16,release_id:17,key:KeyCode::Numpad8,row:1},
-    ViewKey{press_id:18,release_id:19,key:KeyCode::Numpad9,row:1},
+    ViewKey{press_id:96,release_id:97,key:KeyCode::Escape,row:0}, // esc
+    ViewKey{press_id:102,release_id:109,key:KeyCode::F1,row:0}, // F1
+    ViewKey{press_id:110,release_id:111,key:KeyCode::F2,row:0}, // F2
+    ViewKey{press_id:112,release_id:113,key:KeyCode::F3,row:0}, // F3
+    ViewKey{press_id:114,release_id:115,key:KeyCode::F4,row:0}, // F4
+    ViewKey{press_id:116,release_id:117,key:KeyCode::F5,row:0}, // F5
+    ViewKey{press_id:118,release_id:119,key:KeyCode::F6,row:0}, // F6
+    ViewKey{press_id:120,release_id:121,key:KeyCode::F7,row:0}, // F7
+    ViewKey{press_id:122,release_id:123,key:KeyCode::F8,row:0}, // F8
+    ViewKey{press_id:124,release_id:125,key:KeyCode::F9,row:0}, // F9
+    ViewKey{press_id:103,release_id:104,key:KeyCode::F10,row:0}, // F10
+    ViewKey{press_id:105,release_id:106,key:KeyCode::F11,row:0}, // F11
+    ViewKey{press_id:107,release_id:108,key:KeyCode::F12,row:0}, // F12
 
-    //ViewKey{press_id:54,release_id:63,key:KeyCode::Numpad9,row:1},
-    //ViewKey{press_id:22,release_id:64,key:KeyCode::Numpad9,row:1},
-    //ViewKey{press_id:24,release_id:65,key:KeyCode::Numpad9,row:1},//[
-    //ViewKey{press_id:26,release_id:66,key:KeyCode::Numpad9,row:1},//b
-    //ViewKey{press_id:28,release_id:67,key:KeyCode::Numpad9,row:1},//c
-    //ViewKey{press_id:30,release_id:68,key:KeyCode::Numpad9,row:1},//cap lock
-    //ViewKey{press_id:32,release_id:69,key:KeyCode::Numpad9,row:1},// shift
-    //ViewKey{press_id:34,release_id:70,key:KeyCode::Numpad9,row:1},// shift
-    //ViewKey{press_id:34,release_id:71,key:KeyCode::Numpad9,row:1},// caplock
-    //ViewKey{press_id:34,release_id:72,key:KeyCode::Numpad9,row:1},// up
-    //ViewKey{press_id:34,release_id:73,key:KeyCode::Numpad9,row:1},// up 
-    //ViewKey{press_id:34,release_id:74,key:KeyCode::Numpad9,row:1},// :
-    //ViewKey{press_id:34,release_id:75,key:KeyCode::Numpad9,row:1},// :
-    //ViewKey{press_id:34,release_id:76,key:KeyCode::Numpad9,row:1},// ,
-    //ViewKey{press_id:34,release_id:78,key:KeyCode::Numpad9,row:1},// ctrl
-    //ViewKey{press_id:34,release_id:79,key:KeyCode::Numpad9,row:1},// ctrl
-    //ViewKey{press_id:34,release_id:80,key:KeyCode::Numpad9,row:1},// C
-    //ViewKey{press_id:34,release_id:81,key:KeyCode::Numpad9,row:1},// D
-    //ViewKey{press_id:34,release_id:82,key:KeyCode::Numpad9,row:1},// Del
-    //ViewKey{press_id:34,release_id:83,key:KeyCode::Numpad9,row:1},// D
-    //ViewKey{press_id:34,release_id:84,key:KeyCode::Numpad9,row:1},// E
-    //ViewKey{press_id:34,release_id:85,key:KeyCode::Numpad9,row:1},// E
-    //ViewKey{press_id:34,release_id:86,key:KeyCode::Numpad9,row:1},// End
-    //ViewKey{press_id:34,release_id:87,key:KeyCode::Numpad9,row:1},// Enter
-    //ViewKey{press_id:34,release_id:88,key:KeyCode::Numpad9,row:1},// enter
-    //ViewKey{press_id:34,release_id:89,key:KeyCode::Numpad9,row:1},// enter 
-    //ViewKey{press_id:34,release_id:90,key:KeyCode::Numpad9,row:1},// esc
-    //ViewKey{press_id:34,release_id:91,key:KeyCode::Numpad9,row:1},// esc
-    //ViewKey{press_id:34,release_id:92,key:KeyCode::Numpad9,row:1},// !
-    //ViewKey{press_id:34,release_id:93,key:KeyCode::Numpad9,row:1},// !
-    //ViewKey{press_id:34,release_id:94,key:KeyCode::Numpad9,row:1},// E
-    //ViewKey{press_id:34,release_id:95,key:KeyCode::Numpad9,row:1},// F
-    //ViewKey{press_id:34,release_id:96,key:KeyCode::Numpad9,row:1},// F1
-    //ViewKey{press_id:34,release_id:97,key:KeyCode::Numpad9,row:1},// F10
-    //ViewKey{press_id:34,release_id:98,key:KeyCode::Numpad9,row:1},// F10
-    //ViewKey{press_id:34,release_id:99,key:KeyCode::Numpad9,row:1},// F11
-    //ViewKey{press_id:34,release_id:100,key:KeyCode::Numpad9,row:1},// F11
-    //ViewKey{press_id:34,release_id:101,key:KeyCode::Numpad9,row:1},// F12
-    //ViewKey{press_id:34,release_id:102,key:KeyCode::Numpad9,row:1},//F12
-    //ViewKey{press_id:34,release_id:103,key:KeyCode::Numpad9,row:1},// F1
-    //ViewKey{press_id:34,release_id:104,key:KeyCode::Numpad9,row:1},// F2
-    //ViewKey{press_id:34,release_id:105,key:KeyCode::Numpad9,row:1},// F3
-    //ViewKey{press_id:34,release_id:106,key:KeyCode::Numpad9,row:1},//F3
-    //ViewKey{press_id:34,release_id:107,key:KeyCode::Numpad9,row:1},// F3
-    //ViewKey{press_id:34,release_id:108,key:KeyCode::Numpad9,row:1},// F4
-    //ViewKey{press_id:34,release_id:109,key:KeyCode::Numpad9,row:1},// F4
-    //ViewKey{press_id:34,release_id:110,key:KeyCode::Numpad9,row:1},// F5
-    //ViewKey{press_id:34,release_id:111,key:KeyCode::Numpad9,row:1},// F5
-    //ViewKey{press_id:34,release_id:112,key:KeyCode::Numpad9,row:1},// F6
-    //ViewKey{press_id:34,release_id:113,key:KeyCode::Numpad9,row:1},// F6
-    //ViewKey{press_id:34,release_id:114,key:KeyCode::Numpad9,row:1},// F7
-    //ViewKey{press_id:34,release_id:115,key:KeyCode::Numpad9,row:1},// F7
-    //ViewKey{press_id:34,release_id:116,key:KeyCode::Numpad9,row:1},// F8
-    //ViewKey{press_id:34,release_id:117,key:KeyCode::Numpad9,row:1},// F8
-    //ViewKey{press_id:34,release_id:118,key:KeyCode::Numpad9,row:2},// F9
-    //ViewKey{press_id:34,release_id:119,key:KeyCode::Numpad9,row:2},// F9
-    //ViewKey{press_id:34,release_id:120,key:KeyCode::Numpad9,row:2},// FN
-    //ViewKey{press_id:34,release_id:121,key:KeyCode::Numpad9,row:2},// FN
-    //ViewKey{press_id:34,release_id:122,key:KeyCode::Numpad9,row:2},// F
-    //ViewKey{press_id:34,release_id:123,key:KeyCode::Numpad9,row:2},// G
-    //ViewKey{press_id:34,release_id:124,key:KeyCode::Numpad9,row:2},// G
-    //ViewKey{press_id:34,release_id:125,key:KeyCode::Numpad9,row:2},// H
-    //ViewKey{press_id:34,release_id:126,key:KeyCode::Numpad9,row:2},// Home
-    //ViewKey{press_id:34,release_id:127,key:KeyCode::Numpad9,row:2},// Home
-    //ViewKey{press_id:34,release_id:128,key:KeyCode::Numpad9,row:2},// H
-    //ViewKey{press_id:34,release_id:129,key:KeyCode::Numpad9,row:2},// I
-    //ViewKey{press_id:34,release_id:130,key:KeyCode::Numpad9,row:2},// INS
-    //ViewKey{press_id:34,release_id:131,key:KeyCode::Numpad9,row:2},// INS
-    //ViewKey{press_id:34,release_id:132,key:KeyCode::Numpad9,row:2},// I
-    //ViewKey{press_id:34,release_id:133,key:KeyCode::Numpad9,row:2},// J
-    //ViewKey{press_id:34,release_id:134,key:KeyCode::Numpad9,row:2},// J
-    //ViewKey{press_id:34,release_id:135,key:KeyCode::Numpad9,row:2},// K
-    //ViewKey{press_id:34,release_id:136,key:KeyCode::Numpad9,row:2},// K
-    //ViewKey{press_id:34,release_id:137,key:KeyCode::Numpad9,row:2},// L
-    //ViewKey{press_id:34,release_id:138,key:KeyCode::Numpad9,row:2},// L
-    //ViewKey{press_id:34,release_id:139,key:KeyCode::Numpad9,row:2},// M
-    //ViewKey{press_id:34,release_id:140,key:KeyCode::Numpad9,row:2},// -
-    //ViewKey{press_id:34,release_id:141,key:KeyCode::Numpad9,row:2},// -
-    //ViewKey{press_id:34,release_id:142,key:KeyCode::Numpad9,row:2},// M
-    //ViewKey{press_id:34,release_id:143,key:KeyCode::Numpad9,row:2},// N
-    //ViewKey{press_id:34,release_id:144,key:KeyCode::Numpad9,row:2},// Num Lock
-    //ViewKey{press_id:34,release_id:145,key:KeyCode::Numpad9,row:2},// Num Lock
-    //ViewKey{press_id:34,release_id:146,key:KeyCode::Numpad9,row:2},// Enter
-    //ViewKey{press_id:34,release_id:147,key:KeyCode::Numpad9,row:2},// Enter
-    //ViewKey{press_id:34,release_id:148,key:KeyCode::Numpad9,row:2},// +
-    //ViewKey{press_id:34,release_id:149,key:KeyCode::Numpad9,row:2},// +
-    //ViewKey{press_id:34,release_id:150,key:KeyCode::Numpad9,row:2},// N
-    //ViewKey{press_id:34,release_id:151,key:KeyCode::Numpad9,row:2},// O
-    //ViewKey{press_id:34,release_id:152,key:KeyCode::Numpad9,row:2},// option
-    //ViewKey{press_id:34,release_id:153,key:KeyCode::Numpad9,row:2},// option
-    //ViewKey{press_id:34,release_id:154,key:KeyCode::Numpad9,row:2},// O
-    //ViewKey{press_id:34,release_id:155,key:KeyCode::Numpad9,row:2},// P
-    //ViewKey{press_id:34,release_id:156,key:KeyCode::Numpad9,row:2},// PageDown
-    //ViewKey{press_id:34,release_id:157,key:KeyCode::Numpad9,row:2},// PageDown
-    //ViewKey{press_id:34,release_id:158,key:KeyCode::Numpad9,row:2},// Page Up
-    //ViewKey{press_id:34,release_id:159,key:KeyCode::Numpad9,row:2},// Page Up
-    //ViewKey{press_id:34,release_id:160,key:KeyCode::Numpad9,row:2},// .
-    //ViewKey{press_id:34,release_id:161,key:KeyCode::Numpad9,row:2}, // .
-    //ViewKey{press_id:34,release_id:162,key:KeyCode::Numpad9,row:2}, // +
-    //ViewKey{press_id:34,release_id:163,key:KeyCode::Numpad9,row:2}, // +
-    //ViewKey{press_id:34,release_id:164,key:KeyCode::Numpad9,row:2}, // Prt SCAN
-    //ViewKey{press_id:34,release_id:165,key:KeyCode::Numpad9,row:2}, // Prt SCAN
-    //ViewKey{press_id:34,release_id:166,key:KeyCode::Numpad9,row:2}, // P
-    //ViewKey{press_id:34,release_id:167,key:KeyCode::Numpad9,row:2}, // Q
-    //ViewKey{press_id:34,release_id:168,key:KeyCode::Numpad9,row:2}, // ?
-    //ViewKey{press_id:34,release_id:169,key:KeyCode::Numpad9,row:2}, // ?
-    //ViewKey{press_id:34,release_id:170,key:KeyCode::Numpad9,row:2}, // "
-    //ViewKey{press_id:34,release_id:171,key:KeyCode::Numpad9,row:2}, // "
-    //ViewKey{press_id:34,release_id:172,key:KeyCode::Numpad9,row:2}, // Q
-    //ViewKey{press_id:34,release_id:173,key:KeyCode::Numpad9,row:2}, // R
-    //ViewKey{press_id:34,release_id:174,key:KeyCode::Numpad9,row:2}, // enter
-    //ViewKey{press_id:34,release_id:175,key:KeyCode::Numpad9,row:2}, // enter
-    //ViewKey{press_id:34,release_id:176,key:KeyCode::Numpad9,row:2}, // R
-    //ViewKey{press_id:34,release_id:177,key:KeyCode::Numpad9,row:2}, // S
-    //ViewKey{press_id:34,release_id:178,key:KeyCode::Numpad9,row:2}, // ;
-    //ViewKey{press_id:34,release_id:179,key:KeyCode::Numpad9,row:2}, // ;
-    //ViewKey{press_id:34,release_id:180,key:KeyCode::Numpad9,row:2}, // Shift
-    //ViewKey{press_id:34,release_id:180,key:KeyCode::Numpad9,row:2}, // Shift
-    //ViewKey{press_id:34,release_id:181,key:KeyCode::Numpad9,row:2}, // Shift icon
-    //ViewKey{press_id:34,release_id:182,key:KeyCode::Numpad9,row:2}, // Shift icon
-    //ViewKey{press_id:34,release_id:183,key:KeyCode::Numpad9,row:2}, // Shift
-    //ViewKey{press_id:34,release_id:184,key:KeyCode::Numpad9,row:2}, // \
-    //ViewKey{press_id:34,release_id:185,key:KeyCode::Numpad9,row:2}, // \
-    //ViewKey{press_id:34,release_id:186,key:KeyCode::Numpad9,row:2}, // /
-    //ViewKey{press_id:34,release_id:187,key:KeyCode::Numpad9,row:2}, // /
-    //ViewKey{press_id:34,release_id:188,key:KeyCode::Numpad9,row:2}, // space
-    //ViewKey{press_id:34,release_id:189,key:KeyCode::Numpad9,row:2}, // space
-    //ViewKey{press_id:34,release_id:190,key:KeyCode::Numpad9,row:2}, // S
-    //ViewKey{press_id:34,release_id:191,key:KeyCode::Numpad9,row:2}, // T 
-    //ViewKey{press_id:34,release_id:192,key:KeyCode::Numpad9,row:2}, // ~
-    //ViewKey{press_id:34,release_id:193,key:KeyCode::Numpad9,row:2}, // ~
-    //ViewKey{press_id:34,release_id:194,key:KeyCode::Numpad9,row:2}, // T
-    //ViewKey{press_id:34,release_id:195,key:KeyCode::Numpad9,row:2}, // U
-    //ViewKey{press_id:34,release_id:196,key:KeyCode::Numpad9,row:2}, // U
-    //ViewKey{press_id:34,release_id:197,key:KeyCode::Numpad9,row:2}, // V
-    //ViewKey{press_id:34,release_id:198,key:KeyCode::Numpad9,row:2}, // V
-    //ViewKey{press_id:34,release_id:199,key:KeyCode::Numpad9,row:2}, // W
-    //ViewKey{press_id:34,release_id:200,key:KeyCode::Numpad9,row:2}, // window icon
-    //ViewKey{press_id:34,release_id:201,key:KeyCode::Numpad9,row:2}, // window icon
-    //ViewKey{press_id:34,release_id:202,key:KeyCode::Numpad9,row:2}, // W
-    //ViewKey{press_id:34,release_id:203,key:KeyCode::Numpad9,row:2}, // X
-    //ViewKey{press_id:34,release_id:204,key:KeyCode::Numpad9,row:2}, // X
-    //ViewKey{press_id:34,release_id:205,key:KeyCode::Numpad9,row:2}, // Y
-    //ViewKey{press_id:34,release_id:206,key:KeyCode::Numpad9,row:2}, // Y
-    //ViewKey{press_id:34,release_id:207,key:KeyCode::Numpad9,row:2}, // Z
-    //ViewKey{press_id:34,release_id:208,key:KeyCode::Numpad9,row:2}, // Z
-    //ViewKey{press_id:34,release_id:209,key:KeyCode::Numpad9,row:2}, // comand
-    //ViewKey{press_id:34,release_id:210,key:KeyCode::Numpad9,row:2}, // comand
-    //ViewKey{press_id:34,release_id:211,key:KeyCode::Numpad9,row:2}, // Tab
-    //ViewKey{press_id:34,release_id:212,key:KeyCode::Numpad9,row:2}, // tab icon
-    //ViewKey{press_id:34,release_id:213,key:KeyCode::Numpad9,row:2}, // tab icon
-    //ViewKey{press_id:34,release_id:214,key:KeyCode::Numpad9,row:2}, // Tab
-    //ViewKey{press_id:34,release_id:215,key:KeyCode::Numpad9,row:2}, // mouse 
-    //ViewKey{press_id:34,release_id:216,key:KeyCode::Numpad9,row:2}, // mouse Horizal
-    //ViewKey{press_id:34,release_id:217,key:KeyCode::Numpad9,row:2}, // mouse L
-    //ViewKey{press_id:34,release_id:218,key:KeyCode::Numpad9,row:2}, // mouse L
-    //ViewKey{press_id:34,release_id:219,key:KeyCode::Numpad9,row:2}, // mouse move
-    //ViewKey{press_id:34,release_id:220,key:KeyCode::Numpad9,row:2}, // mouse           outline
+    ViewKey{press_id:206,release_id:207,key:KeyCode::Backquote,row:1}, // ~
+    ViewKey{press_id:2,release_id:3,key:KeyCode::Digit1,row:1}, // 1
+    ViewKey{press_id:4,release_id:5,key:KeyCode::Digit2,row:1}, // 2
+    ViewKey{press_id:6,release_id:7,key:KeyCode::Digit3,row:1}, // 3
+    ViewKey{press_id:8,release_id:9,key:KeyCode::Digit4,row:1}, // 4
+    ViewKey{press_id:10,release_id:11,key:KeyCode::Digit5,row:1},
+    ViewKey{press_id:12,release_id:13,key:KeyCode::Digit6,row:1},
+    ViewKey{press_id:14,release_id:15,key:KeyCode::Digit7,row:1},
+    ViewKey{press_id:16,release_id:17,key:KeyCode::Digit8,row:1},
+    ViewKey{press_id:18,release_id:19,key:KeyCode::Digit9,row:1},
+    ViewKey{press_id:0,release_id:1,key:KeyCode::Digit0,row:1},// 0
 
-    //ViewKey{press_id:34,release_id:221,key:KeyCode::Numpad9,row:2}, // mouse right 
-    //ViewKey{press_id:34,release_id:222,key:KeyCode::Numpad9,row:2}, // mouse right outline
-    //ViewKey{press_id:34,release_id:223,key:KeyCode::Numpad9,row:2}, // mouse middle
-    //ViewKey{press_id:34,release_id:224,key:KeyCode::Numpad9,row:2}, // mouse middle
-    //ViewKey{press_id:34,release_id:225,key:KeyCode::Numpad9,row:2}, // mouse middle scroll down
-    //ViewKey{press_id:34,release_id:226,key:KeyCode::Numpad9,row:2}, // mouse middle scroll
-    //ViewKey{press_id:34,release_id:227,key:KeyCode::Numpad9,row:2}, // mouse middle scroll up
-    //ViewKey{press_id:34,release_id:228,key:KeyCode::Numpad9,row:2}, // mouse middle scroll up outline
-    //ViewKey{press_id:34,release_id:229,key:KeyCode::Numpad9,row:2}, // mouse middle scroll up
-    //ViewKey{press_id:34,release_id:230,key:KeyCode::Numpad9,row:2}, // mouse middle scroll vert
-    ViewKey{press_id:34,release_id:231,key:KeyCode::Numpad9,row:2}, // 
-    ViewKey{press_id:34,release_id:232,key:KeyCode::Numpad9,row:2}, // mouse middle scroll vert
-    //ViewKey{press_id:34,release_id:233,key:KeyCode::Numpad9,row:2}, // over limited display all icon texture
+    ViewKey{press_id:146,release_id:147,key:KeyCode::Minus,row:1},
+    ViewKey{press_id:94,release_id:95,key:KeyCode::Equal,row:1},
+    ViewKey{press_id:55,release_id:58,key:KeyCode::Backspace,row:1},
+
+    ViewKey{press_id:201,release_id:204,key:KeyCode::Tab,row:2}, // Tab
+    ViewKey{press_id:173,release_id:178,key:KeyCode::KeyQ,row:2}, // Q
+    ViewKey{press_id:213,release_id:216,key:KeyCode::KeyW,row:2}, // W
+    ViewKey{press_id:89,release_id:100,key:KeyCode::KeyE,row:2}, // E
+    ViewKey{press_id:179,release_id:182,key:KeyCode::KeyR,row:2}, // R
+    ViewKey{press_id:199,release_id:208,key:KeyCode::KeyT,row:2}, // T
+    ViewKey{press_id:219,release_id:220,key:KeyCode::KeyY,row:2}, // Y
+    ViewKey{press_id:209,release_id:210,key:KeyCode::KeyU,row:2}, // U
+    ViewKey{press_id:135,release_id:138,key:KeyCode::KeyI,row:2}, // I
+    ViewKey{press_id:157,release_id:160,key:KeyCode::KeyO,row:2}, // O
+    ViewKey{press_id:161,release_id:172,key:KeyCode::KeyP,row:2}, // P
+    ViewKey{press_id:66,release_id:67,key:KeyCode::BracketLeft,row:2}, // [
+    ViewKey{press_id:60,release_id:61,key:KeyCode::BracketRight,row:2}, // ]
+    ViewKey{press_id:190,release_id:191,key:KeyCode::Backslash,row:2}, // \
+
+    ViewKey{press_id:70,release_id:73,key:KeyCode::CapsLock,row:3}, // cap lock
+    ViewKey{press_id:20,release_id:52,key:KeyCode::KeyA,row:3}, // A
+    ViewKey{press_id:183,release_id:198,key:KeyCode::KeyS,row:3}, // S
+    ViewKey{press_id:85,release_id:88,key:KeyCode::KeyD,row:3}, // D
+    ViewKey{press_id:101,release_id:128,key:KeyCode::KeyF,row:3}, // F
+    ViewKey{press_id:129,release_id:130,key:KeyCode::KeyG,row:3}, // G
+    ViewKey{press_id:131,release_id:134,key:KeyCode::KeyH,row:3}, // H
+    ViewKey{press_id:139,release_id:140,key:KeyCode::KeyJ,row:3}, // J
+    ViewKey{press_id:141,release_id:142,key:KeyCode::KeyK,row:3}, // K
+    ViewKey{press_id:143,release_id:144,key:KeyCode::KeyL,row:3}, // L
+    ViewKey{press_id:184,release_id:185,key:KeyCode::Semicolon,row:3}, // ;
+    ViewKey{press_id:25,release_id:26,key:KeyCode::Quote,row:3}, // '
+    ViewKey{press_id:92,release_id:93,key:KeyCode::Enter,row:3}, // Enter
+
+    ViewKey{press_id:187,release_id:188,key:KeyCode::ShiftLeft,row:4}, // shift
+    ViewKey{press_id:221,release_id:222,key:KeyCode::KeyZ,row:4}, // Z
+    ViewKey{press_id:217,release_id:218,key:KeyCode::KeyX,row:4}, // X
+    ViewKey{press_id:69,release_id:84,key:KeyCode::KeyC,row:4}, // C
+    ViewKey{press_id:211,release_id:212,key:KeyCode::KeyV,row:4}, // V
+    ViewKey{press_id:53,release_id:68,key:KeyCode::KeyB,row:4}, // B
+    ViewKey{press_id:149,release_id:156,key:KeyCode::KeyN,row:4}, // N
+    ViewKey{press_id:145,release_id:148,key:KeyCode::KeyM,row:4}, // M
+    ViewKey{press_id:78,release_id:81,key:KeyCode::Comma,row:4}, // ,
+    ViewKey{press_id:166,release_id:167,key:KeyCode::Period,row:4}, // .
+    ViewKey{press_id:192,release_id:193,key:KeyCode::Slash,row:4}, // /
+    ViewKey{press_id:187,release_id:188,key:KeyCode::ShiftRight,row:4}, // Shift
+
+    ViewKey{press_id:82,release_id:83,key:KeyCode::ControlLeft,row:5}, // Ctrl left
+    ViewKey{press_id:214,release_id:215,key:KeyCode::SuperLeft,row:5}, // window
+    ViewKey{press_id:21,release_id:22,key:KeyCode::AltLeft,row:5}, // Alt Left
+    ViewKey{press_id:195,release_id:196,key:KeyCode::Space,row:5}, // Space bar
+    ViewKey{press_id:21,release_id:22,key:KeyCode::AltRight,row:5}, // Alt Right
+    ViewKey{press_id:214,release_id:215,key:KeyCode::SuperRight,row:5}, // Window
+    ViewKey{press_id:126,release_id:127,key:KeyCode::Fn,row:5}, // FN
+    ViewKey{press_id:82,release_id:83,key:KeyCode::ControlRight,row:5}, // Ctrl Right
+
+
+    //ViewKey{press_id:82,release_id:51,key:KeyCode::ControlRight,row:6}, //
+    //ViewKey{press_id:82,release_id:52,key:KeyCode::ControlRight,row:6}, //
+    //ViewKey{press_id:82,release_id:53,key:KeyCode::ControlRight,row:6}, //
+    //ViewKey{press_id:82,release_id:54,key:KeyCode::ControlRight,row:6}, //
+
+
+
+
+    //ViewKey{press_id:0,release_id:19,key:KeyCode::ControlRight,row:6}, // 9
+    //ViewKey{press_id:0,release_id:20,key:KeyCode::Numpad9,row:2}, // A white
+    //ViewKey{press_id:0,release_id:21,key:KeyCode::Numpad9,row:2}, // Alt white
+    //ViewKey{press_id:0,release_id:22,key:KeyCode::Numpad9,row:2}, // alt
+    //ViewKey{press_id:0,release_id:23,key:KeyCode::Numpad9,row:2}, // ANY white
+    //ViewKey{press_id:0,release_id:24,key:KeyCode::Numpad9,row:2}, // any 
+    //ViewKey{press_id:0,release_id:25,key:KeyCode::Numpad9,row:2}, // ' white
+    //ViewKey{press_id:0,release_id:26,key:KeyCode::Numpad9,row:2}, // '
+    //ViewKey{press_id:0,release_id:27,key:KeyCode::Numpad9,row:2}, // arrow keys white
+    //ViewKey{press_id:0,release_id:28,key:KeyCode::Numpad9,row:2}, // arrow key red
+    //ViewKey{press_id:0,release_id:29,key:KeyCode::Numpad9,row:2}, // arrow key red mid
+    //ViewKey{press_id:0,release_id:30,key:KeyCode::Numpad9,row:2}, //  arrow key
+
+    //ViewKey{press_id:0,release_id:31,key:KeyCode::Numpad9,row:2}, //  arrow key
+    //ViewKey{press_id:0,release_id:32,key:KeyCode::Numpad9,row:2}, //  arrow key
+    //ViewKey{press_id:0,release_id:33,key:KeyCode::Numpad9,row:2}, // arrow key
+    //ViewKey{press_id:0,release_id:34,key:KeyCode::Numpad9,row:2}, //  arrow key
+    //ViewKey{press_id:0,release_id:35,key:KeyCode::Numpad9,row:2}, //  arrow key
+    //ViewKey{press_id:0,release_id:36,key:KeyCode::Numpad9,row:2}, //  arrow key
+    //ViewKey{press_id:0,release_id:37,key:KeyCode::Numpad9,row:2}, //  arrow key
+    //ViewKey{press_id:0,release_id:38,key:KeyCode::Numpad9,row:2}, //  arrow key
+    //ViewKey{press_id:0,release_id:39,key:KeyCode::Numpad9,row:2}, //  arrow key
+    //ViewKey{press_id:0,release_id:40,key:KeyCode::Numpad9,row:2}, //  arrow key
+
+    //ViewKey{press_id:0,release_id:41,key:KeyCode::Numpad9,row:2}, // arrow key
+    //ViewKey{press_id:0,release_id:42,key:KeyCode::Numpad9,row:2}, // down white
+    //ViewKey{press_id:0,release_id:43,key:KeyCode::Numpad9,row:2}, // down
+    //ViewKey{press_id:0,release_id:45,key:KeyCode::Numpad9,row:2}, // left 
+    //ViewKey{press_id:0,release_id:46,key:KeyCode::Numpad9,row:2}, // right white
+    //ViewKey{press_id:0,release_id:47,key:KeyCode::Numpad9,row:2}, // right
+    //ViewKey{press_id:0,release_id:48,key:KeyCode::Numpad9,row:2}, // up white
+    //ViewKey{press_id:0,release_id:49,key:KeyCode::Numpad9,row:2}, // up
+    //ViewKey{press_id:0,release_id:50,key:KeyCode::Numpad9,row:2}, // * white
+
+    //ViewKey{press_id:0,release_id:51,key:KeyCode::Numpad9,row:2}, // *
+    //ViewKey{press_id:0,release_id:52,key:KeyCode::Numpad9,row:2}, // A
+    //ViewKey{press_id:0,release_id:53,key:KeyCode::Numpad9,row:2}, // B White
+    //ViewKey{press_id:0,release_id:54,key:KeyCode::Numpad9,row:2}, // back space text
+    //ViewKey{press_id:0,release_id:55,key:KeyCode::Numpad9,row:2}, // back space white arrow
+    //ViewKey{press_id:0,release_id:56,key:KeyCode::Numpad9,row:2}, // back space icon
+    //ViewKey{press_id:0,release_id:57,key:KeyCode::Numpad9,row:2}, // back space icon
+    //ViewKey{press_id:0,release_id:58,key:KeyCode::Numpad9,row:2}, // back space arrow
+    //ViewKey{press_id:0,release_id:59,key:KeyCode::Numpad9,row:2}, // back space text
+
+    //ViewKey{press_id:0,release_id:60,key:KeyCode::Numpad9,row:2}, // ] white
+    //ViewKey{press_id:0,release_id:61,key:KeyCode::Numpad9,row:2}, // ]
+    //ViewKey{press_id:0,release_id:62,key:KeyCode::Numpad9,row:2}, // > white
+    //ViewKey{press_id:0,release_id:63,key:KeyCode::Numpad9,row:2}, // >
+    //ViewKey{press_id:0,release_id:64,key:KeyCode::Numpad9,row:2}, // < white
+    //ViewKey{press_id:0,release_id:65,key:KeyCode::Numpad9,row:2}, // <
+    //ViewKey{press_id:0,release_id:66,key:KeyCode::Numpad9,row:2}, // [ white
+    //ViewKey{press_id:0,release_id:67,key:KeyCode::Numpad9,row:2}, // [
+    //ViewKey{press_id:0,release_id:68,key:KeyCode::Numpad9,row:2}, // B
+    //ViewKey{press_id:0,release_id:69,key:KeyCode::Numpad9,row:2}, // C White
+
+    //ViewKey{press_id:0,release_id:70,key:KeyCode::Numpad9,row:2}, // cap lock white
+    //ViewKey{press_id:0,release_id:71,key:KeyCode::Numpad9,row:2}, // shift white text
+    //ViewKey{press_id:0,release_id:72,key:KeyCode::Numpad9,row:2}, // shift text
+    //ViewKey{press_id:0,release_id:73,key:KeyCode::Numpad9,row:2}, // cap lock
+    //ViewKey{press_id:0,release_id:74,key:KeyCode::Numpad9,row:2}, // ^ white
+    //ViewKey{press_id:0,release_id:75,key:KeyCode::Numpad9,row:2}, // ^
+    //ViewKey{press_id:0,release_id:76,key:KeyCode::Numpad9,row:2}, // : white
+    //ViewKey{press_id:0,release_id:78,key:KeyCode::Numpad9,row:2}, // , white
+    //ViewKey{press_id:0,release_id:79,key:KeyCode::Numpad9,row:2}, // comand white
+    //ViewKey{press_id:0,release_id:80,key:KeyCode::Numpad9,row:2}, // comand
+
+    //ViewKey{press_id:0,release_id:81,key:KeyCode::Numpad9,row:2}, // ,
+    //ViewKey{press_id:0,release_id:82,key:KeyCode::Numpad9,row:2}, // Ctrl white
+    //ViewKey{press_id:0,release_id:83,key:KeyCode::Numpad9,row:2}, // Ctrl
+    //ViewKey{press_id:0,release_id:84,key:KeyCode::Numpad9,row:2}, // C 
+    //ViewKey{press_id:0,release_id:85,key:KeyCode::Numpad9,row:2}, // D white
+    //ViewKey{press_id:0,release_id:86,key:KeyCode::Numpad9,row:2}, // Del white
+    //ViewKey{press_id:0,release_id:87,key:KeyCode::Numpad9,row:2}, // Del
+    //ViewKey{press_id:0,release_id:88,key:KeyCode::Numpad9,row:2}, // D
+    //ViewKey{press_id:0,release_id:89,key:KeyCode::Numpad9,row:2}, // E white
+    //ViewKey{press_id:0,release_id:90,key:KeyCode::Numpad9,row:2}, // End white
+
+
+    //ViewKey{press_id:0,release_id:91,key:KeyCode::Numpad9,row:2}, // End
+    //ViewKey{press_id:0,release_id:92,key:KeyCode::Numpad9,row:2}, // Enter white
+    //ViewKey{press_id:0,release_id:93,key:KeyCode::Numpad9,row:2}, // Enter
+    //ViewKey{press_id:0,release_id:94,key:KeyCode::Numpad9,row:2}, // = white
+    //ViewKey{press_id:0,release_id:95,key:KeyCode::Numpad9,row:2}, // =
+    //ViewKey{press_id:0,release_id:96,key:KeyCode::Numpad9,row:2}, // Esc white
+    //ViewKey{press_id:0,release_id:97,key:KeyCode::Numpad9,row:2}, // esc
+    //ViewKey{press_id:0,release_id:98,key:KeyCode::Numpad9,row:2}, // !
+    //ViewKey{press_id:0,release_id:99,key:KeyCode::Numpad9,row:2}, // !
+    //ViewKey{press_id:0,release_id:100,key:KeyCode::Numpad9,row:2}, // E
+
+    //ViewKey{press_id:0,release_id:101,key:KeyCode::Numpad9,row:2},// F white
+    //ViewKey{press_id:0,release_id:102,key:KeyCode::Numpad9,row:2},// F1 white
+    //ViewKey{press_id:0,release_id:103,key:KeyCode::Numpad9,row:2},// F10 white
+    //ViewKey{press_id:0,release_id:104,key:KeyCode::Numpad9,row:2},// F10
+    //ViewKey{press_id:0,release_id:105,key:KeyCode::Numpad9,row:2},// F11 white
+    //ViewKey{press_id:0,release_id:106,key:KeyCode::Numpad9,row:2},// F11 
+    //ViewKey{press_id:0,release_id:107,key:KeyCode::Numpad9,row:2},// F12 white
+    //ViewKey{press_id:0,release_id:108,key:KeyCode::Numpad9,row:2},// F12
+    //ViewKey{press_id:0,release_id:109,key:KeyCode::Numpad9,row:2},// F1
+    //ViewKey{press_id:0,release_id:110,key:KeyCode::Numpad9,row:2},// F2 white 
+
+    //ViewKey{press_id:0,release_id:111,key:KeyCode::Numpad9,row:2},// F2
+    //ViewKey{press_id:0,release_id:112,key:KeyCode::Numpad9,row:2},// F3 white
+    //ViewKey{press_id:0,release_id:113,key:KeyCode::Numpad9,row:2},// F3
+    //ViewKey{press_id:0,release_id:114,key:KeyCode::Numpad9,row:2},// F4 white
+    //ViewKey{press_id:0,release_id:115,key:KeyCode::Numpad9,row:2},// F4
+    //ViewKey{press_id:0,release_id:116,key:KeyCode::Numpad9,row:2},// F5 white
+    //ViewKey{press_id:0,release_id:117,key:KeyCode::Numpad9,row:2},// F5
+    //ViewKey{press_id:0,release_id:118,key:KeyCode::Numpad9,row:2},// F6 white
+    //ViewKey{press_id:0,release_id:119,key:KeyCode::Numpad9,row:2},// F6
+    //ViewKey{press_id:0,release_id:120,key:KeyCode::Numpad9,row:2},// F7 white
+
+
+    // ViewKey{press_id:0,release_id:121,key:KeyCode::Numpad9,row:2},// F7
+    // ViewKey{press_id:0,release_id:122,key:KeyCode::Numpad9,row:2},// F8 whjite
+    // ViewKey{press_id:0,release_id:123,key:KeyCode::Numpad9,row:2},// F8
+    // ViewKey{press_id:0,release_id:124,key:KeyCode::Numpad9,row:2},// F9 white
+    // ViewKey{press_id:0,release_id:125,key:KeyCode::Numpad9,row:2},// F9
+    // ViewKey{press_id:0,release_id:126,key:KeyCode::Numpad9,row:2},// FN white
+    // ViewKey{press_id:0,release_id:127,key:KeyCode::Numpad9,row:2},// FN
+    // ViewKey{press_id:0,release_id:128,key:KeyCode::Numpad9,row:2},// F
+    // ViewKey{press_id:0,release_id:129,key:KeyCode::Numpad9,row:2},// G white
+    // ViewKey{press_id:0,release_id:130,key:KeyCode::Numpad9,row:2},// G
+
+    // ViewKey{press_id:0,release_id:131,key:KeyCode::Numpad9,row:2},// H white
+    // ViewKey{press_id:0,release_id:132,key:KeyCode::Numpad9,row:2},// Home white
+    // ViewKey{press_id:0,release_id:133,key:KeyCode::Numpad9,row:2},// Home
+    // ViewKey{press_id:0,release_id:134,key:KeyCode::Numpad9,row:2},// H
+    // ViewKey{press_id:0,release_id:135,key:KeyCode::Numpad9,row:2},// I white
+    // ViewKey{press_id:0,release_id:136,key:KeyCode::Numpad9,row:2},// INS white
+    // ViewKey{press_id:0,release_id:137,key:KeyCode::Numpad9,row:2},// INS
+    // ViewKey{press_id:0,release_id:138,key:KeyCode::Numpad9,row:2},// I
+    // ViewKey{press_id:0,release_id:139,key:KeyCode::Numpad9,row:2},// J white
+    // ViewKey{press_id:0,release_id:140,key:KeyCode::Numpad9,row:2},// J
+
+    // ViewKey{press_id:0,release_id:141,key:KeyCode::Numpad9,row:2},// K white
+    // ViewKey{press_id:0,release_id:142,key:KeyCode::Numpad9,row:2},// K
+    // ViewKey{press_id:0,release_id:143,key:KeyCode::Numpad9,row:2},// L white
+    // ViewKey{press_id:0,release_id:144,key:KeyCode::Numpad9,row:2},// L
+    // ViewKey{press_id:0,release_id:145,key:KeyCode::Numpad9,row:2},// m white
+    // ViewKey{press_id:0,release_id:146,key:KeyCode::Numpad9,row:2},// - white
+    // ViewKey{press_id:0,release_id:147,key:KeyCode::Numpad9,row:2},// - 
+    // ViewKey{press_id:0,release_id:148,key:KeyCode::Numpad9,row:2},// m
+    // ViewKey{press_id:0,release_id:149,key:KeyCode::Numpad9,row:2},// n white
+    // ViewKey{press_id:0,release_id:150,key:KeyCode::Numpad9,row:2},// num lock white
+
+    // ViewKey{press_id:0,release_id:151,key:KeyCode::Numpad9,row:2},// num lock
+    // ViewKey{press_id:0,release_id:152,key:KeyCode::Numpad9,row:2},// enter white
+    // ViewKey{press_id:0,release_id:153,key:KeyCode::Numpad9,row:2},// enter
+    // ViewKey{press_id:0,release_id:154,key:KeyCode::Numpad9,row:2},// + white
+    // ViewKey{press_id:0,release_id:155,key:KeyCode::Numpad9,row:2},// +
+    // ViewKey{press_id:0,release_id:156,key:KeyCode::Numpad9,row:2},// n
+    // ViewKey{press_id:0,release_id:157,key:KeyCode::Numpad9,row:2},// o white
+    // ViewKey{press_id:0,release_id:158,key:KeyCode::Numpad9,row:2},// option white
+    // ViewKey{press_id:0,release_id:159,key:KeyCode::Numpad9,row:2},// option 
+    // ViewKey{press_id:0,release_id:160,key:KeyCode::Numpad9,row:2},// o
+
+    // ViewKey{press_id:0,release_id:161,key:KeyCode::Numpad9,row:2}, // p white
+    // ViewKey{press_id:0,release_id:162,key:KeyCode::Numpad9,row:2}, // page down white
+    // ViewKey{press_id:0,release_id:163,key:KeyCode::Numpad9,row:2}, // page down 
+    // ViewKey{press_id:0,release_id:164,key:KeyCode::Numpad9,row:2}, // page up white
+    // ViewKey{press_id:0,release_id:165,key:KeyCode::Numpad9,row:2}, // page up
+    // ViewKey{press_id:0,release_id:166,key:KeyCode::Numpad9,row:2}, // . white
+    // ViewKey{press_id:0,release_id:167,key:KeyCode::Numpad9,row:2}, // .
+    // ViewKey{press_id:0,release_id:168,key:KeyCode::Numpad9,row:2}, // + white
+    // ViewKey{press_id:0,release_id:169,key:KeyCode::Numpad9,row:2}, // +
+    // ViewKey{press_id:0,release_id:170,key:KeyCode::Numpad9,row:2}, // prt scrn white
+
+
+    // ViewKey{press_id:0,release_id:171,key:KeyCode::Numpad9,row:2}, // prt scrn
+    // ViewKey{press_id:0,release_id:172,key:KeyCode::Numpad9,row:2}, // P 
+    // ViewKey{press_id:0,release_id:173,key:KeyCode::Numpad9,row:2}, // Q white
+    // ViewKey{press_id:0,release_id:174,key:KeyCode::Numpad9,row:2}, // ? white
+    // ViewKey{press_id:0,release_id:175,key:KeyCode::Numpad9,row:2}, // ?
+    // ViewKey{press_id:0,release_id:176,key:KeyCode::Numpad9,row:2}, // " white
+    // ViewKey{press_id:0,release_id:177,key:KeyCode::Numpad9,row:2}, // "
+    // ViewKey{press_id:0,release_id:178,key:KeyCode::Numpad9,row:2}, // Q
+    // ViewKey{press_id:0,release_id:179,key:KeyCode::Numpad9,row:2}, // R white
+    // ViewKey{press_id:0,release_id:180,key:KeyCode::Numpad9,row:2}, // enter icon white
+  
+    // ViewKey{press_id:0,release_id:181,key:KeyCode::Numpad9,row:2}, // enter icon
+    // ViewKey{press_id:0,release_id:182,key:KeyCode::Numpad9,row:2}, // R
+    // ViewKey{press_id:0,release_id:183,key:KeyCode::Numpad9,row:2}, // S white
+    // ViewKey{press_id:0,release_id:184,key:KeyCode::Numpad9,row:2}, // ; white
+    // ViewKey{press_id:0,release_id:185,key:KeyCode::Numpad9,row:2}, // ;
+    // ViewKey{press_id:0,release_id:186,key:KeyCode::Numpad9,row:2}, // shift white text 
+    // ViewKey{press_id:0,release_id:187,key:KeyCode::Numpad9,row:2}, // shift up arrow white
+    // ViewKey{press_id:0,release_id:188,key:KeyCode::Numpad9,row:2}, // shift up arrow
+    // ViewKey{press_id:0,release_id:189,key:KeyCode::Numpad9,row:2}, // shift text
+    // ViewKey{press_id:0,release_id:190,key:KeyCode::Numpad9,row:2}, // \ white
+
+    // ViewKey{press_id:0,release_id:191,key:KeyCode::Numpad9,row:2}, // \
+    // ViewKey{press_id:0,release_id:192,key:KeyCode::Numpad9,row:2}, // / white
+    // ViewKey{press_id:0,release_id:193,key:KeyCode::Numpad9,row:2}, // /
+    // ViewKey{press_id:0,release_id:194,key:KeyCode::Numpad9,row:2}, // spacebar text white 
+    // ViewKey{press_id:0,release_id:195,key:KeyCode::Numpad9,row:2}, // spacebar icon white
+    // ViewKey{press_id:0,release_id:196,key:KeyCode::Numpad9,row:2}, // spacebar icon
+    // ViewKey{press_id:0,release_id:197,key:KeyCode::Numpad9,row:2}, // spacebar text
+    // ViewKey{press_id:0,release_id:198,key:KeyCode::Numpad9,row:2}, // S
+    // ViewKey{press_id:0,release_id:199,key:KeyCode::Numpad9,row:2}, // T white
+    // ViewKey{press_id:0,release_id:200,key:KeyCode::Numpad9,row:2}, // tab text white
+
+    // ViewKey{press_id:0,release_id:201,key:KeyCode::Numpad9,row:2}, // tab 2 arrow white
+    // ViewKey{press_id:0,release_id:202,key:KeyCode::Numpad9,row:2}, // tab 2 arrow white
+    // ViewKey{press_id:0,release_id:203,key:KeyCode::Numpad9,row:2}, // tab arrow
+    // ViewKey{press_id:0,release_id:204,key:KeyCode::Numpad9,row:2}, // tab 2 arrow
+    // ViewKey{press_id:0,release_id:205,key:KeyCode::Numpad9,row:2}, // tab text
+    // ViewKey{press_id:0,release_id:206,key:KeyCode::Numpad9,row:2}, // Backquote white
+    // ViewKey{press_id:0,release_id:207,key:KeyCode::Numpad9,row:2}, // Backquote
+    // ViewKey{press_id:0,release_id:208,key:KeyCode::Numpad9,row:2}, // T
+    // ViewKey{press_id:0,release_id:209,key:KeyCode::Numpad9,row:2}, // U white
+    // ViewKey{press_id:0,release_id:210,key:KeyCode::Numpad9,row:2}, // U
+
+    // ViewKey{press_id:0,release_id:211,key:KeyCode::Numpad9,row:2}, // V white
+    // ViewKey{press_id:0,release_id:212,key:KeyCode::Numpad9,row:2}, // V
+    // ViewKey{press_id:0,release_id:213,key:KeyCode::Numpad9,row:2}, // w white
+    // ViewKey{press_id:0,release_id:214,key:KeyCode::Numpad9,row:2}, // window icon white
+    // ViewKey{press_id:0,release_id:215,key:KeyCode::Numpad9,row:2}, // window icon
+    // ViewKey{press_id:0,release_id:216,key:KeyCode::Numpad9,row:2}, // w
+    // ViewKey{press_id:0,release_id:217,key:KeyCode::Numpad9,row:2}, // x white
+    // ViewKey{press_id:0,release_id:218,key:KeyCode::Numpad9,row:2}, // x
+    // ViewKey{press_id:0,release_id:219,key:KeyCode::Numpad9,row:2}, // y white
+    // ViewKey{press_id:0,release_id:220,key:KeyCode::Numpad9,row:2}, // y
+
+    //ViewKey{press_id:0,release_id:221,key:KeyCode::Numpad9,row:2}, // z white
+    //ViewKey{press_id:0,release_id:222,key:KeyCode::Numpad9,row:2}, // z
+    //ViewKey{press_id:0,release_id:223,key:KeyCode::Numpad9,row:2}, // mouse white
+    //ViewKey{press_id:0,release_id:224,key:KeyCode::Numpad9,row:2}, // mouse horizontal
+    //ViewKey{press_id:0,release_id:225,key:KeyCode::Numpad9,row:2}, // mouse left white
+    //ViewKey{press_id:0,release_id:226,key:KeyCode::Numpad9,row:2}, // mouse left
+    //ViewKey{press_id:0,release_id:227,key:KeyCode::Numpad9,row:2}, // mouse move white
+    //ViewKey{press_id:0,release_id:228,key:KeyCode::Numpad9,row:2}, // mouse 
+    //ViewKey{press_id:0,release_id:229,key:KeyCode::Numpad9,row:2}, // mouse right white
+    //ViewKey{press_id:0,release_id:230,key:KeyCode::Numpad9,row:2}, // mouse right
+
+    //ViewKey{press_id:0,release_id:231,key:KeyCode::Numpad9,row:2}, // mouse middle white
+    //ViewKey{press_id:0,release_id:232,key:KeyCode::Numpad9,row:2}, // mouse middle white
+    //ViewKey{press_id:0,release_id:233,key:KeyCode::Numpad9,row:2}, // mouse wheel down
+    //ViewKey{press_id:0,release_id:234,key:KeyCode::Numpad9,row:2}, // mouse middle
+    //ViewKey{press_id:0,release_id:235,key:KeyCode::Numpad9,row:2}, // mouse middle up red white
+    //ViewKey{press_id:0,release_id:236,key:KeyCode::Numpad9,row:2}, // mouse middle up
+    //ViewKey{press_id:0,release_id:237,key:KeyCode::Numpad9,row:2}, // mouse up red white
+    //ViewKey{press_id:0,release_id:238,key:KeyCode::Numpad9,row:2}, // mouse vertial
+    //ViewKey{press_id:0,release_id:239,key:KeyCode::Numpad9,row:2}, // mouse white
+    //ViewKey{press_id:0,release_id:240,key:KeyCode::Numpad9,row:2}, // mouse vertial white
+    //ViewKey{press_id:0,release_id:241,key:KeyCode::Numpad9,row:2}, // 
+
+    // 241 icons over limited texture atlas
     
     
 
@@ -406,8 +565,62 @@ fn setup(
 
 
   x = -300.;
-  base_y = 64.;
+  base_y = 32.;
   row = 3;
+  for mykey in  displaykeys.key_list.iter(){
+    if mykey.row == row{
+      create_sprite_from_atlas(
+        &mut commands,
+        (x, base_y, 0.0),
+        mykey.release_id,
+        //atlas_handle,
+        atlas_linear_handle.clone(),
+        linear_texture.clone(),
+        mykey.key
+      );
+      x += 32.;
+    }
+  }
+
+  x = -300.;
+  base_y = 0.;
+  row = 4;
+  for mykey in  displaykeys.key_list.iter(){
+    if mykey.row == row{
+      create_sprite_from_atlas(
+        &mut commands,
+        (x, base_y, 0.0),
+        mykey.release_id,
+        //atlas_handle,
+        atlas_linear_handle.clone(),
+        linear_texture.clone(),
+        mykey.key
+      );
+      x += 32.;
+    }
+  }
+
+  x = -300.;
+  base_y = -32.;
+  row = 5;
+  for mykey in  displaykeys.key_list.iter(){
+    if mykey.row == row{
+      create_sprite_from_atlas(
+        &mut commands,
+        (x, base_y, 0.0),
+        mykey.release_id,
+        //atlas_handle,
+        atlas_linear_handle.clone(),
+        linear_texture.clone(),
+        mykey.key
+      );
+      x += 32.;
+    }
+  }
+
+  x = -300.;
+  base_y = -64.;
+  row = 6;
   for mykey in  displaykeys.key_list.iter(){
     if mykey.row == row{
       create_sprite_from_atlas(
