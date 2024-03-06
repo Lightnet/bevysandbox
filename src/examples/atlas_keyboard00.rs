@@ -475,18 +475,17 @@ fn setup(
   // padded textures are to the right, unpadded to the left
 
   // draw unpadded texture atlas
-  /*
   commands.spawn(SpriteBundle {
       texture: linear_texture.clone(),
       transform: Transform {
-          translation: Vec3::new(-250.0, -130.0, 0.0),
-          scale: Vec3::splat(0.8),
+          translation: Vec3::new(-200.0, -20.0, 0.0),
+          scale: Vec3::splat(0.6),
           //scale: Vec3::splat(1.0),
           ..default()
       },
       ..default()
   });
-  */
+  
 
   let font = asset_server.load("fonts/FiraSans-Bold.ttf");
 
@@ -500,120 +499,223 @@ fn setup(
   // labels to indicate padding
 
   // No padding
-  create_label(
-      &mut commands,
-      (-250.0, 330.0, 0.0),
-      "No padding",
-      text_style.clone(),
-  );
+  // create_label(
+  //     &mut commands,
+  //     (-250.0, 330.0, 0.0),
+  //     "No padding",
+  //     text_style.clone(),
+  // );
 
   // Padding
-  create_label(&mut commands, (250.0, 330.0, 0.0), "Padding", text_style);
+  //create_label(&mut commands, (250.0, 330.0, 0.0), "Padding", text_style);
 
-  let mut base_y = 128.0; // y position of the sprites
+  let enity_keyboard = commands
+  .spawn(NodeBundle {
+          style: Style {
+              align_items: AlignItems::Center,
+              justify_content: JustifyContent::Center,
+              flex_direction: FlexDirection::Column,
+              //width: Val::Percent(100.0),
+              //height: Val::Percent(100.0),
+              width: Val::Px(900.0),
+              height: Val::Px(384.0),
+              ..default()
+          },
+          //background_color: Color::CRIMSON.into(),
+          background_color: Color::BLUE.into(),
+          ..default()
+      }).id();
+
+  let enity_keyboard_row1 = commands
+    .spawn(NodeBundle {
+            style: Style {
+                align_items: AlignItems::Default,
+                justify_content: JustifyContent::Default,
+                //flex_direction: FlexDirection::Row,
+                //width: Val::Percent(100.0),
+                //height: Val::Percent(100.0),
+                ..default()
+            },
+            background_color: Color::CRIMSON.into(),
+            ..default()
+        }).id();
+  commands.entity(enity_keyboard).push_children(&[enity_keyboard_row1]);
+
+  //let mut base_y = 128.0; // y position of the sprites
+  let mut base_y = 0.0; // y position of the sprites
   let mut x = -300.;
   let mut row = 0;
   for mykey in  displaykeys.key_list.iter(){
     if mykey.row == row{
-      create_sprite_from_atlas(
+      let entity_button = create_sprite_from_atlas(
         &mut commands,
         (x, base_y, 0.0),
         mykey.release_id,
         //atlas_handle,
         atlas_linear_handle.clone(),
         linear_texture.clone(),
-        mykey.key
+        mykey.key,
+        &mut texture_atlases
       );
+      //commands.entity(enity_keyboard).add_child(entity_button);
+      commands.entity(enity_keyboard_row1).push_children(&[entity_button]);
     x += 32.;
     }
   }
+  
+  let enity_keyboard_row2 = commands
+    .spawn(NodeBundle {
+            style: Style {
+                align_items: AlignItems::Default,
+                justify_content: JustifyContent::Default,
+                ..default()
+            },
+            ..default()
+        }).id();
+  commands.entity(enity_keyboard).push_children(&[enity_keyboard_row2]);
+
   x = -300.;
   base_y = 96.;
   row = 1;
   for mykey in  displaykeys.key_list.iter(){
     if mykey.row == row{
-      create_sprite_from_atlas(
+      let entity_button = create_sprite_from_atlas(
         &mut commands,
         (x, base_y, 0.0),
         mykey.release_id,
         //atlas_handle,
         atlas_linear_handle.clone(),
         linear_texture.clone(),
-        mykey.key
+        mykey.key,
+        &mut texture_atlases
       );
       x += 32.;
+      commands.entity(enity_keyboard_row2).push_children(&[entity_button]);
     }
   }
 
+  let enity_keyboard_row3 = commands
+    .spawn(NodeBundle {
+            style: Style {
+                align_items: AlignItems::Default,
+                justify_content: JustifyContent::Default,
+                ..default()
+            },
+            ..default()
+        }).id();
+  commands.entity(enity_keyboard).push_children(&[enity_keyboard_row3]);
+  
   x = -300.;
   base_y = 64.;
   row = 2;
   for mykey in  displaykeys.key_list.iter(){
     if mykey.row == row{
-      create_sprite_from_atlas(
+      let entity_button = create_sprite_from_atlas(
         &mut commands,
         (x, base_y, 0.0),
         mykey.release_id,
         //atlas_handle,
         atlas_linear_handle.clone(),
         linear_texture.clone(),
-        mykey.key
+        mykey.key,
+        &mut texture_atlases
       );
+      commands.entity(enity_keyboard_row3).push_children(&[entity_button]);
       x += 32.;
     }
   }
 
+  let enity_keyboard_row4 = commands
+    .spawn(NodeBundle {
+            style: Style {
+                align_items: AlignItems::Default,
+                justify_content: JustifyContent::Default,
+                ..default()
+            },
+            ..default()
+        }).id();
+  commands.entity(enity_keyboard).push_children(&[enity_keyboard_row4]);
 
   x = -300.;
   base_y = 32.;
   row = 3;
   for mykey in  displaykeys.key_list.iter(){
     if mykey.row == row{
-      create_sprite_from_atlas(
+      let entity_button = create_sprite_from_atlas(
         &mut commands,
         (x, base_y, 0.0),
         mykey.release_id,
         //atlas_handle,
         atlas_linear_handle.clone(),
         linear_texture.clone(),
-        mykey.key
+        mykey.key,
+        &mut texture_atlases
       );
+      commands.entity(enity_keyboard_row4).push_children(&[entity_button]);
       x += 32.;
     }
   }
+
+
+  let enity_keyboard_row5 = commands
+    .spawn(NodeBundle {
+            style: Style {
+                align_items: AlignItems::Default,
+                justify_content: JustifyContent::Default,
+                ..default()
+            },
+            ..default()
+        }).id();
+  commands.entity(enity_keyboard).push_children(&[enity_keyboard_row5]);
 
   x = -300.;
   base_y = 0.;
   row = 4;
   for mykey in  displaykeys.key_list.iter(){
     if mykey.row == row{
-      create_sprite_from_atlas(
+      let entity_button = create_sprite_from_atlas(
         &mut commands,
         (x, base_y, 0.0),
         mykey.release_id,
         //atlas_handle,
         atlas_linear_handle.clone(),
         linear_texture.clone(),
-        mykey.key
+        mykey.key,
+        &mut texture_atlases
       );
+      commands.entity(enity_keyboard_row5).push_children(&[entity_button]);
       x += 32.;
     }
   }
+
+
+  let enity_keyboard_row6 = commands
+    .spawn(NodeBundle {
+            style: Style {
+                align_items: AlignItems::Default,
+                justify_content: JustifyContent::Default,
+                ..default()
+            },
+            ..default()
+        }).id();
+  commands.entity(enity_keyboard).push_children(&[enity_keyboard_row6]);
 
   x = -300.;
   base_y = -32.;
   row = 5;
   for mykey in  displaykeys.key_list.iter(){
     if mykey.row == row{
-      create_sprite_from_atlas(
+      let entity_button =create_sprite_from_atlas(
         &mut commands,
         (x, base_y, 0.0),
         mykey.release_id,
         //atlas_handle,
         atlas_linear_handle.clone(),
         linear_texture.clone(),
-        mykey.key
+        mykey.key,
+        &mut texture_atlases
       );
+      commands.entity(enity_keyboard_row6).push_children(&[entity_button]);
       x += 32.;
     }
   }
@@ -630,12 +732,12 @@ fn setup(
         //atlas_handle,
         atlas_linear_handle.clone(),
         linear_texture.clone(),
-        mykey.key
+        mykey.key,
+        &mut texture_atlases
       );
       x += 32.;
     }
   }
-
 
   /*
   create_sprite_from_atlas(
@@ -732,11 +834,13 @@ fn create_sprite_from_atlas(
   sprite_index: usize,
   atlas_handle: Handle<TextureAtlasLayout>,
   texture: Handle<Image>,
-  key:KeyCode
-) {
-  commands.spawn(SpriteSheetBundle {
+  key:KeyCode,
+  texture_atlases: &mut ResMut<Assets<TextureAtlasLayout>>,
+) -> Entity {
+  /*
+  let sprite = commands.spawn(SpriteSheetBundle {
       transform: Transform {
-          translation: Vec3::new(translation.0, translation.1, translation.2),
+          //translation: Vec3::new(translation.0, translation.1, translation.2),
           scale: Vec3::splat(0.64),
           ..default()
       },
@@ -747,9 +851,120 @@ fn create_sprite_from_atlas(
       },
       ..default()
   })
+  //.id()
+  //.insert(Style::default())
+  .insert(NodeBundle {
+    style: Style {
+        align_items: AlignItems::Center,
+        justify_content: JustifyContent::Center,
+        //flex_direction: FlexDirection::Column,
+        //width: Val::Percent(100.0),
+        //height: Val::Percent(100.0),
+
+        width: Val::Px(16.0),
+        height: Val::Px(16.0),
+        ..default()
+    },
+    //background_color: Color::CRIMSON.into(),
+    background_color: Color::BLUE.into(),
+    ..default()
+  })
+  //.insert(CalculatedClip{Val:Size::new(30.0, 30.0)})
+  //.insert(Node::default())
+  //.insert(NodeBundle::default())
   .insert(TagInputKey{key})
-  .insert(KEY0);
+  //.insert(KEY0)
+  .id();
+  
+  let mykey = commands
+    .spawn(NodeBundle {
+        style: Style {
+            flex_direction: FlexDirection::Column,
+            align_items: AlignItems::Center,
+            height:Val::Px(32.0),
+            width:Val::Px(32.0),
+            //padding: Val::UiRect(8.0),
+            margin: UiRect {
+              left: Val::Px(2.0),
+              right:Val::Px(2.0),
+              top: Val::Px(2.0),
+              bottom: Val::Px(2.0),
+            },
+            padding: UiRect {
+              left: Val::Px(2.0),
+              right:Val::Px(2.0),
+              top: Val::Px(2.0),
+              bottom: Val::Px(2.0),
+            },
+            ..default()
+        },
+        background_color: Color::CRIMSON.into(),
+        ..default()
+    }).id();
+    //sprite
+    commands.entity(mykey).push_children(&[sprite]);
+
+    mykey
+  */
+
+  let texture_atlas = TextureAtlasLayout::from_grid(Vec2::new(64.0, 64.0), 16, 16, None, None);
+  let texture_atlas_handle = texture_atlases.add(texture_atlas);
+
+
+  let enity_keyicon = commands
+  .spawn(NodeBundle {
+    style: Style {
+      height: Val::Px(32.0),
+      width: Val::Px(32.0),
+      align_items: AlignItems::Default,
+      justify_content: JustifyContent::Default,
+      margin: UiRect {
+        left: Val::Px(2.0),
+        right:Val::Px(2.0),
+        top: Val::Px(2.0),
+        bottom: Val::Px(2.0),
+      },
+      ..default()
+    },
+    background_color: Color::ALICE_BLUE.into(),
+    ..default()
+  })
+  //.insert(UiImage::new(texture))//ok but display sheet
+  .insert(AtlasImageBundle {
+    style: Style {
+        width: Val::Px(64.),
+        height: Val::Px(64.),
+        ..default()
+    },
+    //texture_atlas: texture_atlas_handle.into(),
+    texture_atlas:TextureAtlas {
+      index: sprite_index,
+      layout: atlas_handle,
+    },
+    image: UiImage::new(texture),
+    ..default()
+  }).insert(TagInputKey{key})
+  /*
+  .insert(SpriteSheetBundle {
+    transform: Transform {
+        //translation: Vec3::new(translation.0, translation.1, translation.2),
+        scale: Vec3::splat(0.64),
+        ..default()
+    },
+    texture,
+    atlas: TextureAtlas {
+        index: sprite_index,
+        layout: atlas_handle,
+    },
+    ..default()
+  })*/
+  .id();
+
+  enity_keyicon
+
 }
+
+
 /*
 fn create_sprite_from_atlas(
   commands: &mut Commands,

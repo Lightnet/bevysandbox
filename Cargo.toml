@@ -133,6 +133,10 @@ path = "src/examples/ui_keyboard.rs"
 name = "keys01"
 path = "src/examples/ui_keyboard01.rs"
 
+[[example]]
+name = "keys02"
+path = "src/examples/virtual_keyboard01.rs"
+
 #[[example]]
 #name = "physics00"
 #path = "src/examples/physics.rs"
@@ -177,3 +181,10 @@ path = "src/examples/atlas_keyboard00.rs"
 name = "scenesl00"
 path = "src/examples/saveloadscene.rs"
 
+[[example]]
+name = "menu00"
+path = "src/examples/samplemenu.rs"
+
+[[example]]
+name = "menu01"
+path = "src/examples/menu.rs"
