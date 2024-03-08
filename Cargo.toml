@@ -57,11 +57,11 @@ bevy = { version = "0.13.0", features = [
   "png",
   "bevy_gltf",
   #"wav",
-  #"zlib",
-  #"animation",
-  #"bevy_animation",
+  "zlib",
+  "animation",
+  "bevy_animation",
   "bevy_core_pipeline",
-  "dynamic_linking"
+  #"dynamic_linking"
 ]}
 bevy-inspector-egui = "0.23"
 bevy_egui = "0.25"
@@ -188,3 +188,7 @@ path = "src/examples/samplemenu.rs"
 [[example]]
 name = "menu01"
 path = "src/examples/menu.rs"
+
+[[example]]
+name = "camera00"
+path = "src/examples/cameraswitch.rs"
