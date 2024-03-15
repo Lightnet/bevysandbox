@@ -10,6 +10,7 @@
 
 use bevy::prelude::*;
 
+use crate::core::{console::SandboxConsolePlugin, physics::SandboxPhysicsPlugin};
 #[allow(unused_imports)]
 use crate::core::{
   components::GameState, resources::PlayerInfo, systems::{spawn_camera_3d, system_query_info}, ui::{debug::UIEditorPlugin, menu::{
@@ -19,12 +20,11 @@ use crate::core::{
   }},
     world::{
       WorldPrototypePlugin, 
-      //WorldTest01Plugin
+      WorldTest01Plugin
     }
 };
 
 //pub struct HelloPlugin;
-
 //impl Plugin for HelloPlugin {
   //fn build(&self, app: &mut App) {
     // add things to your app here
@@ -37,17 +37,18 @@ pub struct BevySandboxPlugin;
 impl Plugin for BevySandboxPlugin {
   fn build(&self, app: &mut App) {
     app.add_plugins(UIEditorPlugin);
+    app.add_plugins(SandboxConsolePlugin);
     app.insert_resource(ClearColor(Color::rgb(0.3, 0.3, 0.3)));
     //app.insert_resource(PlayerInfo::default());
     app.init_resource::<PlayerInfo>();
-
-    //app.add_plugin(WorldInspectorPlugin::new());
     app.init_state::<GameState>();
+    //app.add_plugin(WorldInspectorPlugin::new());
     app.add_systems(Startup,spawn_camera_3d);
     app.add_plugins(MainMenuPlugin);
     //app.add_plugins(OnlineMenuPlugin);
     app.add_plugins(SettingsMenuPlugin);
-    //app.add_plugins(WorldTest01Plugin);
+    app.add_plugins(SandboxPhysicsPlugin);
+    app.add_plugins(WorldTest01Plugin);
 
     app.add_systems(Update,system_query_info);
   }

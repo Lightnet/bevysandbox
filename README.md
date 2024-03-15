@@ -29,13 +29,9 @@
 # Information:
   Note this is prototype build from Bevy Engine in Rust Language.
   
-  It work in progress that subject to changes. Bevy Engine API subject to change and break.
+  It work in progress that subject to changes. Bevy Engine API version will break and update to plugin take a while to match version build.
 
-  The ideas base on godot for single small file to run scripts.
-
-  To create sandbox base on block base on Minecraft game and other game mixed into as well.
-  
-  Network required more coding to handle ID object lists.
+  The ideas base on godot for single small file to run scripts. To create sandbox base on block base on Minecraft game and other game mixed into as well. Network required more coding to handle ID object lists.
 
   * https://bevyengine.org/assets/
 
@@ -149,10 +145,11 @@ cargo run --bin network -- client
 ```
 
 ## Notes:
- * Examples and samples from bevyengine github for testing.
- * There are other example from other github and users from bevy community.
+ * Examples and samples from bevyengine github and official site for testing.
+ * There are other examples from other github and users from bevy community.
+
 ```
-cargo run -p game --release
+cargo run -p game --release (N/A)
 ```
   For release stable application.
 

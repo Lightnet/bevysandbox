@@ -8,7 +8,7 @@
 
 use bevy::prelude::*;
 //use bevy_mod_picking::prelude::RaycastPickCamera;
-//use bevy_rapier3d::prelude::*;
+use bevy_rapier3d::prelude::*;
 
 #[allow(unused_variables, unused_mut)]
 pub fn setup_physics_player(
@@ -25,9 +25,9 @@ pub fn setup_physics_player(
       ..default()
     },
     //RigidBody::KinematicPositionBased,
-    //KinematicCharacterController::default(),
-    //RigidBody::Dynamic,
-    //Collider::ball(1.0),
+    KinematicCharacterController::default(),
+    RigidBody::Dynamic,
+    Collider::ball(1.0),
     //ColliderDebugColor(colors[color % 3]),
   ))
   .insert(TransformBundle::from(Transform::from_xyz(0.0, 32.0, 0.0)))
@@ -41,7 +41,7 @@ pub fn setup_physics_player(
           ..default()
         },
       //transform: Transform::from_xyz(-2.0, 2.5, 5.0).looking_at(Vec3::ZERO, Vec3::Y),
-      transform: Transform::from_xyz(0.0, 5., 10.0).looking_at(Vec3::ZERO, Vec3::Y),
+      transform: Transform::from_xyz(10.0, 10., 10.0).looking_at(Vec3::ZERO, Vec3::Y),
       ..Default::default()
       },
       //PlayerCamera,
@@ -52,10 +52,10 @@ pub fn setup_physics_player(
   ;
 
 }
-/*
+
 pub fn system_physics_player_input(
 	mut controllers: Query<(&mut Transform, &mut KinematicCharacterController)>,
-	keyboard_input: Res<Input<KeyCode>>,
+	keyboard_input: Res<ButtonInput<KeyCode>>,
   time: Res<Time>,
 ) {
 	//println!("update...");
@@ -63,22 +63,23 @@ pub fn system_physics_player_input(
 	for(mut entity_transform, mut controller )in controllers.iter_mut() {
 		//controller.translation = Some(Vec3::new(1.0, -0.5, 0.01));
     let gravity = Vec3::new(0.0, -0.1, 0.0);
-		if keyboard_input.pressed(KeyCode::W) {
+		if keyboard_input.pressed(KeyCode::KeyW) {
+      println!("W");
       let direction = entity_transform.forward() * 0.1;
       controller.translation = Some(direction + gravity);
-		}else if keyboard_input.pressed(KeyCode::S) {
+		}else if keyboard_input.pressed(KeyCode::KeyS) {
       let direction = entity_transform.back() * 0.1;
       controller.translation = Some(direction + gravity);
 		}else{
 			controller.translation = Some(Vec3::new(0.0, -0.5, 0.0));
 		}
 
-    if keyboard_input.pressed( KeyCode::A) {
+    if keyboard_input.pressed( KeyCode::KeyA) {
       entity_transform.rotate(Quat::from_euler(EulerRot::XYZ,
         0., 1.0 * 0.1, 0.)
       );
     }
-    if keyboard_input.pressed( KeyCode::D) {
+    if keyboard_input.pressed( KeyCode::KeyD) {
       entity_transform.rotate(Quat::from_euler(EulerRot::XYZ,
         0., 1.0 * -0.1, 0.)
       );
@@ -91,4 +92,3 @@ pub fn system_physics_player_input(
     }
 	}
 }
-*/
