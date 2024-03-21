@@ -14,8 +14,8 @@ pub fn spawn_main_menu(
   mut commands: Commands,
   asset_server: Res<AssetServer>
 ) {
-  println!("init menu...");
-  commands.spawn(NodeBundle{
+  //println!("init menu...");
+  commands.spawn((NodeBundle{
     style: Style {
       width: Val::Percent(100.0),
       height: Val::Percent(100.0),
@@ -25,7 +25,7 @@ pub fn spawn_main_menu(
       ..default()
     },
     ..default()
-  }).with_children(|parent|{
+  },MainUIRoot)).with_children(|parent|{
 
     let text_style:TextStyle = TextStyle {
       font: asset_server.load("fonts/FiraSans-Bold.ttf"),
@@ -53,17 +53,17 @@ pub fn spawn_main_menu(
     });
 
     // Online BUTTON
-    parent.spawn(ButtonBundle {
-      style: get_button_style(),
-      background_color: NORMAL_BUTTON.into(),
-      ..default()
-    }).insert(OnlineButton)
-    .with_children(|parent| {
-      parent.spawn(TextBundle::from_section(
-        "Online",
-        text_style.clone(),
-      ));
-    });
+    // parent.spawn(ButtonBundle {
+    //   style: get_button_style(),
+    //   background_color: NORMAL_BUTTON.into(),
+    //   ..default()
+    // }).insert(OnlineButton)
+    // .with_children(|parent| {
+    //   parent.spawn(TextBundle::from_section(
+    //     "Online",
+    //     text_style.clone(),
+    //   ));
+    // });
 
     // SETTINGS BUTTON
     parent.spawn(ButtonBundle {
@@ -90,9 +90,9 @@ pub fn spawn_main_menu(
         text_style.clone(),
       ));
     });
+  });
 
-
-  }).insert(MainUIRoot);
+  //}).insert(MainUIRoot);
 }
 
 pub fn despawn_main_menu(
@@ -135,11 +135,27 @@ pub fn spawn_game_menu(mut commands: Commands, asset_server: Res<AssetServer>) {
     });
 }
 
-pub fn despawn_game_menu(
-  mut commands: Commands,
-  main_menu_query:Query<Entity, With<GameUIRoot>>,
-){
-  if let Ok(main_menu_entity) = main_menu_query.get_single(){
-    commands.entity(main_menu_entity).despawn_recursive();
-  }
-}
+// pub fn despawn_game_menu(
+//   mut commands: Commands,
+//   main_menu_query:Query<Entity, With<GameUIRoot>>,
+// ){
+//   if let Ok(main_menu_entity) = main_menu_query.get_single(){
+//     commands.entity(main_menu_entity).despawn_recursive();
+//   }
+// }
+
+// pub fn despawn_main_menu_and_camera3d(
+//   mut commands: Commands,
+//   main_menu_query:Query<Entity, With<GameUIRoot>>,
+//   camera_query:Query<Entity, With<CameraUIRoot>>,
+// ){
+//   println!("Clean up Main Menu...");
+//   if let Ok(main_menu_entity) = main_menu_query.get_single(){
+//     println!("Main Menu despawn_recursive...");
+//     commands.entity(main_menu_entity).despawn_recursive();
+//   }
+
+//   if let Ok(camera_entity) = camera_query.get_single(){
+//     commands.entity(camera_entity).despawn_recursive();
+//   }
+// }

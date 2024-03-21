@@ -21,6 +21,20 @@ pub fn spawn_camera_3d(mut commands: Commands) {
     //.insert(RaycastPickCamera::default());
 }
 
+pub fn spawn_main_menu_camera_3d(mut commands: Commands) {
+  commands
+    .spawn((
+      Camera3dBundle {
+      //transform: Transform::from_xyz(-2.0, 2.5, 5.0).looking_at(Vec3::ZERO, Vec3::Y),
+      transform: Transform::from_xyz(-10.0, 10.0, 20.0).looking_at(Vec3::ZERO, Vec3::Y),
+      ..default()
+      },
+      CameraUIRoot
+    ));
+    //.insert(CameraUIRoot);
+    //.insert(RaycastPickCamera::default());
+}
+
 pub fn system_query_info(
   keyboard_input: Res<ButtonInput<KeyCode>>,
   //mut player_info: ResMut<PlayerInfo>,//write
@@ -48,5 +62,12 @@ pub fn get_text_style(asset_server: &Res<AssetServer>) -> TextStyle {
     font: asset_server.load("fonts/FiraSans-Bold.ttf"),
     font_size:28.0,
     color: Color::WHITE,
+  }
+}
+
+// Generic system that takes a component as a parameter, and will despawn all entities with that component
+pub fn despawn_screen<T: Component>(to_despawn: Query<Entity, With<T>>, mut commands: Commands) {
+  for entity in &to_despawn {
+    commands.entity(entity).despawn_recursive();
   }
 }

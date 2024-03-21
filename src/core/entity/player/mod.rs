@@ -16,7 +16,7 @@ pub fn setup_physics_player(
 	mut meshes: ResMut<Assets<Mesh>>,
 	mut materials: ResMut<Assets<StandardMaterial>>,
 ) {
-
+  println!("set up camera3d...");
   commands.spawn((
     PbrBundle {
       //mesh: meshes.add(shape::Plane::from_size(1.0).into()),

@@ -10,7 +10,7 @@
 
 use bevy::prelude::*;
 
-use crate::core::{console::SandboxConsolePlugin, physics::SandboxPhysicsPlugin};
+use crate::core::{console::SandboxConsolePlugin, physics::SandboxPhysicsPlugin, systems::spawn_main_menu_camera_3d};
 #[allow(unused_imports)]
 use crate::core::{
   components::GameState, resources::PlayerInfo, systems::{spawn_camera_3d, system_query_info}, ui::{debug::UIEditorPlugin, menu::{
@@ -43,7 +43,7 @@ impl Plugin for BevySandboxPlugin {
     app.init_resource::<PlayerInfo>();
     app.init_state::<GameState>();
     //app.add_plugin(WorldInspectorPlugin::new());
-    app.add_systems(Startup,spawn_camera_3d);
+    app.add_systems(Startup,spawn_main_menu_camera_3d);
     app.add_plugins(MainMenuPlugin);
     //app.add_plugins(OnlineMenuPlugin);
     app.add_plugins(SettingsMenuPlugin);
