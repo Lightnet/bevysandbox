@@ -50,7 +50,7 @@ impl Plugin for BevySandboxPlugin {
     app.add_plugins(SandboxPhysicsPlugin);
     app.add_plugins(WorldTest01Plugin);
 
-    app.add_systems(Update,system_query_info);
+    //app.add_systems(Update,system_query_info);
   }
 }
 

@@ -41,7 +41,8 @@ pub fn setup_physics_player(
           ..default()
         },
       //transform: Transform::from_xyz(-2.0, 2.5, 5.0).looking_at(Vec3::ZERO, Vec3::Y),
-      transform: Transform::from_xyz(10.0, 10., 10.0).looking_at(Vec3::ZERO, Vec3::Y),
+      //transform: Transform::from_xyz(10.0, 10., 10.0).looking_at(Vec3::ZERO, Vec3::Y),
+      transform: Transform::from_xyz(0.0, 10., 10.0).looking_at(Vec3::ZERO, Vec3::Y),
       ..Default::default()
       },
       //PlayerCamera,
@@ -64,7 +65,7 @@ pub fn system_physics_player_input(
 		//controller.translation = Some(Vec3::new(1.0, -0.5, 0.01));
     let gravity = Vec3::new(0.0, -0.1, 0.0);
 		if keyboard_input.pressed(KeyCode::KeyW) {
-      println!("W");
+      //println!("W");
       let direction = entity_transform.forward() * 0.1;
       controller.translation = Some(direction + gravity);
 		}else if keyboard_input.pressed(KeyCode::KeyS) {

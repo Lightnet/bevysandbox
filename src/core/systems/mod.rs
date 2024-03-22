@@ -47,12 +47,12 @@ pub fn system_query_info(
 
   //keyboard_input.get_just_released()
 
-  if keyboard_input.just_released(KeyCode::KeyA) {
+  if keyboard_input.just_released(KeyCode::KeyN) {
     println!("player_info: {:?}", player_info);
     println!("player Name: {:}", player_info.name);
   }
 
-  if keyboard_input.just_pressed(KeyCode::KeyD) {
+  if keyboard_input.just_pressed(KeyCode::KeyM) {
     println!("[[player_info]]: {:?}", player_info);
   }
 }
