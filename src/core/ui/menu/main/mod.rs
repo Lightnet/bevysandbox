@@ -34,10 +34,10 @@ impl Plugin for MainMenuPlugin {
     ).run_if(in_state(GameState::MainMenu)) );
     //app.add_systems( OnExit(GameState::MainMenu),despawn_main_menu_and_camera3d);
     app.add_systems( OnExit(GameState::MainMenu),despawn_screen::<MainUIRoot>);
-    app.add_systems( OnExit(GameState::MainMenu),despawn_screen::<CameraUIRoot>);
-
+    //app.add_systems( OnExit(GameState::MainMenu),despawn_screen::<CameraUIRoot>);
+    app.add_systems( OnEnter(GameState::Gameplay),despawn_screen::<CameraUIRoot>);
     //app.add_systems( OnEnter(GameState::Gameplay),despawn_screen::<GameUIRoot>);
-    //app.add_systems( OnEnter(GameState::Gameplay),despawn_screen::<CameraUIRoot>);
+    
 
 
     //game

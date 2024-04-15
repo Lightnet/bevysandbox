@@ -68,6 +68,9 @@ bevy = { version = "0.13.0", features = [
   "bevy_core_pipeline",
   #"dynamic_linking"
 ]}
+bevy_panorbit_camera = "0.16.0"
+bevy_mod_billboard = {git = "https://github.com/kulkalkul/bevy_mod_billboard", rev = "1fabd2214731dedb4b17ce0a0894d22182707759"}
+bevy_asset_loader = "0.20.0"
 bevy-inspector-egui = "0.23"
 bevy_egui = "0.25"
 rand = "0.8.5"
@@ -202,6 +205,10 @@ path = "src/examples/menu.rs"
 [[example]]
 name = "camera00"
 path = "src/examples/cameraswitch.rs"
+
+[[example]]
+name = "char01"
+path = "src/examples/character01.rs"
 
 [[example]] # error ClientId for Deserialize
 name = "network"
