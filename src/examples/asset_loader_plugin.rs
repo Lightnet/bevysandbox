@@ -29,5 +29,6 @@ impl Plugin for AssetLoaderPlugin {
 pub struct MyAssets{
   //
   #[asset(paths("models/main_skeleton.glb"),collection(typed, mapped))]
+  //#[asset(paths("models/male_toon_block01.glb"),collection(typed, mapped))]
   pub gltf_files:HashMap<String, Handle<Gltf>>
 }

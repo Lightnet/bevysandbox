@@ -1,7 +1,8 @@
 /*
   cargo run --example char01
 */
-// time 32.20
+// https://www.youtube.com/watch?v=jbYDljqf4kg&t=1s
+// time 56.01
 
 use asset_loader_plugin::AssetLoaderPlugin;
 use bevy::prelude::*;
