@@ -1,7 +1,7 @@
 /*
   cargo run --example char01
 https://www.youtube.com/watch?v=jbYDljqf4kg&t=1s
-  Time:1.07.52
+  Time:1.20.40
 */
 use bevy::prelude::*;
 use crate::asset_loader_plugin::AssetLoaderState;

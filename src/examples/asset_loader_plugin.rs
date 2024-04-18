@@ -30,5 +30,7 @@ pub struct MyAssets{
   //
   #[asset(paths("models/main_skeleton.glb"),collection(typed, mapped))]
   //#[asset(paths("models/male_toon_block01.glb"),collection(typed, mapped))]
-  pub gltf_files:HashMap<String, Handle<Gltf>>
+  pub gltf_files:HashMap<String, Handle<Gltf>>,
+  #[asset(paths("fonts/FiraSans-Bold.ttf"),collection(typed, mapped))]
+  pub font_files:HashMap<String, Handle<Font>>
 }
