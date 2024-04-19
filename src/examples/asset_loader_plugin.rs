@@ -28,7 +28,7 @@ impl Plugin for AssetLoaderPlugin {
 #[derive(AssetCollection, Resource)]
 pub struct MyAssets{
   //
-  #[asset(paths("models/main_skeleton.glb"),collection(typed, mapped))]
+  #[asset(paths("models/main_skeleton.glb","models/male_toon_block01_chest01.glb"),collection(typed, mapped))]
   //#[asset(paths("models/male_toon_block01.glb"),collection(typed, mapped))]
   pub gltf_files:HashMap<String, Handle<Gltf>>,
   #[asset(paths("fonts/FiraSans-Bold.ttf"),collection(typed, mapped))]
