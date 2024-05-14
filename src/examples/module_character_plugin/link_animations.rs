@@ -30,23 +30,23 @@ pub fn link_animations(
 ) {
   // Get all the Animation players which can be deep and hidden in the heirachy
   for entity_with_animation_player in animation_players_query.iter() {
-      let top_entity = get_top_parent(
-          entity_with_animation_player,
-          &all_entities_with_parents_query,
-      );
+    let top_entity = get_top_parent(
+      entity_with_animation_player,
+      &all_entities_with_parents_query,
+    );
 
-      // If the top parent has an animation config ref then link the player to the config
-      if animations_entity_link_query.get(top_entity).is_ok() {
-          warn!("Problem with multiple animation players for the same top parent");
-      } else {
-          println!(
-              "linking entity {:#?} to animation_player entity {:#?}",
-              top_entity, entity_with_animation_player
-          );
-          commands
-              .entity(top_entity)
-              .insert(AnimationEntityLink(entity_with_animation_player.clone()));
-      }
+    // If the top parent has an animation config ref then link the player to the config
+    if animations_entity_link_query.get(top_entity).is_ok() {
+        warn!("Problem with multiple animation players for the same top parent");
+    } else {
+      println!(
+        "linking entity {:#?} to animation_player entity {:#?}",
+        top_entity, entity_with_animation_player
+      );
+      commands
+        .entity(top_entity)
+        .insert(AnimationEntityLink(entity_with_animation_player.clone()));
+    }
   }
 
   next_state.set(SpawnScenesState::Done)
